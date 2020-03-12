@@ -6,6 +6,7 @@ import {
   Grid,
   Header,
 } from "semantic-ui-react";
+import API from '../API'
 
 class LoginForm extends Component {
   state = {
@@ -21,20 +22,21 @@ class LoginForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const data = this.state 
-    const url = "http://localhost:3000/login"
-    const configObj = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    };
+    // const data = this.state 
+    // const url = "http://localhost:3000/login"
+    // const configObj = {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify(data)
+    // };
     
-    return fetch(url, configObj)
-      .then(resp => resp.json())
-      .then(userObj => this.props.logIn(userObj.user))
+    // return fetch(url, configObj)
+    //   .then(resp => resp.json())
+    API.logIn(this.state)
+      .then(userObj => this.props.logIn(userObj.user , userObj.token))
       .then(e.target.reset())
       .catch({ message: "Request failed" });
     // Send the data from the form to the server in order to authenticate the user

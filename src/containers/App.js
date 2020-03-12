@@ -5,6 +5,7 @@ import '../App.css';
 
 import Home from './Home'
 import MenuContainer from "./MenuContainer";
+import API from "../API";
 
 
 class App extends Component {
@@ -13,10 +14,21 @@ class App extends Component {
     user: null
   }
 
-  logIn = (user) => {
+  logIn = (user, token) => {
     this.setState({
       user
     })
+    localStorage.token = token
+  }
+
+  componentDidMount() {
+    if (localStorage.token) {
+      API.validateProfile(localStorage.token)
+        .then(userObj =>
+          this.logIn(userObj.user, userObj.token)
+      )
+      console.log(localStorage.token)
+    }
   }
 
   render() {
