@@ -11,21 +11,37 @@ class LoginForm extends Component {
   state = {
     email: "",
     password: ""
-  };
+  }
 
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
-    });
-  };
+    })
+  }
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log(this.state); 
+    const data = this.state 
+    const url = "http://localhost:3000/login"
+    const configObj = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    };
+    
+    return fetch(url, configObj)
+      .then(resp => resp.json())
+      .then(userObj => this.props.logIn(userObj.user))
+      .then(e.target.reset())
+      .catch({ message: "Request failed" });
     // Send the data from the form to the server in order to authenticate the user
-    // API.signIn(this.state)
+    // API.logIn(this.state)
     //   // The server then responds with the username and a token generated from the user's id to confirm we've been authenticated successfully. We then use the signIn function passed down in props to set the state of username in App to be the username we've been sent back and store the token we've been sent back in localStorage
     //   .then(json => this.props.signIn(json.username, json.token));
+    
   };
 
   render() {
