@@ -9,7 +9,7 @@ import {
 
 class LoginForm extends Component {
   state = {
-    username: "",
+    email: "",
     password: ""
   };
 
@@ -21,7 +21,7 @@ class LoginForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log(this.State); 
+    console.log(this.state); 
     // Send the data from the form to the server in order to authenticate the user
     // API.signIn(this.state)
     //   // The server then responds with the username and a token generated from the user's id to confirm we've been authenticated successfully. We then use the signIn function passed down in props to set the state of username in App to be the username we've been sent back and store the token we've been sent back in localStorage
@@ -46,6 +46,7 @@ class LoginForm extends Component {
                 icon="user"
                 iconPosition="left"
                 placeholder="Email"
+                name="email"
                 onChange={this.handleChange}
               />
               <Form.Input
@@ -54,6 +55,7 @@ class LoginForm extends Component {
                 iconPosition="left"
                 placeholder="Password"
                 type="password"
+                name="password"
                 onChange={this.handleChange}
               />
               <Button fluid size="large" name="login" type="submit">
