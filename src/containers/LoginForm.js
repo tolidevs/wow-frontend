@@ -31,7 +31,7 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <Segment stacked>
+      <Segment>
         <Grid
           textAlign="center"
           style={{ height: "100vh" }}

@@ -17,17 +17,44 @@ import {
 // };
 
 class Navbar extends React.Component {
+  state = {
+    menuOn: false
+  }
+
+  selectMenu = () => {
+    this.setState({
+      menuOn: !this.state.menuOn
+    })
+  }
+
   render() {
+    const { menuOn } =this.state
+    const { loggedIn } = this.props
       return (
         // <div className="navbar">
-          <Menu fixed="top">
-              <Menu.Item as='a' href="./menu" position="right">
-                  <Button icon>
-                      {/* needs to be chevron up or chevron down depending on if menu selected - set in state */}
+        <Menu fixed="top">
+          <Menu.Item position="right">
+            <Button icon onClick={this.selectMenu}>
+              {loggedIn ? (
+                <NavLink to="/options" exact>
+                  {menuOn ? (
+                    <Icon name="chevron up" />
+                  ) : (
                     <Icon name="chevron down" />
-                  </Button>
-              </Menu.Item>
-          </Menu>
+                  )}
+                </NavLink>
+              ) : (
+                <NavLink to="/login" exact>
+                  {menuOn ? (
+                    <Icon name="chevron up" />
+                  ) : (
+                    <Icon name="chevron down" />
+                  )}
+                </NavLink>
+              )}
+            </Button>
+          </Menu.Item>
+        </Menu>
         // </div>
       );
   }

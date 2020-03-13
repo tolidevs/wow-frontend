@@ -19,11 +19,12 @@ const post = (url, data) => {
 
 // Make a get request to a given URL and return the Promise. If a token has been provided, include it as a header called Authorization
 const get = (url, token) => {
-  return token ? fetch(url, { headers: { AUTHORIZATION: token } }) : fetch(url)
+  return token ? fetch(url, { headers: { Authorization: token } }) : fetch(url)
 };
 
 // Use the get function to make a request to the profile route and parse the response into JSON
 const validateProfile = token => {
+  console.log(token)
   return get(validateURL, token).then(response => response.json())
 };
 

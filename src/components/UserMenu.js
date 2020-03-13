@@ -4,7 +4,7 @@ import { Grid, Segment, Button } from 'semantic-ui-react';
 
 const UserMenu = () => {
     return (
-      <Segment stacked>
+      <Segment>
         <Grid
           textAlign="center"
           style={{ height: "100vh" }}
