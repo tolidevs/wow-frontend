@@ -10,17 +10,11 @@ class MenuContainer extends Component {
 
         return (
           <Container>
-            { loggedIn ? (
-              <UserMenu />
-            ) : (
-              <LoginForm logIn={logIn} />
-            )}
-
-            {/* <Router>
-              <Route exact path="/login" component={LoginForm} />
-              {/* <Route exact path="/sign-up" component={SignUp} /> */}
-            {/* <Route exact path="/options" component={Options} */}
-            {/* </Router> */}
+            <Router>
+              <Route exact path="/login" component={() => <LoginForm logIn={logIn} />} />
+              <Route exact path="/sign-up" component={SignUp} />
+              <Route exact path="/options" component={() => <UserMenu />} />
+            </Router>
           </Container>
         );
     }
