@@ -1,5 +1,6 @@
 const initialState = {
     user: null,
+    user_logged_in_type: null,
     search_string: null,
     results: null,
     selected_show: null,
@@ -15,6 +16,11 @@ const rootReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 user: action.payload.user
+            }
+        case 'SET_USER_TYPE':
+            return {
+                ...state,
+                user_type: action.payload.user_type
             }
 
     }

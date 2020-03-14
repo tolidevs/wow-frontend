@@ -15,16 +15,10 @@ import API from "../API";
 
 class App extends Component {
 
-  state = {
-    user: null
-  }
-
-  logIn = (user, token) => {
-    // this.setState({
-    //   user
-    // })
+  logIn = (user, token, user_type) => {
     this.props.setUser(user)
     localStorage.token = token
+    this.props.setUserType(user_type)
   }
 
   componentDidMount() {
@@ -38,7 +32,7 @@ class App extends Component {
   }
 
   render() {
-    const { user } = this.state
+    const { user } = this.props
     return (
       <Router>
         <Navbar loggedIn={!!user} />
@@ -68,13 +62,15 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    user_type: state.user_type
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    setUser: user => dispatch({ type: "SET_USER", payload: { user }})
+    setUser: user => dispatch({ type: "SET_USER", payload: { user } }),
+    setUserType: user_type => dispatch({ type: "SET_USER_TYPE", payload: { user_type }})
   }
 }
 

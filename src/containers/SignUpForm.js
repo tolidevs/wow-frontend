@@ -31,7 +31,7 @@ class SignUpForm extends Component {
             email,
             password
         })
-            .then(userObj => this.props.logIn(userObj.user, userObj.token))
+            .then(userObj => this.props.logIn(userObj.user, userObj.token, "new_user"))
             .then(e.target.reset())
             .catch({ message: "Request failed" });
     };

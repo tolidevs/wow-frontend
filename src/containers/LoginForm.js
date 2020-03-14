@@ -25,7 +25,7 @@ class LoginForm extends Component {
     e.preventDefault()
 
     API.logIn(this.state)
-      .then(userObj => this.props.logIn(userObj.user , userObj.token))
+      .then(userObj => this.props.logIn(userObj.user, userObj.token, "existing_user"))
       .then(e.target.reset())
       .catch({ message: "Request failed" });
   };
