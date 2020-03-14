@@ -45,7 +45,7 @@ class LoginForm extends Component {
             <Form size="large" className="login-form" onSubmit={this.handleSubmit}>
               <Form.Input
                 fluid
-                icon="user"
+                icon="at"
                 iconPosition="left"
                 placeholder="Email"
                 name="email"

@@ -1,7 +1,8 @@
 // Define the URLs for our different routes
 const baseURL = "http://localhost:3000"
-const signInURL = `${baseURL}/login`
+const logInURL = `${baseURL}/login`
 const validateURL = `${baseURL}/profile`
+const signUpURL = `${baseURL}/signup`;
 // const itemsURL = `${baseURL}/items`;
 
 // Make a post request to a given URL with a given data object as the body and return the Promise
@@ -24,14 +25,17 @@ const get = (url, token) => {
 
 // Use the get function to make a request to the profile route and parse the response into JSON
 const validateProfile = token => {
-  console.log(token)
   return get(validateURL, token).then(response => response.json())
 };
 
 // Use the post function to make a request to the validate route and parse the response into JSON
 const logIn = data => {
-  return post(signInURL, data).then(response => response.json())
+  return post(logInURL, data).then(response => response.json())
 }
+
+const signUp = data => {
+  return post(signUpURL, data).then(response => response.json());
+};
 
 // Use the get function to make a request to the items route and parse the response into JSON
 // const getItems = token => {
@@ -39,4 +43,4 @@ const logIn = data => {
 // }
 
 // Export the necessary functions as part of one object which we will import elsewhere
-export default { logIn, validateProfile }
+export default { logIn, validateProfile, signUp }

@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 
 class SignUpForm extends Component {
     state = {
+        user_name: "",
         email: "",
         password: ""
     }
@@ -24,7 +25,12 @@ class SignUpForm extends Component {
     handleSubmit = e => {
         e.preventDefault()
 
-        API.logIn(this.state)
+        const { user_name, email, password } = this.state
+        API.signUp({
+            name: user_name,
+            email,
+            password
+        })
             .then(userObj => this.props.logIn(userObj.user, userObj.token))
             .then(e.target.reset())
             .catch({ message: "Request failed" });
@@ -40,37 +46,37 @@ class SignUpForm extends Component {
                 >
                     <Grid.Column style={{ maxWidth: "50vh" }}>
                         <Header as="h2" textAlign="center">
-                            Log In
-            </Header>
-                <Form size="large" className="login-form" onSubmit={this.handleSubmit}>
-                    <Form.Input
-                        fluid
-                        icon="user"
-                        iconPosition="left"
-                        placeholder="Name"
-                        name="name"
-                        onChange={this.handleChange}
-                    />
-                    <Form.Input
-                        fluid
-                        icon="user"
-                        iconPosition="left"
-                        placeholder="Email"
-                        name="email"
-                        onChange={this.handleChange}
-                    />
-                    <Form.Input
-                        fluid
-                        icon="lock"
-                        iconPosition="left"
-                        placeholder="Password"
-                        type="password"
-                        name="password"
-                        onChange={this.handleChange}
-                    />
-                    <Button fluid size="large" name="signup" type="submit">
-                        Sign Up
-              </Button>
+                            Sign Up
+                        </Header>
+                        <Form size="large" className="login-form" onSubmit={this.handleSubmit}>
+                            <Form.Input
+                                fluid
+                                icon="user"
+                                iconPosition="left"
+                                placeholder="Name"
+                                name="user_name"
+                                onChange={this.handleChange}
+                            />
+                            <Form.Input
+                                fluid
+                                icon="at"
+                                iconPosition="left"
+                                placeholder="Email"
+                                name="email"
+                                onChange={this.handleChange}
+                            />
+                            <Form.Input
+                                fluid
+                                icon="lock"
+                                iconPosition="left"
+                                placeholder="Password"
+                                type="password"
+                                name="password"
+                                onChange={this.handleChange}
+                            />
+                            <Button fluid size="large" name="signup" type="submit">
+                                Sign Up
+                            </Button>
                         </Form>
                         <NavLink to="/login" exact>Log In</NavLink>
                     </Grid.Column>

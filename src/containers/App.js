@@ -51,7 +51,7 @@ class App extends Component {
           />
           <Route
             exact path="/sign-up"
-            component={() => <SignUpForm signUp={this.signUp} />}
+            component={() => <SignUpForm logIn={this.logIn} />}
           />
           <Route exact path="/options" component={() => <UserMenu />} />
 
