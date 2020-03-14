@@ -1,6 +1,7 @@
 const initialState = {
+    menu_on: false,
     user: null,
-    user_logged_in_type: null,
+    user_type: null,
     search_string: null,
     results: null,
     selected_show: null,
@@ -22,7 +23,11 @@ const rootReducer = ( state = initialState, action ) => {
                 ...state,
                 user_type: action.payload.user_type
             }
-
+        case 'SET_MENU':
+            return {
+                ...state,
+                menu_on: action.payload.menu_on
+            }
     }
 }
 

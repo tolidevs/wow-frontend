@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
-import UserMenu from '../components/UserMenu';
+import UserMenu from './UserMenu';
 import Home from './Home'
 // import MenuContainer from "./MenuContainer";
 import API from "../API";
@@ -21,21 +21,27 @@ class App extends Component {
     this.props.setUserType(user_type)
   }
 
+  logOut = () => {
+    this.props.setUser(null);
+    localStorage.token = null;
+    this.props.setUserType(null);
+  }
+
   componentDidMount() {
     if (localStorage.token) {
       API.validateProfile(localStorage.token)
         .then(userObj =>
-          this.logIn(userObj.user, userObj.token)
+          this.logIn(userObj.user, userObj.token, "existing_user")
       )
       // console.log(localStorage.token)
     }
   }
 
   render() {
-    const { user } = this.props
     return (
       <Router>
-        <Navbar loggedIn={!!user} />
+        <Navbar />
+        {}
         <Container>
           <Route exact path="/" component={Home} />
           <Route
@@ -47,7 +53,7 @@ class App extends Component {
             exact path="/sign-up"
             component={() => <SignUpForm logIn={this.logIn} />}
           />
-          <Route exact path="/options" component={() => <UserMenu />} />
+          <Route exact path="/menu" component={() => <UserMenu logOut={this.logOut} />} />
 
           {/* <Route
             exact

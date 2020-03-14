@@ -18,40 +18,34 @@ import {
 // };
 
 class Navbar extends React.Component {
-  state = {
-    menuOn: false
-  }
+  
 
   selectMenu = () => {
-    this.setState({
-      menuOn: !this.state.menuOn
-    })
+    const { setMenu, menu_on } = this.props
+    setMenu(!menu_on)
   }
 
   render() {
-    const { menuOn } = this.state
-    const { loggedIn } = this.props
+    const { loggedIn, menu_on } = this.props
     return (
       <Menu className="navbar" fixed="top">
         <Menu.Item position="right">
           <Button icon onClick={this.selectMenu}>
-            {loggedIn ? (
-              <NavLink to="/options" exact>
-                {menuOn ? (
-                  <Icon name="chevron up" />
-                ) : (
-                    <Icon name="chevron down" />
-                  )}
+            { menu_on ? (
+              <NavLink to="/" exact>
+                <Icon name="chevron up" />
               </NavLink>
             ) : (
-                <NavLink to="/login" exact>
-                  {menuOn ? (
-                    <Icon name="chevron up" />
-                  ) : (
-                      <Icon name="chevron down" />
-                    )}
+              loggedIn ? (
+                <NavLink to="/menu" exact>
+                  <Icon name="chevron down" />
                 </NavLink>
-              )}
+              ) : (
+                <NavLink to="/login" exact>
+                      <Icon name="chevron down" />
+                </NavLink>
+              )
+            ) }
           </Button>
         </Menu.Item>
       </Menu>
@@ -65,8 +59,15 @@ class Navbar extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    loggedIn: !!state.user
+    loggedIn: !!state.user,
+    menu_on: state.menu_on
   }
 }
 
-export default connect(mapStateToProps)(Navbar)
+const mapDispatchToProps = dispatch => {
+  return {
+    setMenu: menu_on => dispatch({ type: "SET_MENU", payload: { menu_on } })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
