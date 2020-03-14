@@ -3,11 +3,13 @@ import Navbar from '../components/Navbar'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import '../App.css';
 import { Container } from 'semantic-ui-react';
-import LoginForm from './LoginForm'
-import UserMenu from '../components/UserMenu';
+import { connect } from "react-redux";
 
+import LoginForm from './LoginForm'
+import SignUpForm from './SignUpForm'
+import UserMenu from '../components/UserMenu';
 import Home from './Home'
-import MenuContainer from "./MenuContainer";
+// import MenuContainer from "./MenuContainer";
 import API from "../API";
 
 
@@ -18,9 +20,10 @@ class App extends Component {
   }
 
   logIn = (user, token) => {
-    this.setState({
-      user
-    })
+    // this.setState({
+    //   user
+    // })
+    this.props.setUser(user)
     localStorage.token = token
   }
 
@@ -30,7 +33,7 @@ class App extends Component {
         .then(userObj =>
           this.logIn(userObj.user, userObj.token)
       )
-      console.log(localStorage.token)
+      // console.log(localStorage.token)
     }
   }
 
@@ -46,7 +49,10 @@ class App extends Component {
             path="/login"
             component={() => <LoginForm logIn={this.logIn} />}
           />
-          {/* <Route exact path="/sign-up" component={SignUp} /> */}
+          <Route
+            exact path="/sign-up"
+            component={() => <SignUpForm signUp={this.signUp} />}
+          />
           <Route exact path="/options" component={() => <UserMenu />} />
 
           {/* <Route
@@ -60,5 +66,17 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setUser: user => dispatch({ type: "SET_USER", payload: { user }})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
 

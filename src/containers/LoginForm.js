@@ -7,6 +7,7 @@ import {
   Header,
 } from "semantic-ui-react";
 import API from '../API'
+import { NavLink } from "react-router-dom";
 
 class LoginForm extends Component {
   state = {
@@ -63,7 +64,7 @@ class LoginForm extends Component {
                 Login
               </Button>
             </Form>
-              <a href="./sign-up">Sign Up</a>
+            <NavLink to="/sign-up" exact>Sign Up</NavLink>
           </Grid.Column>
         </Grid>
       </Segment>
@@ -73,41 +74,3 @@ class LoginForm extends Component {
 
 export default LoginForm;
 
-
-
-
-{/* <Form
-  className="login-form"
-  onSubmit={e => {
-    loginFunction(
-      e,
-      e.target.email.value,
-      e.target.password.value,
-      document.activeElement
-    );
-  }}
->
-  <Form.Group widths={2}>
-    <Form.Input
-      name="email"
-      label="Email"
-      placeholder="Email Address"
-      type="email"
-      required
-    />
-    <Form.Input
-      name="password"
-      label="Password"
-      placeholder="Password"
-      type="password"
-      required
-    />
-  </Form.Group>
-
-  <Button name="login" type="submit" onClick={displayLogin}>
-    Login
-  </Button>
-  <Button name="create" type="submit" onClick={displayLogin} secondary>
-    Sign Up
-  </Button>
-</Form>; */}

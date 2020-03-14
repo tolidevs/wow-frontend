@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import {
     Menu,
@@ -28,36 +29,44 @@ class Navbar extends React.Component {
   }
 
   render() {
-    const { menuOn } =this.state
+    const { menuOn } = this.state
     const { loggedIn } = this.props
-      return (
-        // <div className="navbar">
-        <Menu fixed="top">
-          <Menu.Item position="right">
-            <Button icon onClick={this.selectMenu}>
-              {loggedIn ? (
-                <NavLink to="/options" exact>
-                  {menuOn ? (
-                    <Icon name="chevron up" />
-                  ) : (
+    return (
+      <Menu className="navbar" fixed="top">
+        <Menu.Item position="right">
+          <Button icon onClick={this.selectMenu}>
+            {loggedIn ? (
+              <NavLink to="/options" exact>
+                {menuOn ? (
+                  <Icon name="chevron up" />
+                ) : (
                     <Icon name="chevron down" />
                   )}
-                </NavLink>
-              ) : (
+              </NavLink>
+            ) : (
                 <NavLink to="/login" exact>
                   {menuOn ? (
                     <Icon name="chevron up" />
                   ) : (
-                    <Icon name="chevron down" />
-                  )}
+                      <Icon name="chevron down" />
+                    )}
                 </NavLink>
               )}
-            </Button>
-          </Menu.Item>
-        </Menu>
-        // </div>
-      );
+          </Button>
+        </Menu.Item>
+      </Menu>
+    );
+  }
+
+
+
+  // end of class
+}
+
+const mapStateToProps = state => {
+  return {
+    loggedIn: !!state.user
   }
 }
 
-export default Navbar;
+export default connect(mapStateToProps)(Navbar)

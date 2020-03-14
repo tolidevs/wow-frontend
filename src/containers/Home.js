@@ -6,9 +6,12 @@ class Home extends Component {
         return (
           <Segment
             textAlign="center"
-            style={{ height: "100vh" }}
-            verticalAlign="middle"
-            
+            style={{
+              height: "100vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
           >
             <Message>Home Page</Message>
           </Segment>
