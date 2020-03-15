@@ -3,6 +3,7 @@ const baseURL = "http://localhost:3000"
 const logInURL = `${baseURL}/login`
 const validateURL = `${baseURL}/profile`
 const signUpURL = `${baseURL}/signup`;
+const findShowsURL = `${baseURL}/search`
 // const itemsURL = `${baseURL}/items`;
 
 // Make a post request to a given URL with a given data object as the body and return the Promise
@@ -37,10 +38,14 @@ const signUp = data => {
   return post(signUpURL, data).then(response => response.json());
 };
 
+const findShows = search_string => {
+  return post(findShowsURL, {search_string}).then(response => response.json())
+}
+
 // Use the get function to make a request to the items route and parse the response into JSON
 // const getItems = token => {
 //   return get(itemsURL, token).then(response => response.json())
 // }
 
 // Export the necessary functions as part of one object which we will import elsewhere
-export default { logIn, validateProfile, signUp }
+export default { logIn, validateProfile, signUp, findShows }

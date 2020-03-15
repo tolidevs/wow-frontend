@@ -28,6 +28,11 @@ const rootReducer = ( state = initialState, action ) => {
                 ...state,
                 menu_on: action.payload.menu_on
             }
+        case 'SET_SEARCH_STRING':
+            return {
+                ...state,
+                search_string: action.payload.search_string
+            }
     }
 }
 
