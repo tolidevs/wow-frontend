@@ -39,7 +39,7 @@ class UserMenu extends Component {
   }
 
   render() {
-    const { logOut, setUserType } = this.props
+    const { logOut, setUserType, setMenu } = this.props
 
     return (
       <Segment>
@@ -53,15 +53,27 @@ class UserMenu extends Component {
             
             <div className="menu-button">
               <NavLink exact to='/'>
-                <Button onClick={() => setUserType(null)}>Search</Button>
+                <Button onClick={() => {
+                  setUserType(null)
+                  setMenu(false)
+                }
+                }>Search</Button>
               </NavLink>
             </div>
             <div className="menu-button">
-              <Button onClick={() => setUserType(null)}>Manage Account</Button>
+              <Button onClick={() => {
+                setUserType(null)
+                setMenu(false)
+              }
+              }>Manage Account</Button>
             </div>
             <div className="menu-button">
               <NavLink exact to='/'>
-                <Button onClick={() => logOut()} >Log Out</Button>
+                <Button onClick={() => {
+                  logOut()
+                  setMenu(false)
+                }
+                }>Log Out</Button>
               </NavLink>
             </div>
           </Grid.Column>
@@ -71,17 +83,18 @@ class UserMenu extends Component {
   }
 }
     
-const mapStateToProps = state => {
+const mapStateToProps = ({ user, user_type }) => {
   return {
-    user: state.user,
-    user_type: state.user_type
+    user,
+    user_type
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     setUser: user => dispatch({ type: "SET_USER", payload: { user } }),
-    setUserType: user_type => dispatch({ type: "SET_USER_TYPE", payload: { user_type }})
+    setUserType: user_type => dispatch({ type: "SET_USER_TYPE", payload: { user_type } }),
+    setMenu: menu_on => dispatch({ type: "SET_MENU", payload: { menu_on } })
   }
 }
 
