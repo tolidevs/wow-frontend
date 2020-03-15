@@ -6,8 +6,9 @@ import {
   Grid,
   Header,
 } from "semantic-ui-react";
-import API from '../API'
-import { NavLink } from "react-router-dom";
+import API from '../API';
+import { NavLink, Redirect } from "react-router-dom";
+import { connect } from 'react-redux'
 
 class LoginForm extends Component {
   state = {
@@ -19,6 +20,10 @@ class LoginForm extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  redirectToHome = () => {
+    return this.props.user && <Redirect to="/" exact />
   }
 
   handleSubmit = e => {
@@ -42,7 +47,11 @@ class LoginForm extends Component {
             <Header as="h2" textAlign="center">
               Log In
             </Header>
-            <Form size="large" className="login-form" onSubmit={this.handleSubmit}>
+            <Form
+              size="large"
+              className="login-form"
+              onSubmit={this.handleSubmit}
+            >
               <Form.Input
                 fluid
                 icon="at"
@@ -64,13 +73,22 @@ class LoginForm extends Component {
                 Login
               </Button>
             </Form>
-            <NavLink to="/sign-up" exact>Sign Up</NavLink>
+            <NavLink to="/sign-up" exact>
+              Sign Up
+            </NavLink>
           </Grid.Column>
         </Grid>
+        {this.redirectToHome()}
       </Segment>
     );
   }
 };
 
-export default LoginForm;
+const mapStateToProps = ({ user }) => {
+  return {
+    user
+  }
+}
+
+export default connect(mapStateToProps)(LoginForm)
 
