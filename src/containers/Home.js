@@ -29,7 +29,7 @@ class Home extends Component {
       >
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
-            icon="search"
+            action={{ icon: "search" }}
             placeholder="Search for a show or film..."
             onChange={this.handleChange}
           ></Form.Input>
