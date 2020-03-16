@@ -9,7 +9,7 @@ import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
 import UserMenu from './UserMenu';
 import Home from './Home'
-// import MenuContainer from "./MenuContainer";
+import Results from './Results'
 import API from "../API";
 
 
@@ -41,8 +41,8 @@ class App extends Component {
     return (
       <Router>
         <Navbar />
-        {}
-        <Container>
+
+        <Container className="main-container">
           <Route exact path="/" component={Home} />
           <Route
             exact
@@ -50,16 +50,17 @@ class App extends Component {
             component={() => <LoginForm logIn={this.logIn} />}
           />
           <Route
-            exact path="/sign-up"
+            exact
+            path="/sign-up"
             component={() => <SignUpForm logIn={this.logIn} />}
           />
-          <Route exact path="/menu" component={() => <UserMenu logOut={this.logOut} />} />
-
-          {/* <Route
+          <Route
             exact
             path="/menu"
-            component={() => <MenuContainer logIn={this.logIn} />}
-          /> */}
+            component={() => <UserMenu logOut={this.logOut} />}
+          />
+          <Route exact path="/results" component={() => <Results />} />
+          <Route exact path="/results/show/:id" component={() => <Results />} />
         </Container>
       </Router>
     );

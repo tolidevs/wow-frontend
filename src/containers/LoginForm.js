@@ -40,7 +40,10 @@ class LoginForm extends Component {
       <Segment>
         <Grid
           textAlign="center"
-          style={{ height: "100vh" }}
+          style={{
+            height: "100vh",
+            marginTop: "20px"
+          }}
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: "50vh" }}>
@@ -53,6 +56,7 @@ class LoginForm extends Component {
               onSubmit={this.handleSubmit}
             >
               <Form.Input
+                required
                 fluid
                 icon="at"
                 iconPosition="left"
@@ -61,6 +65,7 @@ class LoginForm extends Component {
                 onChange={this.handleChange}
               />
               <Form.Input
+               required
                 fluid
                 icon="lock"
                 iconPosition="left"

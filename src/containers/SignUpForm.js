@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
     Button,
     Form,
     Segment,
     Grid,
     Header,
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 import API from '../API'
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink, Redirect } from 'react-router-dom';
 
 class SignUpForm extends Component {
   state = {
@@ -23,7 +23,7 @@ class SignUpForm extends Component {
   };
 
   redirectToHome = () => {
-    return this.props.user && <Redirect to="/menu" exact />;
+    return this.props.user && <Redirect to='/menu' exact />;
   };
 
   handleSubmit = e => {
@@ -60,6 +60,7 @@ class SignUpForm extends Component {
               onSubmit={this.handleSubmit}
             >
               <Form.Input
+                required
                 fluid
                 icon="user"
                 iconPosition="left"
@@ -68,6 +69,7 @@ class SignUpForm extends Component {
                 onChange={this.handleChange}
               />
               <Form.Input
+                required
                 fluid
                 icon="at"
                 iconPosition="left"
@@ -76,6 +78,7 @@ class SignUpForm extends Component {
                 onChange={this.handleChange}
               />
               <Form.Input
+                required
                 fluid
                 icon="lock"
                 iconPosition="left"

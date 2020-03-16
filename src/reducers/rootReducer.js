@@ -3,7 +3,7 @@ const initialState = {
     user: null,
     user_type: null,
     search_string: null,
-    results: null,
+    search_results: null,
     selected_show: null,
     show_details: null,
     user_subscriptions: null
@@ -32,6 +32,16 @@ const rootReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 search_string: action.payload.search_string
+            }
+        case 'SET_SEARCH_RESULTS':
+            return {
+                ...state,
+                search_results: action.payload.search_results
+            }
+        case 'SET_SELECTED_SHOW':
+            return {
+                ...state,
+                selected_show: action.payload.selected_show
             }
     }
 }

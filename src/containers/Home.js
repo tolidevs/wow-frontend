@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
 import { Segment, Form } from 'semantic-ui-react';
-import API from '../API';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom'
+
 
 class Home extends Component {
+
+  state = {
+    search_submitted: false
+  }
 
   handleChange = e => {
     this.props.setSearchString(e.target.value)
   }
 
+  redirectToResults = () => {
+    return this.state.search_submitted && this.props.search_string.length > 0 && <Redirect to="/results" exact />
+  }
+
   handleSubmit = e => {
     e.preventDefault()
-// send search string to back end, call API search on search string and console log waht is returned
-    API.findShows(this.props.search_string)
-      .then( console.log )
+    // redirect to results page
+    this.setState({
+      search_submitted: true
+    })
   }
 
   render() {
@@ -29,11 +39,13 @@ class Home extends Component {
       >
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
+            required
             action={{ icon: "search" }}
             placeholder="Search for a show or film..."
             onChange={this.handleChange}
           ></Form.Input>
         </Form>
+        {this.redirectToResults()}
       </Segment>
     );
   }
@@ -47,7 +59,8 @@ const mapStateToProps = ({ search_string }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setSearchString: search_string => dispatch({ type: "SET_SEARCH_STRING", payload: {search_string} })
+    setSearchString: search_string => dispatch({ type: 'SET_SEARCH_STRING', payload: { search_string } }),
+    setSearchResults: search_results => dispatch({ type: 'SET_SEARCH_RESULTS', payload: { search_results }})
   }
 }
 
