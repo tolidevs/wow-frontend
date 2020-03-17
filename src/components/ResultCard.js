@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import {
     Item,
-    Header,
-    Image,
     Grid,
     Icon
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import API from "../API";
 
 
 class ResultCard extends Component {

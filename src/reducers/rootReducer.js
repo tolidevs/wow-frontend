@@ -69,6 +69,11 @@ const rootReducer = ( state = initialState, action ) => {
                 ...state,
                 selected_show: action.payload.selected_show
             }
+      case 'SET_SHOW_DETAILS':
+        return {
+          ...state,
+          show_details: action.payload.show
+        }
     }
 }
 

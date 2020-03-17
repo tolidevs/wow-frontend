@@ -2,9 +2,9 @@
 const baseURL = "http://localhost:3000"
 const logInURL = `${baseURL}/login`
 const validateURL = `${baseURL}/profile`
-const signUpURL = `${baseURL}/signup`;
+const signUpURL = `${baseURL}/signup`
 const findShowsURL = `${baseURL}/search`
-// const itemsURL = `${baseURL}/items`;
+const getDetailsURL = `${baseURL}/show`
 
 // Make a post request to a given URL with a given data object as the body and return the Promise
 const post = (url, data) => {
@@ -43,7 +43,7 @@ const findShows = search_string => {
 }
 
 const getShowDetails = imdbID => {
-  return post()
+  return post(getDetailsURL, {imdbID}).then(response => response.json())
 }
 
 // Use the get function to make a request to the items route and parse the response into JSON
@@ -52,4 +52,4 @@ const getShowDetails = imdbID => {
 // }
 
 // Export the necessary functions as part of one object which we will import elsewhere
-export default { logIn, validateProfile, signUp, findShows }
+export default { logIn, validateProfile, signUp, findShows, getShowDetails }

@@ -18,7 +18,7 @@ class Results extends Component {
     // }
 
     renderResults = () => {
-        const { search_results, search_string } = this.props
+        const { search_results } = this.props
         if (Array.isArray(search_results) && search_results.length > 0) {
             return search_results.map(result =>
                     
