@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Segment, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-
+import API from "../API";
 
 class Home extends Component {
 
@@ -21,6 +21,10 @@ class Home extends Component {
   handleSubmit = e => {
     e.preventDefault()
     // redirect to results page
+    API.findShows(this.props.search_string).then(search_results =>
+      this.props.setSearchResults(search_results)
+    )
+
     this.setState({
       search_submitted: true
     })
@@ -51,9 +55,10 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ search_string }) => {
+const mapStateToProps = ({ search_string, search_results }) => {
   return {
-    search_string
+    search_string,
+    search_results
   }
 }
 

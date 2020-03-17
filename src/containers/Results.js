@@ -8,17 +8,14 @@ import {
     Grid
 } from "semantic-ui-react";
 import { connect } from "react-redux";
-import API from '../API';
 import ResultCard from '../components/ResultCard'
 import clapper from '../images/clapper-img.png'
 
 class Results extends Component {
 
-    componentDidMount() {
-// send search string to back end, call API search on search string and console log waht is returned
-    API.findShows(this.props.search_string)
-            .then(search_results => this.props.setSearchResults(search_results));
-    }
+    // componentDidMount() {
+
+    // }
 
     renderResults = () => {
         const { search_results, search_string } = this.props
