@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import {
-  Segment,
-  Header,
-  Image,
-  Grid
+    Item,
+    Header,
+    Image,
+    Grid,
+    Icon
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -12,25 +13,51 @@ import API from "../API";
 
 class ResultCard extends Component {
 
+    state = {
+        selected: false
+    }
+
     handleClick = imdbID => {
-    this.props.setSelectedShow(imdbID)
-    return <Redirect to={
-        { pathame: `results/show/${this.props.imdbID}}`}
-    } />
-}
+        this.props.setSelectedShow(imdbID)
+        this.setState({
+            selected: true
+        })
+        console.log(imdbID)
+    }
+
+    redirectToShow = () => {
+        return this.state.selected && <Redirect to='/results/show'/>;
+    }
+
+    renderIcon = (type) => {
+        if (type === "movie") {
+            return <Icon name="film" size="big" floated="right" />;
+        } else if (type === "series") {
+            return <Icon name="tv" size="big" floated="right" />;
+        } else {
+            return <Icon name="question" size="big" floated="right" />;
+        }
+    }
+
     
     render() { 
-        const { setSelectedShow, imdbID, title, type, year, poster, services } = this.props;
+        const { imdbID, title, type, year, poster, services } = this.props;
 
         return (
           <Grid.Row key={imdbID}>
-            <Segment
-              style={{ width: "100vw" }}
+            <Item.Group
+              style={{ width: "90vw" }}
               onClick={() => this.handleClick(imdbID)}
             >
-              <Image src={poster} bordered centered />
-              <Header>{title}</Header>
-            </Segment>
+              <Item.Header>{title}</Item.Header>
+              <Item.Image src={poster} bordered centered />
+              <Item.Meta>{year}</Item.Meta>
+              <Item.Extra>
+                <Icon name="heart outline" size="big" />
+                {this.renderIcon(type)}
+              </Item.Extra>
+            </Item.Group>
+            {this.redirectToShow()}
           </Grid.Row>
         );
     }

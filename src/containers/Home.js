@@ -28,6 +28,9 @@ class Home extends Component {
     this.setState({
       search_submitted: true
     })
+    console.log(this.props.search_string)
+
+    
   }
 
   render() {

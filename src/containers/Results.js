@@ -41,14 +41,11 @@ class Results extends Component {
         ) : (
           <Grid.Row>
             <Segment>
-                {/* <Dimmer active inverted>
-                  <Loader inverted>Searching</Loader>
-                </Dimmer> */}
-                <Image
-                    src={clapper}
-                    size="medium"
-                    centered
-                />
+              <Dimmer active inverted>
+                  <Loader inverted></Loader>
+                </Dimmer>
+              <Image src={clapper} size="medium" centered />
+              <Header>Searching...</Header>
             </Segment>
           </Grid.Row>
         );
@@ -59,12 +56,13 @@ class Results extends Component {
     // }
 
     render() { 
-        const { search_string } = this.props
+      const { search_string, search_results } = this.props
+      console.log(search_results)
         return (
           <Segment
             textAlign="center"
             style={{
-              width: "100vw",
+              width: "95vw",
               height: "100vh",
               display: "flex",
               justifyContent: "center",
@@ -75,7 +73,7 @@ class Results extends Component {
               columns={1}
               // relaxed='very'
               textAlign="center"
-              style={{ height: "100vh", width: "100vw" }}
+              style={{ height: "100vh", width: "95w" }}
               verticalAlign="middle"
             >
               <Grid.Row>

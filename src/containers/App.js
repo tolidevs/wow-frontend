@@ -7,10 +7,11 @@ import { connect } from "react-redux";
 
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
-import UserMenu from './UserMenu';
+import UserMenu from './UserMenu'
 import Home from './Home'
 import Results from './Results'
-import API from "../API";
+import ShowPage from './ShowPage'
+import API from "../API"
 
 
 class App extends Component {
@@ -42,7 +43,10 @@ class App extends Component {
       <Router>
         <Navbar />
 
-        <Container className="main-container">
+        <Container
+          className="main-container"
+          // style={}
+        >
           <Route exact path="/" component={Home} />
           <Route
             exact
@@ -60,7 +64,7 @@ class App extends Component {
             component={() => <UserMenu logOut={this.logOut} />}
           />
           <Route exact path="/results" component={() => <Results />} />
-          <Route exact path="/results/show/:id" component={() => <Results />} />
+          <Route exact path="/results/show" component={() => <ShowPage />} />
         </Container>
       </Router>
     );

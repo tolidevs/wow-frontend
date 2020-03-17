@@ -42,6 +42,10 @@ const findShows = search_string => {
   return post(findShowsURL, {search_string}).then(response => response.json())
 }
 
+const getShowDetails = imdbID => {
+  return post()
+}
+
 // Use the get function to make a request to the items route and parse the response into JSON
 // const getItems = token => {
 //   return get(itemsURL, token).then(response => response.json())
