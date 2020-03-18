@@ -11,85 +11,78 @@ import { connect } from "react-redux";
 import ResultCard from '../components/ResultCard'
 import clapper from '../images/clapper-img.png'
 
+
 class Results extends Component {
-
-    // componentDidMount() {
-
-    // }
-
-    renderResults = () => {
-        const { search_results } = this.props
-        if (Array.isArray(search_results) && search_results.length > 0) {
-            return search_results.map(result =>
-                    
-                <ResultCard
-                    imdbID={result.imdbID}
-                    title={result.title}
-                    type={result.type}
-                    year={result.year}
-                    poster={result.poster}
-                    services={result.services}
-                />
-                    
-            )
-        }
+  
+  renderResults = () => {
+    const { search_results, saveShow } = this.props;
+    if (Array.isArray(search_results) && search_results.length > 0) {
+      return search_results.map(result => (
+        <ResultCard
+          imdbID={result.imdbID}
+          title={result.title}
+          type={result.type}
+          year={result.year}
+          poster={result.poster}
+          services={result.services}
+          saveShow={saveShow}
+        />
+      ));
     }
-    
-    renderCards = () => {
-        return this.props.search_results ? (
-          <Fragment>{this.renderResults()}</Fragment>
-        ) : (
+  };
+
+  renderCards = () => {
+    return this.props.search_results ? (
+      <Fragment>{this.renderResults()}</Fragment>
+    ) : (
+      <Grid.Row>
+        <Segment>
+          <Dimmer active inverted>
+            <Loader inverted></Loader>
+          </Dimmer>
+          <Image src={clapper} size="medium" centered />
+          <Header>Searching...</Header>
+        </Segment>
+      </Grid.Row>
+    );
+  };
+
+  render() {
+    const { search_string, search_results } = this.props;
+    console.log(search_results);
+    return (
+      <Segment
+        textAlign="center"
+        style={{
+          width: "95vw",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Grid
+          columns={1}
+          // relaxed='very'
+          textAlign="center"
+          style={{ height: "100vh", width: "95w" }}
+          verticalAlign="middle"
+        >
           <Grid.Row>
-            <Segment>
-              <Dimmer active inverted>
-                  <Loader inverted></Loader>
-                </Dimmer>
-              <Image src={clapper} size="medium" centered />
-              <Header>Searching...</Header>
-            </Segment>
+            <Header>Results for {search_string}</Header>
           </Grid.Row>
-        );
-    }
-
-    // componentDidUpdate(prevProps, prevState) {
-
-    // }
-
-    render() { 
-      const { search_string, search_results } = this.props
-      console.log(search_results)
-        return (
-          <Segment
-            textAlign="center"
-            style={{
-              width: "95vw",
-              height: "100vh",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Grid
-              columns={1}
-              // relaxed='very'
-              textAlign="center"
-              style={{ height: "100vh", width: "95w" }}
-              verticalAlign="middle"
-            >
-              <Grid.Row>
-                <Header>Results for {search_string}</Header>
-              </Grid.Row>
-              {this.renderCards()}
-            </Grid>
-          </Segment>
-        );
-    }
+          {this.renderCards()}
+        </Grid>
+      </Segment>
+    );
+  }
 }
 
-const mapStateToProps = ({ search_string, search_results }) => {
+const mapStateToProps = ({ search_string, search_results, user }) => {
     return {
         search_string,
-        search_results
+        search_results,
+        user
     }
 }
 

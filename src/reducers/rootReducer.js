@@ -32,7 +32,8 @@ const initialState = {
   ],
   selected_show: "tt0096061",
   show_details: null,
-  user_subscriptions: null
+  user_subscriptions: null,
+  saved_shows: []
 };
 
 const rootReducer = ( state = initialState, action ) => {
@@ -73,6 +74,11 @@ const rootReducer = ( state = initialState, action ) => {
         return {
           ...state,
           show_details: action.payload.show
+        }
+      case 'SET_SAVED_SHOWS':
+        return {
+          ...state,
+          saved_shows: action.payload.saved_shows
         }
     }
 }

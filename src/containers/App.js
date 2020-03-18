@@ -12,6 +12,7 @@ import Home from './Home'
 import Results from './Results'
 import ShowPage from './ShowPage'
 import API from "../API"
+import SavedShows from './SavedShows'
 
 
 class App extends Component {
@@ -20,13 +21,25 @@ class App extends Component {
     this.props.setUser(user)
     localStorage.token = token
     this.props.setUserType(user_type)
+    this.getAndSetSavedShows(user.id)
+  }
+
+  getAndSetSavedShows = (user_id) => {
+    API.getSavedShows(user_id)
+    .then( shows => this.props.setSavedShows(shows))
   }
 
   logOut = () => {
     this.props.setUser(null);
     localStorage.token = null;
     this.props.setUserType(null);
+    this.props.setSavedShows([])
   }
+
+  saveShow = (imdbID, title, type, year, poster) => {
+    API.saveShow(this.props.user.id, imdbID, title, type, year, poster)
+      .then(saved_show => this.props.setSavedShows([...this.props.saved_shows, saved_show]));
+  };
 
   componentDidMount() {
     if (localStorage.token) {
@@ -63,25 +76,28 @@ class App extends Component {
             path="/menu"
             component={() => <UserMenu logOut={this.logOut} />}
           />
-          <Route exact path="/results" component={() => <Results />} />
+          <Route exact path="/results" component={() => <Results saveShow={this.saveShow} />} />
           <Route exact path="/results/show" component={() => <ShowPage />} />
+          <Route exact path="/menu/saved-shows" component={() => <SavedShows />} />
         </Container>
       </Router>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ user, user_type, saved_shows }) => {
   return {
-    user: state.user,
-    user_type: state.user_type
+    user,
+    user_type,
+    saved_shows
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     setUser: user => dispatch({ type: "SET_USER", payload: { user } }),
-    setUserType: user_type => dispatch({ type: "SET_USER_TYPE", payload: { user_type }})
+    setUserType: user_type => dispatch({ type: "SET_USER_TYPE", payload: { user_type } }),
+    setSavedShows: saved_shows => dispatch({ type: 'SET_SAVED_SHOWS', payload: { saved_shows } })
   }
 }
 
