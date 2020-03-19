@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux";
 import ResultCard from '../components/ResultCard'
 import clapper from '../images/clapper-img.png'
+import { Redirect } from "react-router-dom";
 
 
 class Results extends Component {
@@ -51,6 +52,7 @@ class Results extends Component {
     const { search_string, search_results } = this.props;
     console.log(search_results);
     return (
+      search_string ? (
       <Segment
         textAlign="center"
         style={{
@@ -73,8 +75,11 @@ class Results extends Component {
           </Grid.Row>
           {this.renderCards()}
         </Grid>
-      </Segment>
-    );
+        </Segment>
+      ) : (
+          <Redirect to="/" />
+      )
+    ) 
   }
 }
 

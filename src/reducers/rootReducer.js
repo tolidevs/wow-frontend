@@ -2,35 +2,9 @@ const initialState = {
   menu_on: false,
   user: null,
   user_type: null,
-  search_string: "scrooged",
-  search_results: [
-    {
-      imdbID: "tt0096061",
-      title: "Scrooged",
-      type: "movie",
-      year: "1988",
-      poster:
-        "https://m.media-amazon.com/images/M/MV5BM2NlMDQzMDktNTMyZS00MjBjLWI0MmEtMzgzZDM2ZTVkNzE1XkEyXkFqcGdeQXVyNTUyMzE4Mzg@._V1_SX300.jpg",
-      services: [
-        {
-          name: "iTunes",
-          url: "https://itunes.apple.com/gb/movie/scrooged/id305271659"
-        },
-        {
-          name: "Google Play",
-          url:
-            "https://play.google.com/store/movies/details/Scrooged?gl=gb&hl=en&id=Il6M3Wvc71A"
-        },
-        {
-          name: "Amazon Prime Video",
-          url:
-            "https://www.amazon.co.uk/gp/product/B07ZX4F3DB?cre…07ZX4F3DB&ie=UTF8&linkCode=xm2&tag=utellycom00-21"
-        },
-        { name: "IVA", url: null }
-      ]
-    }
-  ],
-  selected_show: "tt0096061",
+  search_string: null,
+  search_results: null,
+  selected_show: null,
   show_details: null,
   user_subscriptions: null,
   saved_shows: []

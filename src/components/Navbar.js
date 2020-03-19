@@ -31,21 +31,20 @@ class Navbar extends React.Component {
       <Menu className="navbar" fixed="top">
         <Menu.Item position="right">
           <Button icon onClick={this.selectMenu}>
-            { menu_on ? (
+            {menu_on ? (
+              // need to change this to history so when close menu takes you back to last page not home page
               <NavLink to="/" exact>
                 <Icon name="chevron up" />
               </NavLink>
+            ) : loggedIn ? (
+              <NavLink to="/menu" exact>
+                <Icon name="chevron down" />
+              </NavLink>
             ) : (
-              loggedIn ? (
-                <NavLink to="/menu" exact>
-                  <Icon name="chevron down" />
-                </NavLink>
-              ) : (
-                <NavLink to="/login" exact>
-                      <Icon name="chevron down" />
-                </NavLink>
-              )
-            ) }
+              <NavLink to="/login" exact>
+                <Icon name="chevron down" />
+              </NavLink>
+            )}
           </Button>
         </Menu.Item>
       </Menu>

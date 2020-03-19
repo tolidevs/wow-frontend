@@ -3,7 +3,9 @@ import {
     Item,
     Grid,
     Icon,
-    Image
+    Image,
+    Header,
+    Message
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -47,38 +49,30 @@ class ResultCard extends Component {
     };
 
     renderServices = (services) => {
-        return services.map(
-            service => {
-                switch (service.name) {
-                default:
-                    return null;
-                case "Netflix":
-                    return (
-                        <Image src={netflix} as='a' href={service.url}></Image>
-                    )
-                case "iTunes":
-                    return (
-                      <Image src={itunes} as="a" href={service.url}></Image>
-                    );
-                case "Amazon Instant Video":
-                    return (
-                      <Image src={amazon} as="a" href={service.url}></Image>
-                    );
-                case "Google Play":
-                    return (
-                      <Image src={google} as="a" href={service.url}></Image>
-                    );
-                case "DisneyPlus":
-                    return (
-                      <Image src={disney} as="a" href={service.url}></Image>
-                    );
-                case "other":
-                    return (
-                      <Image src={stream} as="a" href={service.url}></Image>
-                    );
-                }
+        if (Array.isArray(services) && services.length > 0) {
+          return services.map(service => {
+            switch (service.name) {
+              default:
+                return null;
+              case "Netflix":
+                return <Image src={netflix} as="a" href={service.url}></Image>;
+              case "iTunes":
+                return <Image src={itunes} as="a" href={service.url}></Image>;
+              case "Amazon":
+                return <Image src={amazon} as="a" href={service.url}></Image>;
+              case "Google Play":
+                return <Image src={google} as="a" href={service.url}></Image>;
+              case "DisneyPlus":
+                return <Image src={disney} as="a" href={service.url}></Image>;
+              case "other":
+                return <Image src={stream} as="a" href={service.url}></Image>;
             }
-        )
+          });
+        } 
+    }
+
+    renderNoServicesMessage = () => {
+        return !this.renderServices(this.props.services) && <Message>Not currently available on any streaming services</Message>
     }
 
     render() {
@@ -107,7 +101,8 @@ class ResultCard extends Component {
               </Item.Extra>
               <Item.Extra>
                 Watch on: <br></br>
-                <Image.Group size='tiny'>{this.renderServices(services)}</Image.Group>
+                    <Image.Group size='tiny'>{this.renderServices(services)}</Image.Group>
+                    {this.renderNoServicesMessage()}
               </Item.Extra>
             </Item.Group>
             {this.redirectToShow()}

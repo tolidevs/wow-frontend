@@ -50,30 +50,51 @@ class UserMenu extends Component {
         >
           <Grid.Column style={{ maxWidth: "50vh" }}>
             {this.setHeader()}
-            
+
             <div className="menu-button">
-              <NavLink exact to='/'>
-                <Button onClick={() => {
-                  setUserType(null)
-                  setMenu(false)
-                }
-                }>Search</Button>
+              <NavLink exact to="/">
+                <Button
+                  onClick={() => {
+                    setUserType(null);
+                    setMenu(false);
+                  }}
+                >
+                  Search
+                </Button>
               </NavLink>
             </div>
             <div className="menu-button">
-              <Button onClick={() => {
-                setUserType(null)
-                setMenu(false)
-              }
-              }>Manage Account</Button>
+              <NavLink exact to="/menu/saved-shows">
+                <Button
+                  onClick={() => {
+                    setUserType(null);
+                    setMenu(false);
+                  }}
+                >
+                  My Saved Shows
+                </Button>
+              </NavLink>
             </div>
             <div className="menu-button">
-              <NavLink exact to='/'>
-                <Button onClick={() => {
-                  logOut()
-                  setMenu(false)
-                }
-                }>Log Out</Button>
+              <Button
+                onClick={() => {
+                  setUserType(null);
+                  setMenu(false);
+                }}
+              >
+                Manage Account
+              </Button>
+            </div>
+            <div className="menu-button">
+              <NavLink exact to="/">
+                <Button
+                  onClick={() => {
+                    logOut();
+                    setMenu(false);
+                  }}
+                >
+                  Log Out
+                </Button>
               </NavLink>
             </div>
           </Grid.Column>

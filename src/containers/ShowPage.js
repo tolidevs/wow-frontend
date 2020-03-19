@@ -34,6 +34,12 @@ class ShowPage extends Component {
     );
   }
 
+  save = (imdbID, title, type, year, poster) => {
+    return (
+      this.props.user && this.props.saveShow(imdbID, title, type, year, poster)
+    );
+  };
+
   renderType = type => {
     if (type === "movie") {
       return (
@@ -102,16 +108,22 @@ class ShowPage extends Component {
             <p>{show_details.plot}</p>
           </div>
         )}
+        <br></br>
+        <div>
+            <p>Back</p>
+            <Icon type="arrow circle left" />
+        </div>
       </Segment>
     );
   }
 }
 
-    const mapStateToProps = ({ selected_show, search_results, show_details }) => {
+    const mapStateToProps = ({ selected_show, search_results, show_details, user }) => {
         return {
             selected_show,
             search_results,
-            show_details
+            show_details,
+            user
         }
     }
 

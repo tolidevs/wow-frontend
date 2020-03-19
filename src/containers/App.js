@@ -77,7 +77,7 @@ class App extends Component {
             component={() => <UserMenu logOut={this.logOut} />}
           />
           <Route exact path="/results" component={() => <Results saveShow={this.saveShow} />} />
-          <Route exact path="/results/show" component={() => <ShowPage />} />
+          <Route exact path="/results/show" component={() => <ShowPage saveShow={this.saveShow} />} />
           <Route exact path="/menu/saved-shows" component={() => <SavedShows />} />
         </Container>
       </Router>
