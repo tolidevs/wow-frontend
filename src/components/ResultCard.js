@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import RemoveFromWatchListModal from './RemoveFromWatchListModal'
+import NotLoggedInModal from './NotLoggedInModal'
 import {
     Item,
     Grid,
@@ -30,7 +32,7 @@ class ResultCard extends Component {
     };
 
     redirectToShow = () => {
-        return this.state.selected && <Redirect push to="/results/show" />;
+        return this.state.selected && <Redirect push to="/results/show/" />;
     };
 
     renderIcon = type => {
@@ -46,6 +48,20 @@ class ResultCard extends Component {
     save = (imdbID, title, type, year, poster) => {
         return this.props.user && this.props.saveShow(imdbID, title, type, year, poster);
     };
+
+  renderSaveIcon = (show) => {
+    const { imdbID, title, type, year, poster } = show
+    const savedShow = (this.props.saved_shows.filter(saved => saved.imdbID === show.imdbID))[0]
+    if (savedShow) {
+      return <RemoveFromWatchListModal id={savedShow.id} title={savedShow.title} deleteSavedShow={this.props.deleteSavedShow} />
+    } else {
+      return (<Icon
+        name="heart outline"
+        size="big"
+        onClick={() => this.save(imdbID, title, type, year, poster)}
+      />)
+    }
+  }
 
     renderServices = (services) => {
         if (Array.isArray(services) && services.length > 0) {
@@ -71,12 +87,12 @@ class ResultCard extends Component {
     }
 
     renderNoServicesMessage = () => {
-        return !this.renderServices(this.props.services) && <Message>Not currently available on any streaming services</Message>
+        return !this.renderServices(this.props.showObj.services) && <Message>Not currently available on any streaming services</Message>
     }
 
     render() {
-        const { imdbID, title, type, year, poster, services } = this.props;
-
+        const { imdbID, title, type, year, poster, services } = this.props.showObj
+        const { showObj } = this.props
         return (
           <Grid.Row key={imdbID}>
             <Item.Group style={{ width: "90vw" }}>
@@ -90,13 +106,9 @@ class ResultCard extends Component {
                 onClick={() => this.handleClick(imdbID)}
               />
               <Item.Meta>{year}</Item.Meta>
-              <Item.Extra>
-                <Icon
-                  name="heart outline"
-                  size="big"
-                  onClick={() => this.save(imdbID, title, type, year, poster)}
-                />
-                {this.renderIcon(type)}
+                <Item.Extra>
+                    {this.renderSaveIcon(showObj)}
+                    {this.renderIcon(type)}
               </Item.Extra>
               <Item.Extra>
                 Watch on: <br></br>
@@ -106,13 +118,15 @@ class ResultCard extends Component {
             </Item.Group>
             {this.redirectToShow()}
           </Grid.Row>
+          
         );
     }
 }
 
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = ({ user, saved_shows }) => {
     return {
-        user
+        user,
+        saved_shows
     }
 }
  

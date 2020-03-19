@@ -16,17 +16,19 @@ import { Redirect } from "react-router-dom";
 class Results extends Component {
   
   renderResults = () => {
-    const { search_results, saveShow } = this.props;
+    const { search_results, saveShow, deleteSavedShow } = this.props;
     if (Array.isArray(search_results) && search_results.length > 0) {
       return search_results.map(result => (
         <ResultCard
-          imdbID={result.imdbID}
-          title={result.title}
-          type={result.type}
-          year={result.year}
-          poster={result.poster}
-          services={result.services}
+          // imdbID={result.imdbID}
+          // title={result.title}
+          // type={result.type}
+          // year={result.year}
+          // poster={result.poster}
+          // services={result.services}
           saveShow={saveShow}
+          deleteSavedShow={deleteSavedShow}
+          showObj={result}
         />
       ));
     }

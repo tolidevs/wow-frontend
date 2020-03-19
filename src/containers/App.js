@@ -42,7 +42,11 @@ class App extends Component {
   saveShow = (imdbID, title, type, year, poster) => {
     API.saveShow(this.props.user.id, imdbID, title, type, year, poster)
       .then(saved_show => this.props.setSavedShows([...this.props.saved_shows, saved_show]));
-  };
+  }
+
+  deleteSavedShow = (id) => {
+    API.deleteSavedShow(id).then(json => console.log(json.message))
+  }
 
   componentDidMount() {
     if (localStorage.token) {
@@ -86,7 +90,7 @@ class App extends Component {
               exact
               path="/results"
               component={() => (
-                <Results saveShow={this.saveShow} history={history} />
+                <Results saveShow={this.saveShow} deleteSavedShow={this.deleteSavedShow} history={history} />
               )}
             />
             <Route

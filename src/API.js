@@ -5,7 +5,7 @@ const validateURL = `${baseURL}/profile`
 const signUpURL = `${baseURL}/signup`
 const findShowsURL = `${baseURL}/search`
 const getDetailsURL = `${baseURL}/show`
-const saveShowURL = `${baseURL}/saved_shows`
+const savedShowURL = `${baseURL}/saved_shows`
 const getSavedShowsURL = `${baseURL}/user/saved_shows`
 
 // Make a post request to a given URL with a given data object as the body and return the Promise
@@ -24,6 +24,14 @@ const post = (url, data) => {
 // Make a get request to a given URL and return the Promise. If a token has been provided, include it as a header called Authorization
 const get = (url, token) => {
   return token ? fetch(url, { headers: { Authorization: token } }) : fetch(url)
+}
+
+// make a delete request to a given URL
+const deleteItem = (url, id) => {
+  const configurationObject = {
+    method: "DELETE",
+  }
+  return fetch(`${url}/${id}`, configurationObject)
 }
 
 // Use the get function to make a request to the profile route and parse the response into JSON
@@ -49,7 +57,7 @@ const getShowDetails = imdbID => {
 }
 
 const saveShow = (user_id, imdbID, title, type, year, poster) => {
-  return post(saveShowURL, {
+  return post(savedShowURL, {
     user: user_id,
     imdbID,
     title,
@@ -62,6 +70,10 @@ const saveShow = (user_id, imdbID, title, type, year, poster) => {
 
 const getSavedShows = user_id => {
   return post(getSavedShowsURL, {user_id}).then(resp => resp.json())
+}
+
+const deleteSavedShow = id => {
+  return deleteItem(savedShowURL, id).then(resp => resp.json())
 }
 
 // Use the get function to make a request to the items route and parse the response into JSON
@@ -77,5 +89,6 @@ export default {
   findShows,
   getShowDetails,
   saveShow,
-  getSavedShows
+  getSavedShows,
+  deleteSavedShow
 }

@@ -32,7 +32,7 @@ class ShowPage extends Component {
     // if a new one is selected (not same as current saved details) then set the details to
     // the new show and do a new API fetch - makes use of API more efficient, minimise unnecessary
     // fetches when we already have the details
-    if (show_details && selected_show !== show_details.imdbID && !("properties" in show_details)) {
+    if (show_details && selected_show !== show_details.imdbID && !("plot" in show_details)) {
       this.setState({
         show: this.getShowShortDetails()[0]
       });
