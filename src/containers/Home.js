@@ -15,7 +15,7 @@ class Home extends Component {
   }
 
   redirectToResults = () => {
-    return this.state.search_submitted && this.props.search_string.length > 0 && <Redirect to="/results" exact />
+    return this.state.search_submitted && this.props.search_string.length > 0 && <Redirect push to="/results" exact />
   }
 
   handleSubmit = e => {
@@ -28,7 +28,7 @@ class Home extends Component {
     this.setState({
       search_submitted: true
     })
-    console.log(this.props.search_string)
+    // console.log(this.props.search_string)
 
     
   }

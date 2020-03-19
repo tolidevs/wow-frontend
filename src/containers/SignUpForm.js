@@ -23,7 +23,7 @@ class SignUpForm extends Component {
   };
 
   redirectToHome = () => {
-    return this.props.user && <Redirect to='/menu' exact />;
+    return this.props.user && <Redirect push to='/menu' exact />;
   };
 
   handleSubmit = e => {

@@ -26,11 +26,11 @@ class ResultCard extends Component {
         this.setState({
         selected: true
         });
-        console.log(imdbID);
+        // console.log(imdbID);
     };
 
     redirectToShow = () => {
-        return this.state.selected && <Redirect to="/results/show" />;
+        return this.state.selected && <Redirect push to="/results/show" />;
     };
 
     renderIcon = type => {

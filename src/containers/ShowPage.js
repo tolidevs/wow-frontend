@@ -27,7 +27,6 @@ class ShowPage extends Component {
 
   componentDidMount() {
     const { selected_show, show_details } = this.props
-    console.log(this.props.history)
     // check whether there are show details stored in state yet, check whether it is teh same details as the one selected
     // and check whether the full details have been fetched from the API.
     // if a new one is selected (not same as current saved details) then set the details to
@@ -118,6 +117,7 @@ class ShowPage extends Component {
           </div>
         )}
         <br></br>
+        {/* need to fix this, isnt remembering last it is just goign back to menu */}
         <div onClick={() => this.props.history.goBack()}>
           <Icon
             name="arrow circle left"

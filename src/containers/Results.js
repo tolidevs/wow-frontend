@@ -77,7 +77,7 @@ class Results extends Component {
         </Grid>
         </Segment>
       ) : (
-          <Redirect to="/" />
+          <Redirect push to="/" />
       )
     ) 
   }
