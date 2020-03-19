@@ -102,16 +102,18 @@ class ShowPage extends Component {
         {show_details && (
           <div>
             <p>
-              <Icon type="question" size="big"></Icon> {show_details.genre}
+              <Icon name="question" size="big"></Icon> {show_details.genre}
             </p>
             <p>IMDB Rating: {show_details.imdbRating} / 10</p>
             <p>{show_details.plot}</p>
           </div>
         )}
         <br></br>
-        <div>
-            <p>Back</p>
-            <Icon type="arrow circle left" />
+        <div onClick={() => this.props.history.goBack()}>
+          <Icon
+            name="arrow circle left"
+          />
+          Back
         </div>
       </Segment>
     );

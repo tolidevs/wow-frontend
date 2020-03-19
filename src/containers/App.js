@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Navbar from '../components/Navbar'
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory'
 import '../App.css';
 import { Container } from 'semantic-ui-react';
 import { connect } from "react-redux";
@@ -13,9 +14,11 @@ import Results from './Results'
 import ShowPage from './ShowPage'
 import API from "../API"
 import SavedShows from './SavedShows'
-
+import NotFound from '../components/NotFound'
+const history = createHistory();
 
 class App extends Component {
+
 
   logIn = (user, token, user_type) => {
     this.props.setUser(user)
@@ -53,32 +56,53 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <Navbar />
+      <Router history={history}>
+        <Navbar history={history} />
 
         <Container
           className="main-container"
           // style={}
         >
-          <Route exact path="/" component={Home} />
-          <Route
-            exact
-            path="/login"
-            component={() => <LoginForm logIn={this.logIn} />}
-          />
-          <Route
-            exact
-            path="/sign-up"
-            component={() => <SignUpForm logIn={this.logIn} />}
-          />
-          <Route
-            exact
-            path="/menu"
-            component={() => <UserMenu logOut={this.logOut} />}
-          />
-          <Route exact path="/results" component={() => <Results saveShow={this.saveShow} />} />
-          <Route exact path="/results/show" component={() => <ShowPage saveShow={this.saveShow} />} />
-          <Route exact path="/menu/saved-shows" component={() => <SavedShows />} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route
+              exact
+              path="/login"
+              component={() => <LoginForm logIn={this.logIn} />}
+            />
+            <Route
+              exact
+              path="/sign-up"
+              component={() => <SignUpForm logIn={this.logIn} />}
+            />
+            <Route
+              exact
+              path="/menu"
+              component={() => (
+                <UserMenu logOut={this.logOut} history={history} />
+              )}
+            />
+            <Route
+              exact
+              path="/results"
+              component={() => (
+                <Results saveShow={this.saveShow} history={history} />
+              )}
+            />
+            <Route
+              exact
+              path="/results/show"
+              component={() => (
+                <ShowPage saveShow={this.saveShow} history={history} />
+              )}
+            />
+            <Route
+              exact
+              path="/menu/saved-shows"
+              component={() => <SavedShows history={history} />}
+            />
+            <Route component={NotFound} />
+          </Switch>
         </Container>
       </Router>
     );
