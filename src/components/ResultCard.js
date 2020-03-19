@@ -4,7 +4,6 @@ import {
     Grid,
     Icon,
     Image,
-    Header,
     Message
 } from "semantic-ui-react";
 import { connect } from "react-redux";

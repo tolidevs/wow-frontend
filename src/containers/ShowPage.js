@@ -26,12 +26,21 @@ class ShowPage extends Component {
   };
 
   componentDidMount() {
-    this.setState({
-      show: this.getShowShortDetails()[0]
-    });
-    API.getShowDetails(this.props.selected_show).then(showObj =>
-      this.props.setShowDetails({ ...this.state.show, ...showObj })
-    );
+    const { selected_show, show_details } = this.props
+    console.log(this.props.history)
+    // check whether there are show details stored in state yet, check whether it is teh same details as the one selected
+    // and check whether the full details have been fetched from the API.
+    // if a new one is selected (not same as current saved details) then set the details to
+    // the new show and do a new API fetch - makes use of API more efficient, minimise unnecessary
+    // fetches when we already have the details
+    if (show_details && selected_show !== show_details.imdbID && !("properties" in show_details)) {
+      this.setState({
+        show: this.getShowShortDetails()[0]
+      });
+      API.getShowDetails(this.props.selected_show).then(showObj =>
+        this.props.setShowDetails({ ...this.state.show, ...showObj })
+      );
+    }
   }
 
   save = (imdbID, title, type, year, poster) => {

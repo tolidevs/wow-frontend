@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import {
   Segment,
   Header,
-  Image,
   Grid
 } from "semantic-ui-react";
 import { connect } from "react-redux";
@@ -24,7 +23,7 @@ class SavedShows extends Component {
         />
       ));
     } else {
-        return <Header >You have not saved any shows yet</Header>
+        return <Header>You have not saved any shows yet</Header>
     }
   };
 
