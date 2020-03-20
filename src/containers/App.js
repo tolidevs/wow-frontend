@@ -3,9 +3,7 @@ import Navbar from '../components/Navbar'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory'
 import '../App.css';
-import { Container } from 'semantic-ui-react';
 import { connect } from "react-redux";
-
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
 import UserMenu from './UserMenu'
@@ -63,7 +61,7 @@ class App extends Component {
       <Router history={history}>
         <Navbar history={history} />
 
-        <Container
+        <div
           className="main-container"
           // style={}
         >
@@ -97,17 +95,17 @@ class App extends Component {
               exact
               path="/results/show"
               component={() => (
-                <ShowPage saveShow={this.saveShow} history={history} />
+                <ShowPage saveShow={this.saveShow} deleteSavedShow={this.deleteSavedShow} history={history} />
               )}
             />
             <Route
               exact
               path="/menu/saved-shows"
-              component={() => <SavedShows history={history} />}
+              component={() => <SavedShows history={history} saveShow={this.saveShow} deleteSavedShow={this.deleteSavedShow} />}
             />
             <Route component={NotFound} />
           </Switch>
-        </Container>
+        </div>
       </Router>
     );
   }

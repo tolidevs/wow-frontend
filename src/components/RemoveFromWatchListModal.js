@@ -13,7 +13,7 @@ class RemoveFromWatchListModal extends Component{
     handleClose = () => this.setState({ open: false })
 
     render() {
-        const { title, id, deleteSavedShow } = this.props
+        const { title, id, unsave } = this.props
         return (
             <Modal open={this.state.open}
                 trigger={<Icon
@@ -31,13 +31,13 @@ class RemoveFromWatchListModal extends Component{
                 <Modal.Actions>
                     <Button basic color='red' onClick={this.handleClose} inverted>
                         <Icon name='remove' /> No
-              </Button>
+                    </Button>
                     <Button color='green' onClick={() => {
-                        deleteSavedShow(id)
+                        unsave(id)
                         this.handleClose()
                     }
                     } inverted>
-                        <Icon name='checkmark' /> Yes
+                    <Icon name='checkmark' /> Yes
               </Button>
                 </Modal.Actions>
             </Modal>

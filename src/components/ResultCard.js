@@ -19,49 +19,73 @@ import stream from "../images/stream.png";
 
 
 class ResultCard extends Component {
-    state = {
-        selected: false
-    };
+  state = {
+      selected: false
+  };
 
-    handleClick = imdbID => {
-        this.props.setSelectedShow(imdbID);
-        this.setState({
-        selected: true
-        });
-        // console.log(imdbID);
-    };
+  // -------------selecting a show & redirecting to it -----------
 
-    redirectToShow = () => {
-        return this.state.selected && <Redirect push to="/results/show/" />;
-    };
+  handleClick = imdbID => {
+      this.props.setSelectedShow(imdbID);
+      this.setState({
+      selected: true
+      });
+      // console.log(imdbID);
+  };
 
-    renderIcon = type => {
-        if (type === "movie") {
-        return <Icon name="film" size="big" floated="right" />;
-        } else if (type === "series") {
-        return <Icon name="tv" size="big" floated="right" />;
-        } else {
-        return <Icon name="question" size="big" floated="right" />;
-        }
-    };
+  redirectToShow = () => {
+    if (this.state.selected) {
+      return <Redirect push to="/results/show/" />;
+    }
+  };
 
-    save = (imdbID, title, type, year, poster) => {
-        return this.props.user && this.props.saveShow(imdbID, title, type, year, poster);
-    };
 
-  renderSaveIcon = (show) => {
+  // --------------rendering the icon depending on type ------------
+
+  renderIcon = type => {
+      if (type === "movie") {
+      return <Icon name="film" size="big" floated="right" />;
+      } else if (type === "series") {
+      return <Icon name="tv" size="big" floated="right" />;
+      } else {
+      return <Icon name="question" size="big" floated="right" />;
+      }
+  };
+
+// --------------to do with saving/unsaving a show -----------
+
+  // save a show if a user is logged in
+  save = (show) => {
     const { imdbID, title, type, year, poster } = show
+    return this.props.user && this.props.saveShow(imdbID, title, type, year, poster);
+  };
+
+  // delete saved show from backend and remove from saved_shows in state
+  unsave = (id) => {
+    this.props.setSavedShows(this.props.saved_shows.filter(saved => saved.id !== id))
+    this.props.deleteSavedShow(id)
+    
+  }
+  
+  // if already saved then render a filled heart icon that renders a modal to check if you are sure you want to remove from watchlist
+  // if not render an empty heart icon
+  renderSaveIcon = (show) => {
     const savedShow = (this.props.saved_shows.filter(saved => saved.imdbID === show.imdbID))[0]
-    if (savedShow) {
-      return <RemoveFromWatchListModal id={savedShow.id} title={savedShow.title} deleteSavedShow={this.props.deleteSavedShow} />
+
+    if (!this.props.user) {
+      return <NotLoggedInModal />
+    } else if (savedShow) {
+      return <RemoveFromWatchListModal id={savedShow.id} title={savedShow.title} unsave={this.unsave} />
     } else {
       return (<Icon
         name="heart outline"
         size="big"
-        onClick={() => this.save(imdbID, title, type, year, poster)}
+        onClick={() => this.save(show)}
       />)
     }
   }
+
+// ------------- to do with rendering the services -------------
 
     renderServices = (services) => {
         if (Array.isArray(services) && services.length > 0) {
@@ -89,6 +113,8 @@ class ResultCard extends Component {
     renderNoServicesMessage = () => {
         return !this.renderServices(this.props.showObj.services) && <Message>Not currently available on any streaming services</Message>
     }
+  
+  // ---------------render ---------------
 
     render() {
         const { imdbID, title, type, year, poster, services } = this.props.showObj
@@ -132,7 +158,8 @@ const mapStateToProps = ({ user, saved_shows }) => {
  
 const mapDispatchToProps = dispatch => {
     return {
-        setSelectedShow: selected_show => dispatch ({ type: 'SET_SELECTED_SHOW', payload: { selected_show }})
+      setSelectedShow: selected_show => dispatch({ type: 'SET_SELECTED_SHOW', payload: { selected_show } }),
+      setSavedShows: saved_shows => dispatch({ type: 'SET_SAVED_SHOWS', payload: { saved_shows } })
     }
 }
 

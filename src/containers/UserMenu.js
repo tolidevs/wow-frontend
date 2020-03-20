@@ -71,7 +71,7 @@ class UserMenu extends Component {
                     setMenu(false);
                   }}
                 >
-                  My Saved Shows
+                  My Watch List
                 </Button>
               </NavLink>
             </div>

@@ -4,6 +4,7 @@ import {
     Button,
     Icon
 } from "semantic-ui-react";
+import { NavLink } from 'react-router-dom';
 
 class NotLoggedInModal extends Component {
     state = { open: false }
@@ -13,11 +14,10 @@ class NotLoggedInModal extends Component {
     handleClose = () => this.setState({ open: false })
 
     render() {
-        const { title, id, deleteSavedShow } = this.props
         return (
             <Modal open={this.state.open}
                 trigger={<Icon
-                    name="heart"
+                    name="heart outline"
                     size="big"
                     onClose={this.handleClose}
                     onClick={this.handleOpen}
@@ -26,14 +26,16 @@ class NotLoggedInModal extends Component {
                 size="tiny"
             >
                 <Modal.Content>
-                    <p>Are you sure you would like to remove {title} from your watchlist?</p>
+                    <p>Please <NavLink to="/login">log in</NavLink> to save to your Watch List</p>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button basic color='red' onClick={this.handleClose} inverted>
-                        <Icon name='remove' /> No
-              </Button>
-                    <Button color='green' onClick={() => deleteSavedShow(id)} inverted>
-                        <Icon name='checkmark' /> Yes
+                    <NavLink to="/login">
+                        <Button basic color='green' onClick={this.handleClose} inverted>
+                            <Icon name='sign in' /> Log In
+                        </Button>
+                    </NavLink>
+                    <Button color='red' onClick={this.handleClose} inverted>
+                        <Icon name='arrow circle left' /> Go back
               </Button>
                 </Modal.Actions>
             </Modal>

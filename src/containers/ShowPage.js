@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from "react";
+import RemoveFromWatchListModal from '../components/RemoveFromWatchListModal'
+import NotLoggedInModal from '../components/NotLoggedInModal'
 import {
   Segment,
   Header,
@@ -20,10 +22,12 @@ class ShowPage extends Component {
     show: null
   };
 
+  // ----------get details from existing results object------------
   getShowShortDetails = () => {
     const { selected_show, search_results } = this.props;
     return [...search_results].filter(show => show.imdbID === selected_show);
   };
+
 
   componentDidMount() {
     const { selected_show, show_details } = this.props
@@ -42,12 +46,8 @@ class ShowPage extends Component {
     }
   }
 
-  save = (imdbID, title, type, year, poster) => {
-    return (
-      this.props.user && this.props.saveShow(imdbID, title, type, year, poster)
-    );
-  };
 
+  // --------render icon for type of show/film ----------------------------
   renderType = type => {
     if (type === "movie") {
       return (
@@ -89,8 +89,44 @@ class ShowPage extends Component {
     });
   };
 
+  // --------------to do with saving/unsaving a show -----------
+
+  // save a show if a user is logged in
+  save = (show) => {
+    const { imdbID, title, type, year, poster } = show
+    return this.props.user && this.props.saveShow(imdbID, title, type, year, poster);
+  };
+
+  // delete saved show from backend and remove from saved_shows in state
+  unsave = (id) => {
+    this.props.setSavedShows(this.props.saved_shows.filter(saved => saved.id !== id))
+    this.props.deleteSavedShow(id)
+
+  }
+
+  // if already saved then render a filled heart icon that renders a modal to check if you are sure you want to remove from watchlist
+  // if not render an empty heart icon
+  renderSaveIcon = (show) => {
+    const savedShow = (this.props.saved_shows.filter(saved => saved.imdbID === show.imdbID))[0]
+
+    if (!this.props.user) {
+      return <NotLoggedInModal />
+    } else if (savedShow) {
+      return <RemoveFromWatchListModal id={savedShow.id} title={savedShow.title} unsave={this.unsave} />
+    } else {
+      return (<Icon
+        name="heart outline"
+        size="big"
+        onClick={() => this.save(show)}
+      />)
+    }
+  }
+
+// ----------- render -------------
+
   render() {
     const { show_details } = this.props;
+
     const {
       title,
       type,
@@ -102,7 +138,7 @@ class ShowPage extends Component {
       <Segment style={{ width: "90vw" }} verticalAlign="middle">
         <Header>{title}</Header>
         <Image src={poster} bordered centered />
-        <Icon name="heart outline" size="big" floated="right" />
+        {this.renderSaveIcon(this.props.show_details)}
         <br></br>Watch on:
         <Image.Group size="tiny">{this.renderServices(services)}</Image.Group>
         <br></br>
@@ -129,19 +165,21 @@ class ShowPage extends Component {
   }
 }
 
-    const mapStateToProps = ({ selected_show, search_results, show_details, user }) => {
+    const mapStateToProps = ({ selected_show, search_results, show_details, user, saved_shows }) => {
         return {
-            selected_show,
-            search_results,
-            show_details,
-            user
+          selected_show,
+          search_results,
+          show_details,
+          user,
+          saved_shows
         }
     }
 
     const mapDispatchToProps = dispatch => {
         return {
-            setSelectedShow: selected_show => dispatch({ type: 'SET_SELECTED_SHOW', payload: { selected_show } }),
-            setShowDetails: show => dispatch({ type: 'SET_SHOW_DETAILS', payload: { show }})
+          setSelectedShow: selected_show => dispatch({ type: 'SET_SELECTED_SHOW', payload: { selected_show } }),
+          setShowDetails: show => dispatch({ type: 'SET_SHOW_DETAILS', payload: { show } }),
+          setSavedShows: saved_shows => dispatch({ type: 'SET_SAVED_SHOWS', payload: { saved_shows } })
         }
 }
 
