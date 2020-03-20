@@ -37,8 +37,8 @@ class App extends Component {
     this.props.setSavedShows([])
   }
 
-  saveShow = (imdbID, title, type, year, poster) => {
-    API.saveShow(this.props.user.id, imdbID, title, type, year, poster)
+  saveShow = (imdbID, title, show_type, year, poster) => {
+    API.saveShow(this.props.user.id, imdbID, title, show_type, year, poster)
       .then(saved_show => this.props.setSavedShows([...this.props.saved_shows, saved_show]));
   }
 
@@ -100,7 +100,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/menu/saved-shows"
+              path="/user/watch-list"
               component={() => <SavedShows history={history} saveShow={this.saveShow} deleteSavedShow={this.deleteSavedShow} />}
             />
             <Route component={NotFound} />

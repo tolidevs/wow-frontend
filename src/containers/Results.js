@@ -51,8 +51,8 @@ class Results extends Component {
   };
 
   render() {
-    const { search_string, search_results } = this.props;
-    console.log(search_results);
+    const { search_string } = this.props;
+    // console.log(search_results);
     return (
       search_string ? (
       <Segment
@@ -69,7 +69,7 @@ class Results extends Component {
           columns={1}
           // relaxed='very'
           textAlign="center"
-          style={{ height: "100vh", width: "95w" }}
+          style={{ height: "100vh", width: "90w" }}
           verticalAlign="middle"
         >
           <Grid.Row>

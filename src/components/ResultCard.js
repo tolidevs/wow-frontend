@@ -40,12 +40,12 @@ class ResultCard extends Component {
   };
 
 
-  // --------------rendering the icon depending on type ------------
+  // --------------rendering the icon depending on show_type ------------
 
-  renderIcon = type => {
-      if (type === "movie") {
+  renderIcon = show_type => {
+      if (show_type === "movie") {
       return <Icon name="film" size="big" floated="right" />;
-      } else if (type === "series") {
+      } else if (show_type === "series") {
       return <Icon name="tv" size="big" floated="right" />;
       } else {
       return <Icon name="question" size="big" floated="right" />;
@@ -56,8 +56,8 @@ class ResultCard extends Component {
 
   // save a show if a user is logged in
   save = (show) => {
-    const { imdbID, title, type, year, poster } = show
-    return this.props.user && this.props.saveShow(imdbID, title, type, year, poster);
+    const { imdbID, title, show_type, year, poster } = show
+    return this.props.user && this.props.saveShow(imdbID, title, show_type, year, poster);
   };
 
   // delete saved show from backend and remove from saved_shows in state
@@ -117,7 +117,7 @@ class ResultCard extends Component {
   // ---------------render ---------------
 
     render() {
-        const { imdbID, title, type, year, poster, services } = this.props.showObj
+        const { imdbID, title, show_type, year, poster, services } = this.props.showObj
         const { showObj } = this.props
         return (
           <Grid.Row key={imdbID}>
@@ -134,7 +134,7 @@ class ResultCard extends Component {
               <Item.Meta>{year}</Item.Meta>
                 <Item.Extra>
                     {this.renderSaveIcon(showObj)}
-                    {this.renderIcon(type)}
+                    {this.renderIcon(show_type)}
               </Item.Extra>
               <Item.Extra>
                 Watch on: <br></br>

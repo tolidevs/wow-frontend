@@ -56,12 +56,12 @@ const getShowDetails = imdbID => {
   return post(getDetailsURL, {imdbID}).then(response => response.json())
 }
 
-const saveShow = (user_id, imdbID, title, type, year, poster) => {
+const saveShow = (user_id, imdbID, title, show_type, year, poster) => {
   return post(savedShowURL, {
     user: user_id,
     imdbID,
     title,
-    type,
+    show_type,
     year,
     poster
   })

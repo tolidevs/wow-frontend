@@ -48,15 +48,15 @@ class ShowPage extends Component {
 
 
   // --------render icon for type of show/film ----------------------------
-  renderType = type => {
-    if (type === "movie") {
+  renderType = show_type => {
+    if (show_type === "movie") {
       return (
         <Fragment>
           <Icon name="film" size="big" floated="right" />
           Film
         </Fragment>
       );
-    } else if (type === "series") {
+    } else if (show_type === "series") {
       return (
         <Fragment>
           <Icon name="tv" size="big" floated="right" />
@@ -93,8 +93,8 @@ class ShowPage extends Component {
 
   // save a show if a user is logged in
   save = (show) => {
-    const { imdbID, title, type, year, poster } = show
-    return this.props.user && this.props.saveShow(imdbID, title, type, year, poster);
+    const { imdbID, title, show_type, year, poster } = show
+    return this.props.user && this.props.saveShow(imdbID, title, show_type, year, poster);
   };
 
   // delete saved show from backend and remove from saved_shows in state
@@ -129,7 +129,7 @@ class ShowPage extends Component {
 
     const {
       title,
-      type,
+      show_type,
       year,
       poster,
       services
@@ -142,7 +142,7 @@ class ShowPage extends Component {
         <br></br>Watch on:
         <Image.Group size="tiny">{this.renderServices(services)}</Image.Group>
         <br></br>
-        {this.renderType(type)} {year}
+        {this.renderType(show_type)} {year}
         {show_details && (
           <div>
             <p>

@@ -9,17 +9,20 @@ import ResultCard from "../components/ResultCard";
 
 class SavedShows extends Component {
   renderResults = () => {
-    const { saved_shows, saveShow } = this.props;
+    const { saved_shows, saveShow, deleteSavedShow } = this.props;
     if (saved_shows.length > 0) {
       return saved_shows.map(result => (
         <ResultCard
-          imdbID={result.imdbID}
-          title={result.title}
-          type={result.type}
-          year={result.year}
-          poster={result.poster}
-          services={result.services}
+          // imdbID={result.imdbID}
+          // title={result.title}
+          // type={result.type}
+          // year={result.year}
+          // poster={result.poster}
+          // services={result.services}
           saveShow={saveShow}
+          deleteSavedShow={deleteSavedShow}
+          showObj={result}
+
         />
       ));
     } else {
@@ -47,11 +50,11 @@ class SavedShows extends Component {
           columns={1}
           // relaxed='very'
           textAlign="center"
-          style={{ height: "100vh", width: "95w" }}
+          style={{ height: "100vh", width: "90w" }}
           verticalAlign="middle"
         >
           <Grid.Row>
-            <Header>Your Saved Shows</Header>
+            <Header>Your Watch List</Header>
           </Grid.Row>
           {this.renderCards()}
         </Grid>

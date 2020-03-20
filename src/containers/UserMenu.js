@@ -30,7 +30,7 @@ class UserMenu extends Component {
           <Fragment>
             <Grid.Row>
               <Header as="h1">
-                Welcome back {user.name}
+                Hi {user.name}, choose an option
               </Header>
             </Grid.Row>
             </Fragment>
@@ -55,7 +55,7 @@ class UserMenu extends Component {
               <NavLink exact to="/">
                 <Button
                   onClick={() => {
-                    setUserType(null);
+                    setUserType('existing_user');
                     setMenu(false);
                   }}
                 >
@@ -64,10 +64,10 @@ class UserMenu extends Component {
               </NavLink>
             </div>
             <div className="menu-button">
-              <NavLink exact to="/menu/saved-shows">
+              <NavLink exact to="/user/watch-list">
                 <Button
                   onClick={() => {
-                    setUserType(null);
+                    setUserType('existing_user');
                     setMenu(false);
                   }}
                 >
@@ -78,7 +78,7 @@ class UserMenu extends Component {
             <div className="menu-button">
               <Button
                 onClick={() => {
-                  setUserType(null);
+                  setUserType('existing_user');
                   setMenu(false);
                 }}
               >

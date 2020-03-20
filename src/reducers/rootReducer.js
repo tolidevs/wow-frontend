@@ -23,7 +23,7 @@ const initialState = {
     {
       imdbID: "tt0381061",
       title: "Casino Royale",
-      type: "movie",
+      show_type: "movie",
       year: "2006",
       poster:
         "https://m.media-amazon.com/images/M/MV5BMDI5ZWJhOWItYTlhOC00YWNhLTlkNzctNDU5YTI1M2E1MWZhXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg",
@@ -42,7 +42,7 @@ const initialState = {
     {
       imdbID: "tt0112641",
       title: "Casino",
-      type: "movie",
+      show_type: "movie",
       year: "1995",
       poster:
         "https://m.media-amazon.com/images/M/MV5BMTcxOWYzNDYtYmM4YS00N2NkLTk0NTAtNjg1ODgwZjAxYzI3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
@@ -56,7 +56,7 @@ const initialState = {
     {
       imdbID: "tt0061452",
       title: "Casino Royale",
-      type: "movie",
+      show_type: "movie",
       year: "1967",
       poster:
         "https://m.media-amazon.com/images/M/MV5BZjJlYzgyZTQtNDFiMy00ZGFjLTk2N2ItN2ViNzNhNzhhNGM1XkEyXkFqcGdeQXVyMDI2NDg0NQ@@._V1_SX300.jpg",
@@ -76,7 +76,7 @@ const initialState = {
     {
       imdbID: "tt1194417",
       title: "Casino Jack",
-      type: "movie",
+      show_type: "movie",
       year: "2010",
       poster:
         "https://m.media-amazon.com/images/M/MV5BMTM2NzQ4NDE2M15BMl5BanBnXkFtZTcwNDM0NzcwNA@@._V1_SX300.jpg",
@@ -100,7 +100,7 @@ const initialState = {
     {
       imdbID: "tt1540814",
       title: "Casino Jack and the United States of Money",
-      type: "movie",
+      show_type: "movie",
       year: "2010",
       poster:
         "https://m.media-amazon.com/images/M/MV5BMjA3MTc2MzM4NV5BMl5BanBnXkFtZTcwMzE5MjYxMw@@._V1_SX300.jpg",
@@ -109,7 +109,7 @@ const initialState = {
     {
       imdbID: "tt0419909",
       title: "The Last Casino",
-      type: "movie",
+      show_type: "movie",
       year: "2004",
       poster:
         "https://m.media-amazon.com/images/M/MV5BZmJkMTA5YTMtZjNkZS00ODgwLTg4MDQtMWFmMDMwYWZhNTBhXkEyXkFqcGdeQXVyNTY0OTIxNTg@._V1_SX300.jpg",
@@ -118,7 +118,7 @@ const initialState = {
     {
       imdbID: "tt0831279",
       title: "The Casino Job",
-      type: "movie",
+      show_type: "movie",
       year: "2009",
       poster:
         "https://m.media-amazon.com/images/M/MV5BMTMzNjQwNTI2N15BMl5BanBnXkFtZTcwNDE5MzAyMg@@._V1_SX300.jpg",
@@ -127,7 +127,7 @@ const initialState = {
     {
       imdbID: "tt0072791",
       title: "Cleopatra Jones and the Casino of Gold",
-      type: "movie",
+      show_type: "movie",
       year: "1975",
       poster:
         "https://m.media-amazon.com/images/M/MV5BMjUyNTUxNjEtOTMzNy00MmZiLTk2NDctOTIwZjNhZmY2YzY5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNzc5MjA3OA@@._V1_SX300.jpg",
@@ -147,7 +147,7 @@ const initialState = {
     {
       imdbID: "tt0039434",
       title: "Gran Casino",
-      type: "movie",
+      show_type: "movie",
       year: "1947",
       poster:
         "https://m.media-amazon.com/images/M/MV5BMTc0NDExMDUzN15BMl5BanBnXkFtZTcwNDE0OTM1MQ@@._V1_SX300.jpg",
@@ -156,7 +156,7 @@ const initialState = {
     {
       imdbID: "tt0864331",
       title: "The Haunted Casino",
-      type: "movie",
+      show_type: "movie",
       year: "2007",
       poster:
         "https://m.media-amazon.com/images/M/MV5BMTk2ODk4MzUyMF5BMl5BanBnXkFtZTcwMjI3MjE2MQ@@._V1_SX300.jpg",
@@ -167,7 +167,7 @@ const initialState = {
   show_details: {
     imdbID: "tt0381061",
     title: "Casino Royale",
-    type: "movie",
+    show_type: "movie",
     year: "2006",
     poster:
       "https://m.media-amazon.com/images/M/MV5BMDI5ZWJhOWItYTlhOC00YWNhLTlkNzctNDU5YTI1M2E1MWZhXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg",
