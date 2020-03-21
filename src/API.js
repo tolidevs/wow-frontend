@@ -7,6 +7,7 @@ const findShowsURL = `${baseURL}/search`
 const getDetailsURL = `${baseURL}/show`
 const savedShowURL = `${baseURL}/saved_shows`
 const getSavedShowsURL = `${baseURL}/user/saved_shows`
+const getServicesURL = `${baseURL}/get_services`
 
 // Make a post request to a given URL with a given data object as the body and return the Promise
 const post = (url, data) => {
@@ -36,24 +37,27 @@ const deleteItem = (url, id) => {
 
 // Use the get function to make a request to the profile route and parse the response into JSON
 const validateProfile = token => {
-  return get(validateURL, token).then(response => response.json())
+  return get(validateURL, token).then(resp => resp.json())
 }
 
-// Use the post function to make a request to the validate route and parse the response into JSON
+// Use the post function to make a request to the login route and parse the response into JSON
 const logIn = data => {
-  return post(logInURL, data).then(response => response.json())
+  return post(logInURL, data).then(resp => resp.json())
 }
 
+// Use the post function to make a request to the sign up route and parse the response into JSON
 const signUp = data => {
-  return post(signUpURL, data).then(response => response.json())
+  return post(signUpURL, data).then(resp => resp.json())
 }
 
+// Use the post function to make a request to the find shows route with the search string and parse the response into JSON
 const findShows = search_string => {
-  return post(findShowsURL, {search_string}).then(response => response.json())
+  return post(findShowsURL, {search_string}).then(resp => resp.json())
 }
 
+// Use the post function to make a request to the get show details route with the imdbID and parse the response into JSON
 const getShowDetails = imdbID => {
-  return post(getDetailsURL, {imdbID}).then(response => response.json())
+  return post(getDetailsURL, {imdbID}).then(resp => resp.json())
 }
 
 const saveShow = (user_id, imdbID, title, show_type, year, poster) => {
@@ -76,10 +80,10 @@ const deleteSavedShow = id => {
   return deleteItem(savedShowURL, id).then(resp => resp.json())
 }
 
-// Use the get function to make a request to the items route and parse the response into JSON
-// const getItems = token => {
-//   return get(itemsURL, token).then(response => response.json())
-// }
+const getServices = array => {
+  return post(getServicesURL, {array}).then(resp => resp.json())
+}
+
 
 // Export the necessary functions as part of one object which we will import elsewhere
 export default {
@@ -90,5 +94,6 @@ export default {
   getShowDetails,
   saveShow,
   getSavedShows,
-  deleteSavedShow
+  deleteSavedShow,
+  getServices
 }

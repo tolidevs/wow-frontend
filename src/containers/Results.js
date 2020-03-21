@@ -20,12 +20,6 @@ class Results extends Component {
     if (Array.isArray(search_results) && search_results.length > 0) {
       return search_results.map(result => (
         <ResultCard
-          // imdbID={result.imdbID}
-          // title={result.title}
-          // type={result.type}
-          // year={result.year}
-          // poster={result.poster}
-          // services={result.services}
           saveShow={saveShow}
           deleteSavedShow={deleteSavedShow}
           showObj={result}
@@ -96,7 +90,7 @@ const mapStateToProps = ({ search_string, search_results, user }) => {
 const mapDispatchToProps = dispatch => {
     return {
         setSearchResults: search_results => dispatch({ type: 'SET_SEARCH_RESULTS', payload: { search_results }}),
-        setSelectedShow: selected_show =>dispatch({ type: 'SET_SELECTED_SHOW', payload: selected_show })
+        // setSelectedShow: selected_show =>dispatch({ type: 'SET_SELECTED_SHOW', payload: selected_show })
     }
 }
 
