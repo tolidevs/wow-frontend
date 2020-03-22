@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import RemoveFromWatchListModal from './RemoveFromWatchListModal'
 import NotLoggedInModal from './NotLoggedInModal'
+import API from '../API'
 import {
     Item,
     Grid,
@@ -57,20 +58,28 @@ class ResultCard extends Component {
   // save a show if a user is logged in
   save = (show) => {
     const { imdbID, title, show_type, year, poster } = show
-    return this.props.user && this.props.saveShow(imdbID, title, show_type, year, poster);
+    return this.props.user && this.saveShow(imdbID, title, show_type, year, poster);
   };
+
+  saveShow = (imdbID, title, show_type, year, poster) => {
+    API.saveShow(this.props.user.id, imdbID, title, show_type, year, poster)
+      .then(saved_show => this.props.setSavedShows([...this.props.saved_shows, saved_show]));
+  }
 
   // delete saved show from backend and remove from saved_shows in state
   unsave = (id) => {
-    this.props.setSavedShows(this.props.saved_shows.filter(saved => saved.id !== id))
-    this.props.deleteSavedShow(id)
-    
+    this.props.setSavedShows([...this.props.saved_shows].filter(saved => saved.id !== id))
+    this.deleteSavedShow(id)
+  }
+
+  deleteSavedShow = (id) => {
+    API.deleteSavedShow(id).then(json => console.log(json.message))
   }
   
   // if already saved then render a filled heart icon that renders a modal to check if you are sure you want to remove from watchlist
   // if not render an empty heart icon
   renderSaveIcon = (show) => {
-    const savedShow = (this.props.saved_shows.filter(saved => saved.imdbID === show.imdbID))[0]
+    const savedShow = ([...this.props.saved_shows].filter(saved => saved.imdbID === show.imdbID))[0]
 
     if (!this.props.user) {
       return <NotLoggedInModal />

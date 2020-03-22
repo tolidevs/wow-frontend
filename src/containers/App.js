@@ -37,14 +37,6 @@ class App extends Component {
     this.props.setSavedShows([])
   }
 
-  saveShow = (imdbID, title, show_type, year, poster) => {
-    API.saveShow(this.props.user.id, imdbID, title, show_type, year, poster)
-      .then(saved_show => this.props.setSavedShows([...this.props.saved_shows, saved_show]));
-  }
-
-  deleteSavedShow = (id) => {
-    API.deleteSavedShow(id).then(json => console.log(json.message))
-  }
 
   componentDidMount() {
     if (localStorage.token) {
@@ -52,7 +44,6 @@ class App extends Component {
         .then(userObj =>
           this.logIn(userObj.user, userObj.token, "existing_user")
       )
-      // console.log(localStorage.token)
     }
   }
 
@@ -63,7 +54,6 @@ class App extends Component {
 
         <div
           className="main-container"
-          // style={}
         >
           <Switch>
             <Route exact path="/" component={Home} />
@@ -88,20 +78,22 @@ class App extends Component {
               exact
               path="/results"
               component={() => (
-                <Results saveShow={this.saveShow} deleteSavedShow={this.deleteSavedShow} history={history} />
+                <Results history={history} />
               )}
             />
             <Route
               exact
               path="/results/show"
               component={() => (
-                <ShowPage saveShow={this.saveShow} deleteSavedShow={this.deleteSavedShow} history={history} />
+                <ShowPage history={history} />
               )}
             />
             <Route
               exact
               path="/user/watch-list"
-              component={() => <SavedShows history={history} saveShow={this.saveShow} deleteSavedShow={this.deleteSavedShow} />}
+              component={() =>
+                <SavedShows history={history}
+                />}
             />
             <Route component={NotFound} />
           </Switch>
@@ -111,11 +103,10 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ user, user_type, saved_shows }) => {
+const mapStateToProps = ({ user, user_type}) => {
   return {
     user,
-    user_type,
-    saved_shows
+    user_type
   }
 }
 

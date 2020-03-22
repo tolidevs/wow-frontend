@@ -16,14 +16,10 @@ import { Redirect } from "react-router-dom";
 class Results extends Component {
   
   renderResults = () => {
-    const { search_results, saveShow, deleteSavedShow } = this.props;
+    const { search_results } = this.props;
     if (Array.isArray(search_results) && search_results.length > 0) {
       return search_results.map(result => (
-        <ResultCard
-          saveShow={saveShow}
-          deleteSavedShow={deleteSavedShow}
-          showObj={result}
-        />
+        <ResultCard showObj={result} />
       ));
     }
   };
@@ -46,7 +42,6 @@ class Results extends Component {
 
   render() {
     const { search_string } = this.props;
-    // console.log(search_results);
     return (
       search_string ? (
       <Segment
@@ -61,7 +56,6 @@ class Results extends Component {
       >
         <Grid
           columns={1}
-          // relaxed='very'
           textAlign="center"
           style={{ height: "100vh", width: "90w" }}
           verticalAlign="middle"
@@ -79,18 +73,16 @@ class Results extends Component {
   }
 }
 
-const mapStateToProps = ({ search_string, search_results, user }) => {
+const mapStateToProps = ({ search_string, search_results }) => {
     return {
         search_string,
         search_results,
-        user
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        setSearchResults: search_results => dispatch({ type: 'SET_SEARCH_RESULTS', payload: { search_results }}),
-        // setSelectedShow: selected_show =>dispatch({ type: 'SET_SELECTED_SHOW', payload: selected_show })
+      setSearchResults: search_results => dispatch({ type: 'SET_SEARCH_RESULTS', payload: { search_results }})
     }
 }
 

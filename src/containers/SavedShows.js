@@ -11,15 +11,10 @@ import API from "../API";
 class SavedShows extends Component {
 
   renderResults = () => {
-    const { saved_shows, saveShow, deleteSavedShow } = this.props;
+    const { saved_shows } = this.props;
     if (saved_shows.length > 0) {
       return [...saved_shows].map(result => (
-        <ResultCard
-          saveShow={saveShow}
-          deleteSavedShow={deleteSavedShow}
-          showObj={result}
-
-        />
+        <ResultCard showObj={result} />
       ));
     } else {
         return <Header>You have not saved any shows yet</Header>
