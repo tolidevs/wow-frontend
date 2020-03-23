@@ -76,14 +76,16 @@ class UserMenu extends Component {
               </NavLink>
             </div>
             <div className="menu-button">
-              <Button
-                onClick={() => {
-                  setUserType('existing_user');
-                  setMenu(false);
-                }}
-              >
-                Manage Account
-              </Button>
+              <NavLink exact to="/user/subscriptions">
+                <Button
+                  onClick={() => {
+                    setUserType('existing_user');
+                    setMenu(false);
+                  }}
+                >
+                  Manage Subscriptions
+                </Button>
+              </NavLink>
             </div>
             <div className="menu-button">
               <NavLink exact to="/">

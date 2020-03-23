@@ -22,6 +22,18 @@ class ShowPage extends Component {
     show: null
   };
 
+  // ---------clear show details if nt the same as the last selected show
+      // check whether there are show details stored in state yet, check whether it is teh same details as the one selected
+  clearShowDetails = () => {
+    const { selected_show, show_details, setShowDetails } = this.props;
+    if (show_details && selected_show !== show_details.imdbID) {
+      this.setState({
+        show: this.getShowShortDetails()[0]
+      });
+      setShowDetails(this.state.show)
+    }
+  }
+
   // ----------get details from existing results object------------
   getShowShortDetails = () => {
     const { selected_show, search_results } = this.props;
@@ -30,21 +42,22 @@ class ShowPage extends Component {
 
 
   componentDidMount() {
-    const { selected_show, show_details } = this.props
-    // check whether there are show details stored in state yet, check whether it is teh same details as the one selected
+    const { selected_show, show_details, setShowDetails } = this.props
+
     // and check whether the full details have been fetched from the API.
     // if a new one is selected (not same as current saved details) then set the details to
     // the new show and do a new API fetch - makes use of API more efficient, minimise unnecessary
     // fetches when we already have the details
-    if (show_details && selected_show !== show_details.imdbID && !("plot" in show_details)) {
-      this.setState({
-        show: this.getShowShortDetails()[0]
-      });
-      API.getShowDetails(this.props.selected_show).then(showObj =>
-        this.props.setShowDetails({ ...this.state.show, ...showObj })
+    
+      console.log("hit_this")
+    // if (show_details && selected_show !== show_details.imdbID && !("plot" in show_details)) {
+      API.getShowDetails(selected_show).then(showObj =>
+        setShowDetails({ ...this.state.show, ...showObj })
       );
-    }
+
   }
+
+
 
 
   // --------render icon for type of show/film ----------------------------
@@ -144,9 +157,10 @@ class ShowPage extends Component {
     } = this.getShowShortDetails()[0];
     return (
       <Segment style={{ width: "90vw" }} verticalAlign="middle">
+        {this.clearShowDetails()}
         <Header>{title}</Header>
         <Image src={poster} bordered centered />
-        {this.renderSaveIcon(this.props.show_details)}
+        {this.renderSaveIcon(this.props.selected_show)}
         <br></br>Watch on:
         <Image.Group size="tiny">{this.renderServices(services)}</Image.Group>
         <br></br>
@@ -161,7 +175,6 @@ class ShowPage extends Component {
           </div>
         )}
         <br></br>
-        {/* need to fix this, isnt remembering last it is just goign back to menu */}
         <div onClick={() => this.props.history.goBack()}>
           <Icon
             name="arrow circle left"

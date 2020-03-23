@@ -36,6 +36,7 @@ class Home extends Component {
   render() {
     return (
       <Segment
+        basic
         textAlign="center"
         style={{
           height: "100vh",
@@ -44,7 +45,10 @@ class Home extends Component {
           alignItems: "center"
         }}
       >
-        <Form onSubmit={this.handleSubmit}>
+        <Form
+          style={{ width: "70vw"}}
+          onSubmit={this.handleSubmit}
+        >
           <Form.Input
             required
             action={{ icon: "search" }}

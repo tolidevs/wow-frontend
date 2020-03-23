@@ -8,6 +8,9 @@ const getDetailsURL = `${baseURL}/show`
 const savedShowURL = `${baseURL}/saved_shows`
 const getSavedShowsURL = `${baseURL}/user/saved_shows`
 const getServicesURL = `${baseURL}/get_services`
+const getSubscriptionsURL = `${baseURL}/user/subscriptions`
+const allServicesURL = `${baseURL}/services`
+const subscriptionsURL = `${baseURL}/subscriptions`
 
 // Make a post request to a given URL with a given data object as the body and return the Promise
 const post = (url, data) => {
@@ -84,6 +87,18 @@ const getServices = array => {
   return post(getServicesURL, {array}).then(resp => resp.json())
 }
 
+const getSubscriptions = user_id => {
+  return post(getSubscriptionsURL, { user_id }).then(resp => resp.json())
+}
+
+const getAllServices = () => {
+  return get(allServicesURL).then(resp => resp.json())
+}
+
+const saveSubscription = (service_id, user_id) => {
+  return post(subscriptionsURL, {service_id, user_id}).then(resp => resp.json())
+}
+
 
 // Export the necessary functions as part of one object which we will import elsewhere
 export default {
@@ -95,5 +110,8 @@ export default {
   saveShow,
   getSavedShows,
   deleteSavedShow,
-  getServices
+  getServices,
+  getSubscriptions,
+  getAllServices,
+  saveSubscription
 }

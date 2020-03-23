@@ -13,6 +13,7 @@ import ShowPage from './ShowPage'
 import API from "../API"
 import SavedShows from './SavedShows'
 import NotFound from '../components/NotFound'
+import Subscriptions from './Subscriptions'
 const history = createHistory();
 
 class App extends Component {
@@ -23,11 +24,17 @@ class App extends Component {
     localStorage.token = token
     this.props.setUserType(user_type)
     this.getAndSetSavedShows(user.id)
+    this.getAndSetSubscriptions(user.id)
   }
 
   getAndSetSavedShows = (user_id) => {
     API.getSavedShows(user_id)
     .then( shows => this.props.setSavedShows(shows))
+  }
+
+  getAndSetSubscriptions = (user_id) => {
+    API.getSubscriptions(user_id)
+      .then(subscriptions => this.props.setUserSubscriptions(subscriptions))
   }
 
   logOut = () => {
@@ -95,6 +102,13 @@ class App extends Component {
                 <SavedShows history={history}
                 />}
             />
+            <Route
+              exact
+              path="/user/subscriptions"
+              component={() =>
+                <Subscriptions history={history}
+                />}
+            />
             <Route component={NotFound} />
           </Switch>
         </div>
@@ -114,7 +128,8 @@ const mapDispatchToProps = dispatch => {
   return {
     setUser: user => dispatch({ type: "SET_USER", payload: { user } }),
     setUserType: user_type => dispatch({ type: "SET_USER_TYPE", payload: { user_type } }),
-    setSavedShows: saved_shows => dispatch({ type: 'SET_SAVED_SHOWS', payload: { saved_shows } })
+    setSavedShows: saved_shows => dispatch({ type: 'SET_SAVED_SHOWS', payload: { saved_shows } }),
+    setUserSubscriptions: user_subscriptions => dispatch({ type: "SET_USER_SUBSCRIPTIONS", payload: { user_subscriptions }})
   }
 }
 
