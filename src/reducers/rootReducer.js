@@ -7,7 +7,7 @@ const initialState = {
   selected_show: null,
   show_details: null,
   user_subscriptions: [],
-  saved_shows: []
+  saved_shows: null
 };
 
 // const initialState = {

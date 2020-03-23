@@ -41,7 +41,7 @@ class App extends Component {
     this.props.setUser(null);
     localStorage.token = null;
     this.props.setUserType(null);
-    this.props.setSavedShows([])
+    this.props.setSavedShows(null)
   }
 
 

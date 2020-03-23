@@ -40,17 +40,9 @@ class ShowPage extends Component {
     return [...search_results].filter(show => show.imdbID === selected_show);
   };
 
-
+// --------when page loaded get full details from API------------
   componentDidMount() {
     const { selected_show, show_details, setShowDetails } = this.props
-
-    // and check whether the full details have been fetched from the API.
-    // if a new one is selected (not same as current saved details) then set the details to
-    // the new show and do a new API fetch - makes use of API more efficient, minimise unnecessary
-    // fetches when we already have the details
-    
-      console.log("hit_this")
-    // if (show_details && selected_show !== show_details.imdbID && !("plot" in show_details)) {
       API.getShowDetails(selected_show).then(showObj =>
         setShowDetails({ ...this.state.show, ...showObj })
       );
@@ -102,6 +94,9 @@ class ShowPage extends Component {
     });
   };
 
+
+
+
   // --------------to do with saving/unsaving a show -----------
 
   // save a show if a user is logged in
@@ -112,7 +107,8 @@ class ShowPage extends Component {
 
   saveShow = (imdbID, title, show_type, year, poster) => {
     API.saveShow(this.props.user.id, imdbID, title, show_type, year, poster)
-      .then(saved_show => this.props.setSavedShows([...this.props.saved_shows, saved_show]));
+      .then(() => API.getSavedShows(this.props.user.id))
+      .then(console.log)
   }
 
   // delete saved show from backend and remove from saved_shows in state

@@ -63,7 +63,8 @@ class ResultCard extends Component {
 
   saveShow = (imdbID, title, show_type, year, poster) => {
     API.saveShow(this.props.user.id, imdbID, title, show_type, year, poster)
-      .then(saved_show => this.props.setSavedShows([...this.props.saved_shows, saved_show]));
+      .then(() => API.getSavedShows(this.props.user.id))
+      .then(console.log)
   }
 
   // delete saved show from backend and remove from saved_shows in state

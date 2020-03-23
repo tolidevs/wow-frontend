@@ -2,7 +2,9 @@ import React, { Component, Fragment } from "react";
 import {
   Segment,
   Header,
-  Grid
+  Grid,
+  Dimmer,
+  Loader
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import ResultCard from "../components/ResultCard";
@@ -21,32 +23,43 @@ class SavedShows extends Component {
     }
   };
 
-  // when page  loads do fetch for services
-  componentDidMount() {
-    const shows = [...this.props.saved_shows]
-    this.getServices(shows)
+  renderCards = () => {
+    return this.props.saved_shows ? (
+      <Fragment>{this.renderResults()}</Fragment>
+    ) : (
+        <Grid.Row>
+          <Segment>
+            <Dimmer active inverted>
+              <Loader inverted></Loader>
+            </Dimmer>
+            <Header>Loading saved shows...</Header>
+          </Segment>
+        </Grid.Row>
+      );
+  };
+
+  // when page  loads do fetch for services if saved_shows has a value
+  componentDidUpdate() {
+    const shows = this.props.saved_shows
+    shows && this.getServices(shows)
   }
 
   // check if show has services key. if not add to array (as do not yet have data on where is available). 
   // run fetch services on array and assign services to each show(done in back end)
-  getServices = ( shows ) => {
+  getServices = (shows) => {
     const get_services_array = shows.filter(saved_show => !saved_show.services)
     API.getServices(get_services_array)
-      // .then(console.log)
       .then(results => this.mapServicesToState(results))
   }
 
 // iterate through saved shows in state and replace if they are in shows returned from API (updated with services) then update redux saved_services state with new array
   mapServicesToState = (results_array) => {
+    if (results_array.length > 0){
     const replace_shows = [...this.props.saved_shows].map(show => results_array.filter(s => s.imdbID === show.imdbID)[0] || show)
-    this.props.setSavedShows(replace_shows)
+      this.props.setSavedShows(replace_shows)
+    }
   }
 
-
-  // check it hitting componentDidUpdate - not hitting this is just re-rendering and hitting componentDidMount
-  componentDidUpdate(prevProps) {
-    console.log("updated")
-    }
 
   render() {
     return (
@@ -71,7 +84,7 @@ class SavedShows extends Component {
             <Header>Your Watch List</Header>
           </Grid.Row>
           <Fragment>
-            {this.renderResults()}
+            {this.renderCards()}
           </Fragment>
           
         </Grid>
