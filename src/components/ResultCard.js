@@ -26,8 +26,10 @@ class ResultCard extends Component {
 
   // -------------selecting a show & redirecting to it -----------
 
-  handleClick = imdbID => {
-      this.props.setSelectedShow(imdbID);
+  handleClick = () => {
+    const { showObj } = this.props
+    this.props.setSelectedShow(showObj.imdbID)
+    this.props.setShowDetails(showObj)
       this.setState({
       selected: true
       });
@@ -62,9 +64,16 @@ class ResultCard extends Component {
   };
 
   saveShow = (imdbID, title, show_type, year, poster) => {
-    API.saveShow(this.props.user.id, imdbID, title, show_type, year, poster)
-      .then(() => API.getSavedShows(this.props.user.id))
-      .then(console.log)
+    const { user } = this.props
+    API.saveShow(user.id, imdbID, title, show_type, year, poster)
+      .then(() => this.updateSavedShows())
+  }
+
+  // get saved shows from back end & update state
+  updateSavedShows = () => {
+    const { user, setSavedShows } = this.props
+    API.getSavedShows(user.id)
+      .then(saved_shows => setSavedShows(saved_shows))
   }
 
   // delete saved show from backend and remove from saved_shows in state
@@ -74,7 +83,7 @@ class ResultCard extends Component {
   }
 
   deleteSavedShow = (id) => {
-    API.deleteSavedShow(id).then(json => console.log(json.message))
+    API.deleteSavedShow(id).then(() => this.updateSavedShows())
   }
   
   // if already saved then render a filled heart icon that renders a modal to check if you are sure you want to remove from watchlist
@@ -132,14 +141,14 @@ class ResultCard extends Component {
         return (
           <Grid.Row key={imdbID}>
             <Item.Group style={{ width: "90vw" }}>
-              <Item.Header onClick={() => this.handleClick(imdbID)}>
+              <Item.Header onClick={() => this.handleClick()}>
                 {title}
               </Item.Header>
               <Item.Image
                 src={poster}
                 bordered
                 centered
-                onClick={() => this.handleClick(imdbID)}
+                onClick={() => this.handleClick()}
               />
               <Item.Meta>{year}</Item.Meta>
                 <Item.Extra>
@@ -169,7 +178,8 @@ const mapStateToProps = ({ user, saved_shows }) => {
 const mapDispatchToProps = dispatch => {
     return {
       setSelectedShow: selected_show => dispatch({ type: 'SET_SELECTED_SHOW', payload: { selected_show } }),
-      setSavedShows: saved_shows => dispatch({ type: 'SET_SAVED_SHOWS', payload: { saved_shows } })
+      setSavedShows: saved_shows => dispatch({ type: 'SET_SAVED_SHOWS', payload: { saved_shows } }),
+      setShowDetails: show => dispatch({ type: 'SET_SHOW_DETAILS', payload: { show } })
     }
 }
 

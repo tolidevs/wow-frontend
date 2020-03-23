@@ -5,7 +5,8 @@ import {
   Segment,
   Header,
   Image,
-  Icon
+  Icon,
+  Message
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import API from "../API";
@@ -18,33 +19,13 @@ import stream from "../images/stream.png";
 
 
 class ShowPage extends Component {
-  state = {
-    show: null
-  };
 
-  // ---------clear show details if nt the same as the last selected show
-      // check whether there are show details stored in state yet, check whether it is teh same details as the one selected
-  clearShowDetails = () => {
-    const { selected_show, show_details, setShowDetails } = this.props;
-    if (show_details && selected_show !== show_details.imdbID) {
-      this.setState({
-        show: this.getShowShortDetails()[0]
-      });
-      setShowDetails(this.state.show)
-    }
-  }
-
-  // ----------get details from existing results object------------
-  getShowShortDetails = () => {
-    const { selected_show, search_results } = this.props;
-    return [...search_results].filter(show => show.imdbID === selected_show);
-  };
 
 // --------when page loaded get full details from API------------
   componentDidMount() {
     const { selected_show, show_details, setShowDetails } = this.props
       API.getShowDetails(selected_show).then(showObj =>
-        setShowDetails({ ...this.state.show, ...showObj })
+        setShowDetails({ ...show_details, ...showObj })
       );
 
   }
@@ -106,9 +87,16 @@ class ShowPage extends Component {
   }
 
   saveShow = (imdbID, title, show_type, year, poster) => {
-    API.saveShow(this.props.user.id, imdbID, title, show_type, year, poster)
-      .then(() => API.getSavedShows(this.props.user.id))
-      .then(console.log)
+    const { user } = this.props
+    API.saveShow(user.id, imdbID, title, show_type, year, poster)
+      .then(() => this.updateSavedShows())
+  }
+
+  // get saved shows from back end & update state
+  updateSavedShows = () => {
+    const { user, setSavedShows } = this.props
+    API.getSavedShows(user.id)
+      .then(saved_shows => setSavedShows(saved_shows))
   }
 
   // delete saved show from backend and remove from saved_shows in state
@@ -118,7 +106,7 @@ class ShowPage extends Component {
   }
 
   deleteSavedShow = (id) => {
-    API.deleteSavedShow(id).then(json => console.log(json.message))
+    API.deleteSavedShow(id).then(() => this.updateSavedShows())
   }
 
   // if already saved then render a filled heart icon that renders a modal to check if you are sure you want to remove from watchlist
@@ -143,17 +131,21 @@ class ShowPage extends Component {
 
   render() {
     const { show_details } = this.props;
-
     const {
       title,
       show_type,
       year,
       poster,
       services
-    } = this.getShowShortDetails()[0];
+    } = this.props.show_details
     return (
+      // <Fragment>
+      //   {this.renderPage()}
+      // </Fragment>
+    
+  
       <Segment style={{ width: "90vw" }} verticalAlign="middle">
-        {this.clearShowDetails()}
+
         <Header>{title}</Header>
         <Image src={poster} bordered centered />
         {this.renderSaveIcon(this.props.selected_show)}
@@ -161,7 +153,7 @@ class ShowPage extends Component {
         <Image.Group size="tiny">{this.renderServices(services)}</Image.Group>
         <br></br>
         {this.renderType(show_type)} {year}
-        {show_details && (
+        {show_details.genre && (
           <div>
             <p>
               <Icon name="question" size="big"></Icon> {show_details.genre}
@@ -178,7 +170,8 @@ class ShowPage extends Component {
           Back
         </div>
       </Segment>
-    );
+
+    )
   }
 }
 
