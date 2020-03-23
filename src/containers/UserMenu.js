@@ -42,7 +42,16 @@ class UserMenu extends Component {
     const { logOut, setUserType, setMenu } = this.props
 
     return (
-      <Segment>
+      <Segment
+        basic
+        textAlign="center"
+        style={{
+          height: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
         <Grid
           textAlign="center"
           style={{ height: "100vh" }}
@@ -54,6 +63,8 @@ class UserMenu extends Component {
             <div className="menu-button">
               <NavLink exact to="/">
                 <Button
+                  size='huge'
+                  fluid
                   onClick={() => {
                     setUserType('existing_user');
                     setMenu(false);
@@ -66,6 +77,8 @@ class UserMenu extends Component {
             <div className="menu-button">
               <NavLink exact to="/user/watch-list">
                 <Button
+                  fluid
+                  size='huge'
                   onClick={() => {
                     setUserType('existing_user');
                     setMenu(false);
@@ -78,6 +91,8 @@ class UserMenu extends Component {
             <div className="menu-button">
               <NavLink exact to="/user/subscriptions">
                 <Button
+                  fluid
+                  size='huge'
                   onClick={() => {
                     setUserType('existing_user');
                     setMenu(false);
@@ -90,6 +105,8 @@ class UserMenu extends Component {
             <div className="menu-button">
               <NavLink exact to="/">
                 <Button
+                  fluid
+                  size='huge'
                   onClick={() => {
                     logOut();
                     setMenu(false);

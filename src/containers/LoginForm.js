@@ -23,7 +23,7 @@ class LoginForm extends Component {
   }
 
   redirectToHome = () => {
-    return this.props.user && <Redirect push to="/menu" exact />
+    return this.props.user && <Redirect  to="/menu" exact />
   }
 
   handleSubmit = e => {
@@ -39,22 +39,17 @@ class LoginForm extends Component {
     return (
       <Segment
         basic
-        textAlign="center"
         style={{
-          height: "100vh",
+          height: "90vh",
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}>
+          alignItems: "center",
+          width: "80vw"
+        }}
+      >
         <Grid
           textAlign="center"
-          style={{
-            height: "100vh",
-            marginTop: "20px"
-          }}
-          verticalAlign="middle"
         >
-          <Grid.Column style={{ maxWidth: "50vh" }}>
+          <Grid.Column>
             <Header as="h2" textAlign="center">
               Log In
             </Header>

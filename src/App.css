@@ -1,42 +1,93 @@
+/* colours:
+#002326
+#72C9CC
+#DCDEE5
+#231F20
+#0D474E
+#9CD4D6
+*/
+
+
+
 body {
-  background-color: black;
+  background-color: #231F20;
+  font-family: 'Comfortaa', cursive;
+  background-image: url('./film-background.jpg');
+  background-position: center;
+  background-size: auto 100%;
+  background-attachment: fixed;
+}
+
+.ui {
+  font-family: 'Comfortaa', cursive;
 }
 
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.ui.top.fixed.navbar.menu {
+  background-color: #9CD4D6;
+  outline-style: none;
+  border-style: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+div.right.item.dropdown{
+  background-color: #9CD4D6;
+  /* outline-style: none;
+  border-style: none; */
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+div.ui.container.main-container{
+  padding-top: 64px;
+  padding-bottom: 16px;
+  height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+div.ui.segment{
+  background-color: #DCDEE5;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+div.ui.center.aligned {
+  width: 90vw;
+}
+
+.ui.form input[type=text]{
+  font-family: 'Comfortaa', cursive;
+
+  color: #231F20;
+}
+
+input::selection, textarea::selection{
+  font-family: 'Comfortaa', cursive;
+  background-color: #72C9CC;
+  color: #231F20;
+}
+
+.ui.icon.button{
+  background-color: #E0E1E2;
+}
+
+button.ui.fluid.button{
+  margin: 5px;
+  font-family: 'Comfortaa', cursive;
+}
+
+h1.ui.header {
+  background-color: #fafafa;
+  opacity: 80%;
+  text-align: center;
+  color: #231F20;
+  font-size: 40px;
+  font-family: 'Comfortaa', cursive;
+  margin: 0px;
+}
+
+* {
+  font-family: 'Comfortaa', cursive;
 }

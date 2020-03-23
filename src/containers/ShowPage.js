@@ -6,7 +6,6 @@ import {
   Header,
   Image,
   Icon,
-  Message
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import API from "../API";

@@ -29,7 +29,7 @@ class Navbar extends React.Component {
     const { loggedIn, menu_on } = this.props
     return (
       <Menu className="navbar" fixed="top">
-        <Menu.Item position="right">
+        <Menu.Item className="dropdown" position="right">
           <Button icon onClick={this.selectMenu}>
             {menu_on ? (
               // need to change this to history so when close menu takes you back to last page not home page
@@ -37,7 +37,7 @@ class Navbar extends React.Component {
               <Icon name="chevron up" onClick={() => this.props.history.goBack()}/>
               // </NavLink>
             ) : loggedIn ? (
-              <NavLink to="/menu" exact>
+              <NavLink id="down-arrow" to="/menu" exact>
                 <Icon name="chevron down" />
               </NavLink>
             ) : (

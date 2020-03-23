@@ -39,20 +39,22 @@ class Home extends Component {
         basic
         textAlign="center"
         style={{
-          height: "100vh",
+          height: "90vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center"
         }}
       >
         <Form
-          style={{ width: "70vw"}}
+          style={{ width: "80vw"}}
           onSubmit={this.handleSubmit}
         >
           <Form.Input
+            size='big'
+            className="form-input-custom"
             required
             action={{ icon: "search" }}
-            placeholder="Search for a show or film..."
+            placeholder="Type to search"
             onChange={this.handleChange}
           ></Form.Input>
         </Form>

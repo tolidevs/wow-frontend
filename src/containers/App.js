@@ -14,17 +14,20 @@ import API from "../API"
 import SavedShows from './SavedShows'
 import NotFound from '../components/NotFound'
 import Subscriptions from './Subscriptions'
+import { Container } from 'semantic-ui-react'
 const history = createHistory();
 
 class App extends Component {
 
 
   logIn = (user, token, user_type) => {
-    this.props.setUser(user)
-    localStorage.token = token
-    this.props.setUserType(user_type)
-    this.getAndSetSavedShows(user.id)
-    this.getAndSetSubscriptions(user.id)
+    if (user) {
+      this.props.setUser(user)
+      localStorage.token = token
+      this.props.setUserType(user_type)
+      this.getAndSetSavedShows(user.id)
+      this.getAndSetSubscriptions(user.id)
+    }
   }
 
   getAndSetSavedShows = (user_id) => {
@@ -59,8 +62,9 @@ class App extends Component {
       <Router history={history}>
         <Navbar history={history} />
 
-        <div
+        <Container
           className="main-container"
+          textAlign="center"
         >
           <Switch>
             <Route exact path="/" component={Home} />
@@ -110,8 +114,8 @@ class App extends Component {
                 />}
             />
             <Route component={NotFound} />
-          </Switch>
-        </div>
+            </Switch>
+        </Container>
       </Router>
     );
   }
