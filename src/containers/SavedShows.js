@@ -39,9 +39,13 @@ class SavedShows extends Component {
   };
 
   // when page  loads do fetch for services if saved_shows has a value
-  componentDidUpdate() {
-    const shows = this.props.saved_shows
-    shows && this.getServices(shows)
+  componentDidMount() {
+    console.log("updated")
+    setTimeout(() => {
+      const shows = this.props.saved_shows
+      shows && this.getServices(shows)
+    }, 1500)
+    
   }
 
   // check if show has services key. if not add to array (as do not yet have data on where is available). 
