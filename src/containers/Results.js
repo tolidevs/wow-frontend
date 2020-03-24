@@ -44,24 +44,25 @@ class Results extends Component {
     const { search_string } = this.props;
     return (
       search_string ? (
-      <Segment
-        textAlign="center"
-        style={{
-          width: "95vw",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
+        <Segment
+          basic
+          textAlign="center"
+          style={{
+            height: "90vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
       >
         <Grid
-          columns={1}
-          textAlign="center"
-          style={{ height: "100vh", width: "90w" }}
-          verticalAlign="middle"
-        >
+            textAlign="center"
+            style={{ height: "100vh" }}
+            verticalAlign="middle"
+          >
+            <Grid.Row> </Grid.Row>
+            <Grid.Row> </Grid.Row>
           <Grid.Row>
-            <Header>Results for {search_string}</Header>
+            <Header as="h1">Results for {search_string}</Header>
           </Grid.Row>
           {this.renderCards()}
         </Grid>

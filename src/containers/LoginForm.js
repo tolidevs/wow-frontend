@@ -42,17 +42,18 @@ class LoginForm extends Component {
         style={{
           height: "90vh",
           display: "flex",
-          alignItems: "center",
-          width: "80vw"
+          justifyContent: "center",
+          alignItems: "center"
         }}
       >
         <Grid
           textAlign="center"
         >
           <Grid.Column>
-            <Header as="h2" textAlign="center">
+            <Header as="h1">
               Log In
             </Header>
+            <br></br>
             <Form
               size="large"
               className="login-form"
@@ -60,6 +61,7 @@ class LoginForm extends Component {
             >
               <Form.Input
                 required
+                size="big"
                 fluid
                 icon="at"
                 iconPosition="left"
@@ -70,6 +72,7 @@ class LoginForm extends Component {
               <Form.Input
                required
                 fluid
+                size="big"
                 icon="lock"
                 iconPosition="left"
                 placeholder="Password"
@@ -77,11 +80,11 @@ class LoginForm extends Component {
                 name="password"
                 onChange={this.handleChange}
               />
-              <Button fluid size="large" name="login" type="submit">
-                Login
+              <Button fluid size="huge" name="login" type="submit">
+                Log In
               </Button>
             </Form>
-            <NavLink to="/sign-up" exact>
+            <NavLink className="secondary" to="/sign-up" exact>
               Sign Up
             </NavLink>
           </Grid.Column>

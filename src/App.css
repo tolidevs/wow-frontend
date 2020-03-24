@@ -16,6 +16,11 @@ body {
   background-position: center;
   background-size: auto 100%;
   background-attachment: fixed;
+  font-size: 20px;
+}
+
+img {
+  border-radius: 5px;
 }
 
 .ui {
@@ -43,7 +48,7 @@ div.right.item.dropdown{
 }
 
 
-div.ui.container.main-container{
+div.ui.center.aligned.container.main-container{
   padding-top: 64px;
   padding-bottom: 16px;
   height: 100vh;
@@ -53,8 +58,21 @@ div.ui.segment{
   background-color: #DCDEE5;
 }
 
+div.ui.basic.segment.welcome{
+  background-color: #fafafa;
+  opacity: 90%;
+  border-radius: 5px;
+}
+
+
 div.ui.center.aligned {
   width: 90vw;
+}
+
+div.ui.basic.center.aligned.segment.result-card{
+  background: rgba(250, 250, 250, 0.9);
+  /* opacity: 90%; */
+  border-radius: 5px;
 }
 
 .ui.form input[type=text]{
@@ -74,18 +92,53 @@ input::selection, textarea::selection{
 }
 
 button.ui.fluid.button{
-  margin: 5px;
   font-family: 'Comfortaa', cursive;
+}
+
+.menu-button{
+  margin: 5px
 }
 
 h1.ui.header {
   background-color: #fafafa;
   opacity: 80%;
   text-align: center;
-  color: #231F20;
+  /* color: #231F20; */
+  color: #002326;
   font-size: 40px;
   font-family: 'Comfortaa', cursive;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+h2.header {
+  background-color: #fafafa;
+  opacity: 80%;
+  text-align: center;
+  color: #231F20;
+  font-size: 30px;
+  font-family: 'Comfortaa', cursive;
   margin: 0px;
+  border-radius: 5px;
+}
+
+a.secondary {
+  text-decoration: none;
+  background-color: #0D474E;
+  padding: 3px;
+  opacity: 0.7;
+  border-radius: 2px;
+  font-weight: bold;
+  color: #fafafa;
+}
+
+p {
+  background-color: #fafafa;
+  opacity: 80%;
+  text-align: center;
+  margin: 0px;
+  border-radius: 5px;
+  font-size: 20px;
 }
 
 * {

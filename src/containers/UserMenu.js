@@ -57,7 +57,7 @@ class UserMenu extends Component {
           style={{ height: "100vh" }}
           verticalAlign="middle"
         >
-          <Grid.Column style={{ maxWidth: "50vh" }}>
+          <Grid.Column >
             {this.setHeader()}
 
             <div className="menu-button">

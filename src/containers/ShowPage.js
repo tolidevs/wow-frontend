@@ -13,7 +13,7 @@ import netflix from "../images/netflix-logo.png";
 import amazon from "../images/amazon-icon.png";
 import disney from "../images/disneyplus-logo.jpg";
 import itunes from "../images/itunes-logo.jpg";
-import google from "../images/google-play-logo.png";
+import google from "../images/google-play.png";
 import stream from "../images/stream.png";
 
 
@@ -28,9 +28,6 @@ class ShowPage extends Component {
       );
 
   }
-
-
-
 
   // --------render icon for type of show/film ----------------------------
   renderType = show_type => {
@@ -138,15 +135,18 @@ class ShowPage extends Component {
       services
     } = this.props.show_details
     return (
-      // <Fragment>
-      //   {this.renderPage()}
-      // </Fragment>
-    
-  
-      <Segment style={{ width: "90vw" }} verticalAlign="middle">
+      <Segment
+        basic
+        className="result-card"
+        textAlign="center"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}>
 
-        <Header>{title}</Header>
-        <Image src={poster} bordered centered />
+        <Header as="h1">{title}</Header>
+        <Image src={poster} centered />
         {this.renderSaveIcon(this.props.selected_show)}
         <br></br>Watch on:
         <Image.Group size="tiny">{this.renderServices(services)}</Image.Group>

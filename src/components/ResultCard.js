@@ -7,7 +7,8 @@ import {
     Grid,
     Icon,
     Image,
-    Message
+    Message,
+    Segment
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -15,7 +16,7 @@ import netflix from "../images/netflix-logo.png";
 import amazon from "../images/amazon-icon.png";
 import disney from "../images/disneyplus-logo.jpg";
 import itunes from "../images/itunes-logo.jpg";
-import google from "../images/google-play-logo.png";
+import google from "../images/google-play.png";
 import stream from "../images/stream.png";
 
 
@@ -140,13 +141,21 @@ class ResultCard extends Component {
         const { showObj } = this.props
         return (
           <Grid.Row key={imdbID}>
+            <Segment
+              basic
+              className="result-card"
+              textAlign="center"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}>
             <Item.Group style={{ width: "90vw" }}>
-              <Item.Header onClick={() => this.handleClick()}>
+              <Item.Header as="h2" onClick={() => this.handleClick()}>
                 {title}
               </Item.Header>
               <Item.Image
                 src={poster}
-                bordered
                 centered
                 onClick={() => this.handleClick()}
               />
@@ -160,7 +169,8 @@ class ResultCard extends Component {
                     <Image.Group size='tiny'>{this.renderServices(services)}</Image.Group>
                     {this.renderNoServicesMessage()}
               </Item.Extra>
-            </Item.Group>
+              </Item.Group>
+            </Segment>
             {this.redirectToShow()}
           </Grid.Row>
           

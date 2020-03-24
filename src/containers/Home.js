@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Form } from 'semantic-ui-react';
+import { Segment, Form, Grid, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import API from "../API";
@@ -45,19 +45,41 @@ class Home extends Component {
           alignItems: "center"
         }}
       >
-        <Form
-          style={{ width: "80vw"}}
-          onSubmit={this.handleSubmit}
+        <Grid
+          textAlign="center"
+          style={{ height: "100vh" }}
+          
         >
-          <Form.Input
-            size='big'
-            className="form-input-custom"
-            required
-            action={{ icon: "search" }}
-            placeholder="Type to search"
-            onChange={this.handleChange}
-          ></Form.Input>
-        </Form>
+          
+          <Grid.Row verticalAlign="bottom" style={{ height: "50vh" }}>
+            <Grid.Column>
+              <Segment basic className="welcome">
+                {/* <Image src={logo} size='small' centered spaced></Image> */}
+                <Header as="h1">What's On Where</Header>
+                <br></br>
+                <p>All streaming services.<br></br>One search.</p>
+              </Segment>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row verticalAlign="top" style={{ height: "50vh" }}>
+            <Grid.Column>
+            <Form
+              style={{ width: "80vw"}}
+              onSubmit={this.handleSubmit}
+            >
+              <Form.Input
+                size='big'
+                className="form-input-custom"
+                required
+                action={{ icon: "search" }}
+                placeholder="Type to search"
+                onChange={this.handleChange}
+              ></Form.Input>
+              </Form>
+            </Grid.Column>
+          </Grid.Row>
+          
+          </Grid>
         {this.redirectToResults()}
       </Segment>
     );

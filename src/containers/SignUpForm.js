@@ -23,7 +23,7 @@ class SignUpForm extends Component {
   };
 
   redirectToHome = () => {
-    return this.props.user && <Redirect push to='/menu' exact />;
+    return this.props.user && <Redirect  to='/menu' exact />;
   };
 
   handleSubmit = e => {
@@ -44,14 +44,20 @@ class SignUpForm extends Component {
 
   render() {
     return (
-      <Segment>
+      <Segment
+        basic
+        style={{
+          height: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}>
         <Grid
           textAlign="center"
-          style={{ height: "100vh" }}
-          verticalAlign="middle"
+
         >
           <Grid.Column style={{ maxWidth: "50vh" }}>
-            <Header as="h2" textAlign="center">
+            <Header as="h1">
               Sign Up
             </Header>
             <Form
@@ -87,11 +93,11 @@ class SignUpForm extends Component {
                 name="password"
                 onChange={this.handleChange}
               />
-              <Button fluid size="large" name="signup" type="submit">
+              <Button fluid size="huge" name="signup" type="submit">
                 Sign Up
               </Button>
             </Form>
-            <NavLink to="/login" exact>
+            <NavLink className="secondary" to="/login" exact>
               Log In
             </NavLink>
           </Grid.Column>

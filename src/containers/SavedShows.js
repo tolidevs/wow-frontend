@@ -19,7 +19,11 @@ class SavedShows extends Component {
         <ResultCard showObj={result} />
       ));
     } else {
-        return <Header>You have not saved any shows yet</Header>
+      return (
+        <Grid.Row>
+          <Header as="h2">You have not saved any shows yet</Header>
+        </Grid.Row>
+      )
     }
   };
 
@@ -68,29 +72,30 @@ class SavedShows extends Component {
   render() {
     return (
       <Segment
+        basic
         textAlign="center"
         style={{
-          width: "95vw",
-          height: "100vh",
+          height: "90vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center"
         }}
       >
         <Grid
-          columns={1}
-          // relaxed='very'
           textAlign="center"
-          style={{ height: "100vh", width: "90w" }}
+          style={{ height: "100vh" }}
           verticalAlign="middle"
         >
-          <Grid.Row>
-            <Header>Your Watch List</Header>
-          </Grid.Row>
-          <Fragment>
-            {this.renderCards()}
-          </Fragment>
-          
+          <Grid.Column>
+            <Grid.Row> </Grid.Row>
+            <Grid.Row> </Grid.Row>
+            <Grid.Row>
+              <Header as="h1">Your Watch List</Header>
+            </Grid.Row>
+            <Fragment>
+              {this.renderCards()}
+            </Fragment>
+          </Grid.Column>
         </Grid>
       </Segment>
     );

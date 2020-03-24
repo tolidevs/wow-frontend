@@ -4,9 +4,11 @@ import { NavLink } from "react-router-dom";
 import {
     Menu,
     Button,
-    Icon
+    Icon,
+    Image
 } from "semantic-ui-react";
-
+import logo from '../images/logo.png'
+  
 // if want to add stying to all links use style={link}
 // const link = {
 //   width: "100px",
@@ -28,7 +30,8 @@ class Navbar extends React.Component {
   render() {
     const { loggedIn, menu_on } = this.props
     return (
-      <Menu className="navbar" fixed="top">
+      <Menu className="navbar" fixed="top" borderless>
+        <Menu.Item><Image src={logo} size="mini"></Image></Menu.Item>
         <Menu.Item className="dropdown" position="right">
           <Button icon onClick={this.selectMenu}>
             {menu_on ? (
@@ -37,11 +40,11 @@ class Navbar extends React.Component {
               <Icon name="chevron up" onClick={() => this.props.history.goBack()}/>
               // </NavLink>
             ) : loggedIn ? (
-              <NavLink id="down-arrow" to="/menu" exact>
+                <NavLink id="down-arrow" to="/menu" style={{ textDecoration: "none" }} exact>
                 <Icon name="chevron down" />
               </NavLink>
             ) : (
-              <NavLink to="/login" exact>
+                  <NavLink to="/login" style={{ textDecoration: "none" }}exact>
                 <Icon name="chevron down" />
               </NavLink>
             )}
