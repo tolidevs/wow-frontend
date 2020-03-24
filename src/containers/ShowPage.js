@@ -6,6 +6,8 @@ import {
   Header,
   Image,
   Icon,
+  Item,
+  Grid
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import API from "../API";
@@ -107,8 +109,8 @@ class ShowPage extends Component {
 
   // if already saved then render a filled heart icon that renders a modal to check if you are sure you want to remove from watchlist
   // if not render an empty heart icon
-  renderSaveIcon = (show) => {
-    const savedShow = (this.props.saved_shows.filter(saved => saved.imdbID === show.imdbID))[0]
+  renderSaveIcon = (show_id) => {
+    const savedShow = (this.props.saved_shows.filter(saved => saved.imdbID === show_id))[0]
 
     if (!this.props.user) {
       return <NotLoggedInModal />
@@ -118,7 +120,7 @@ class ShowPage extends Component {
       return (<Icon
         name="heart outline"
         size="big"
-        onClick={() => this.save(show)}
+        onClick={() => this.save(show_id)}
       />)
     }
   }
@@ -144,30 +146,40 @@ class ShowPage extends Component {
           justifyContent: "center",
           alignItems: "center"
         }}>
-
-        <Header as="h1">{title}</Header>
-        <Image src={poster} centered />
-        {this.renderSaveIcon(this.props.selected_show)}
-        <br></br>Watch on:
+        <Grid
+          textAlign="center"
+          // style={{ height: "100vh" }}
+          verticalAlign="middle">
+          <Grid.Column>
+            <Grid.Row> </Grid.Row>
+            <Grid.Row> </Grid.Row>
+            <Item.Group>
+            <Item.Header as="h1">{title}</Item.Header>
+            <Item.Image src={poster} centered />
+            {this.renderSaveIcon(this.props.selected_show)}
+            <br></br>Watch on:
         <Image.Group size="tiny">{this.renderServices(services)}</Image.Group>
-        <br></br>
-        {this.renderType(show_type)} {year}
-        {show_details.genre && (
-          <div>
-            <p>
-              <Icon name="question" size="big"></Icon> {show_details.genre}
-            </p>
-            <p>IMDB Rating: {show_details.imdbRating} / 10</p>
-            <p>{show_details.plot}</p>
-          </div>
-        )}
-        <br></br>
-        <div onClick={() => this.props.history.goBack()}>
-          <Icon
-            name="arrow circle left"
-          />
-          Back
-        </div>
+            <br></br>
+              <Grid.Row>{this.renderType(show_type)} {year}</Grid.Row>
+            {show_details.genre && (
+              <div>
+                  <Grid.Row>
+                    <Icon name="question" size="big"></Icon> {show_details.genre}
+                  </Grid.Row> 
+                <Grid.Row>IMDB Rating: {show_details.imdbRating} / 10</Grid.Row>
+                <Grid.Row>{show_details.plot}</Grid.Row>
+              </div>
+            )}
+            <br></br>
+            <div onClick={() => this.props.history.goBack()}>
+              <Icon
+                name="arrow circle left"
+              />
+              Back
+            </div>
+            </Item.Group>
+          </Grid.Column>
+        </Grid>
       </Segment>
 
     )
