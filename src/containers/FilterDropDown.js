@@ -2,13 +2,12 @@ import React, {Component} from 'react'
 import { Dropdown, Segment } from 'semantic-ui-react'
 import API from '../API'
 
-const options = [{ key: 0, text: 'My subscribed services', value: '0' }]
+const options = [{ key: 0, text: 'My subscribed services', value: "subscriptions" }]
 
 class FilterDropDown extends Component {
     
     state = {
-        options: options,
-        filter: null
+        options: options
     }
 
     getServices = () => {
@@ -19,7 +18,7 @@ class FilterDropDown extends Component {
     mapServicesToOptions = (services) => {
         const options_array = [...options]
         services.map(service => {
-            let servObj = { key: service.id, text: service.name, value: service.id }
+            let servObj = { key: service.id, text: service.name, value: service.id}
             options_array.push(servObj)
         })
         this.setState({

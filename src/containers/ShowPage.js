@@ -3,7 +3,6 @@ import RemoveFromWatchListModal from '../components/RemoveFromWatchListModal'
 import NotLoggedInModal from '../components/NotLoggedInModal'
 import {
   Segment,
-  Header,
   Image,
   Icon,
   Item,

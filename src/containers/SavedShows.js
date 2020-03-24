@@ -14,33 +14,88 @@ import FilterDropDown from './FilterDropDown'
 class SavedShows extends Component {
 
   state = {
-    filter: null
+    filter: null,
+    servicesLoaded: false
   }
+
 
   renderResults = () => {
     const { saved_shows } = this.props;
-    if (saved_shows.length > 0) {
-      return [...saved_shows].map(result => (
-        <ResultCard showObj={result} />
-      ));
-    } else {
+    if (!saved_shows || saved_shows.length === 0) {
       return (
         <Grid.Row>
           <Header as="h2">You have not saved any shows yet</Header>
         </Grid.Row>
       )
+    } else if (!this.state.servicesLoaded || !this.state.filter ) {
+      return [...saved_shows].map(result => (
+        <ResultCard showObj={result} />
+      ))
+    } else {
+      return this.filteredResults().map(result => (
+        <ResultCard showObj={result} />
+      ))
     }
   };
 
+
+  // create array of service ids to filter by from those in user_subscriptions
+  filterArray = () => {
+    const { user_subscriptions } = this.props
+    let filter_ids = []
+    if (this.state.filter === "subscriptions") {
+      user_subscriptions.map(subscription => filter_ids.push(subscription.service_id))
+      return filter_ids
+    } else {
+      filter_ids.push(this.state.filter)
+      return filter_ids
+    }
+  }
+
+  // return filtered results if filtered array is valid or return saved_shows
+  filteredResults = () => {
+    const filter_array = this.filterArray()
+    const { saved_shows } = this.props
+    if (!filter_array[0]) {
+      return saved_shows
+    } else {
+      const filtered_shows = []
+      for (const filter_id of filter_array) {
+        const filter_name = this.mapNameToID(filter_id)
+        const show = saved_shows.filter(saved => saved.services && Object.values(saved.services).find(service => service.name === filter_name))
+        filtered_shows.push(show)
+      }
+      return ([...new Set(filtered_shows.flat())])
+    }
+  }
+  
+// mapping service ids to names as don't have service IDs in results objects from backend - need to refactor
+  mapNameToID = (id) => {
+    switch (id) {
+      case 1:
+        return "Netflix"
+      case 2:
+        return "Amazon Instant Video"
+      case 3:
+        return "iTunes"
+      case 4:
+        return "DisneyPlus"
+      case 5:
+        return "Google Play"
+    }
+  }
+
+
+  // render loading page or results
   renderCards = () => {
     return this.props.saved_shows ? (
       <Fragment>{this.renderResults()}</Fragment>
     ) : (
         <Grid.Row>
           <Segment>
-            <Dimmer active inverted>
-              <Loader inverted></Loader>
-            </Dimmer>
+            {/* <Dimmer active inverted> */}
+              <Loader active inverted></Loader>
+            {/* </Dimmer> */}
             <Header>Loading saved shows...</Header>
           </Segment>
         </Grid.Row>
@@ -53,7 +108,6 @@ class SavedShows extends Component {
       const shows = this.props.saved_shows
       shows && this.getServices(shows)
     }, 1500)
-    
   }
 
   // check if show has services key. if not add to array (as do not yet have data on where is available). 
@@ -62,6 +116,7 @@ class SavedShows extends Component {
     const get_services_array = shows.filter(saved_show => !saved_show.services)
     API.getServices(get_services_array)
       .then(results => this.mapServicesToState(results))
+      .then(() => this.setState({servicesLoaded:true}) )
   }
 
 // iterate through saved shows in state and replace if they are in shows returned from API (updated with services) then update redux saved_services state with new array
@@ -112,10 +167,11 @@ class SavedShows extends Component {
   }
 }
 
-const mapStateToProps = ({ saved_shows, user }) => {
+const mapStateToProps = ({ saved_shows, user, user_subscriptions }) => {
   return {
     saved_shows,
-    user
+    user,
+    user_subscriptions
   };
 };
 
