@@ -1,12 +1,19 @@
-import React, {Component} from 'react';
+import React from 'react';
+import { Checkbox } from 'semantic-ui-react'
 
-class TickBox extends Component {
-    render() {
-        console.log("hello")
-        return (
-            <h1>"hello"</h1>
-        )
-    }
+const TickBox = ({service, checked, toggleService}) => {
+
+    return (
+        <div>
+            <Checkbox
+                toggle
+                label={service.name}
+                checked={!!checked}
+                onClick={() => toggleService(service.id, checked)}
+            />
+        </div >
+    )
+
 }
 
 export default TickBox

@@ -8,37 +8,67 @@ class Subscriptions extends Component {
   state = {
     services: []
   };
+
+  componentDidMount() {
+    this.getServices()
+  }
+
   // get array of available services from backend
   getServices = () => {
     API.getAllServices()
-      // .then(console.log)
       .then(services => this.setState({ services }));
   };
 
-  // render checkbox for each service
-  // pass it checked=true if user_subscriptions includes service id
+ 
   mapServicesCheckboxes = services => {
-    return services.map(service => this.renderCheckbox(service));
-    // {
-    //     return
-    // })
+    return services && services.map(service => this.renderCheckbox(service));
   };
 
+   // render checkbox for each service
+  // pass it checked=true if user_subscriptions includes service id
   renderCheckbox = service => {
-    console.log(service);
+    const checked = (this.props.user_subscriptions.find(subscription => subscription.service_id === service.id))
+    console.log(checked)
     return (
-      <div>
-        <TickBox />
-      </div>
+      <TickBox
+        key={service.id}
+        service={service}
+        checked={checked}
+        toggleService={this.handleToggle}
+         />
     );
   };
 
-  // saveSubscription = (service_id, user_id) => {
+// ----------functions for adding and deleting a user subscription -----------
 
-  // }
+  handleToggle = (service_id, checked) => {
+    if (checked) {
+      this.deleteSubscription(checked.id)
+    } else {
+      this.saveSubscription(service_id)
+    }
+  }
+
+  saveSubscription = (service_id) => {
+    API.saveSubscription(service_id, this.props.user.id)
+      .then(() => this.updateSubscriptionsState(this.props.user.id))
+  }
+
+  deleteSubscription = (id) => {
+    API.deleteSubscription(id)
+      .then(() => this.updateSubscriptionsState(this.props.user.id))
+  }
+
+  updateSubscriptionsState = (user_id) => {
+    (API.getSubscriptions(user_id))
+      .then(user_subscriptions => {
+        this.props.setUserSubscriptions(user_subscriptions)
+      })
+  }
+
+// -------------render
 
   render() {
-    // const { user } = this.props
     return (
       <Segment>
         <Header>Your Subscriptions</Header>
@@ -47,6 +77,9 @@ class Subscriptions extends Component {
     );
   }
 }
+
+
+
 
 const mapStateToProps = ({ user, user_subscriptions }) => {
   return {
@@ -58,10 +91,7 @@ const mapStateToProps = ({ user, user_subscriptions }) => {
 const mapDispatchToProps = dispatch => {
   return {
     setUserSubscriptions: user_subscriptions =>
-      dispatch({
-        type: "SET_USER_SUBSCRIPTIONS",
-        payload: { user_subscriptions }
-      })
+      dispatch({ type: "SET_USER_SUBSCRIPTIONS", payload: { user_subscriptions } })
   };
 };
 

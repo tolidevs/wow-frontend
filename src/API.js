@@ -8,9 +8,10 @@ const getDetailsURL = `${baseURL}/show`
 const savedShowURL = `${baseURL}/saved_shows`
 const getSavedShowsURL = `${baseURL}/user/saved_shows`
 const getServicesURL = `${baseURL}/get_services`
-const getSubscriptionsURL = `${baseURL}/user/subscriptions`
 const allServicesURL = `${baseURL}/services`
+const getSubscriptionsURL = `${baseURL}/user/subscriptions`
 const subscriptionsURL = `${baseURL}/subscriptions`
+
 
 // Make a post request to a given URL with a given data object as the body and return the Promise
 const post = (url, data) => {
@@ -76,7 +77,7 @@ const saveShow = (user, imdbID, title, show_type, year, poster) => {
 }
 
 const getSavedShows = user_id => {
-  return post(getSavedShowsURL, {user_id}).then(resp => resp.json())
+  return post(getSavedShowsURL, { user_id }).then(resp => resp.json())
 }
 
 const deleteSavedShow = id => {
@@ -84,21 +85,24 @@ const deleteSavedShow = id => {
 }
 
 const getServices = array => {
-  return post(getServicesURL, {array}).then(resp => resp.json())
-}
-
-const getSubscriptions = user_id => {
-  return post(getSubscriptionsURL, { user_id }).then(resp => resp.json())
+  return post(getServicesURL, { array }).then(resp => resp.json())
 }
 
 const getAllServices = () => {
   return get(allServicesURL).then(resp => resp.json())
 }
 
-const saveSubscription = (service_id, user_id) => {
-  return post(subscriptionsURL, {service_id, user_id}).then(resp => resp.json())
+const getSubscriptions = user_id => {
+  return post(getSubscriptionsURL, { user_id }).then(resp => resp.json())
 }
 
+const saveSubscription = (service_id, user_id) => {
+  return post(subscriptionsURL, { service_id, user_id }).then(resp => resp.json())
+}
+
+const deleteSubscription = id => {
+  return deleteItem(subscriptionsURL, id).then(resp => resp.json())
+}
 
 // Export the necessary functions as part of one object which we will import elsewhere
 export default {
@@ -113,5 +117,6 @@ export default {
   getServices,
   getSubscriptions,
   getAllServices,
-  saveSubscription
+  saveSubscription,
+  deleteSubscription
 }
