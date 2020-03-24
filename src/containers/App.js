@@ -15,6 +15,7 @@ import SavedShows from './SavedShows'
 import NotFound from '../components/NotFound'
 import Subscriptions from './Subscriptions'
 import { Container } from 'semantic-ui-react'
+import FilterDropDown from './FilterDropDown'
 const history = createHistory();
 
 class App extends Component {
@@ -113,6 +114,12 @@ class App extends Component {
                 <Subscriptions history={history}
                 />}
             />
+            <Route
+              exact
+              path="/dropdown"
+              component={FilterDropDown}
+            />
+
             <Route component={NotFound} />
             </Switch>
         </Container>

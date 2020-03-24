@@ -9,8 +9,13 @@ import {
 import { connect } from "react-redux";
 import ResultCard from "../components/ResultCard";
 import API from "../API";
+import FilterDropDown from './FilterDropDown'
 
 class SavedShows extends Component {
+
+  state = {
+    filter: null
+  }
 
   renderResults = () => {
     const { saved_shows } = this.props;
@@ -44,7 +49,6 @@ class SavedShows extends Component {
 
   // when page  loads do fetch for services if saved_shows has a value
   componentDidMount() {
-    console.log("updated")
     setTimeout(() => {
       const shows = this.props.saved_shows
       shows && this.getServices(shows)
@@ -68,6 +72,11 @@ class SavedShows extends Component {
     }
   }
 
+  setFilter = (value) => {
+    this.setState({
+      filter: value
+    })
+  }
 
   render() {
     return (
@@ -92,6 +101,7 @@ class SavedShows extends Component {
             <Grid.Row>
               <Header as="h1">Your Watch List</Header>
             </Grid.Row>
+            <Grid.Row><FilterDropDown setFilter={this.setFilter} /></Grid.Row>
             <Fragment>
               {this.renderCards()}
             </Fragment>
