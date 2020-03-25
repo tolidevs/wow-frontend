@@ -168,7 +168,7 @@ div.ui.message{
 
 
 /* a-tags */
-a {
+a, a:visited {
   text-decoration: none;
   color: black
 }

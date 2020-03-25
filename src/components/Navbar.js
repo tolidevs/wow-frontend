@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import {
     Menu,
     Button,
@@ -21,10 +21,18 @@ import logo from '../images/logo.png'
 
 class Navbar extends React.Component {
   
+  
 
   selectMenu = () => {
     const { setMenu, menu_on } = this.props
     setMenu(!menu_on)
+  }
+
+  handleClick = () => {
+    if (this.props.loggedIn) {
+      this.selectMenu()
+      return this.props.history.goBack()
+    } 
   }
 
   render() {
@@ -36,9 +44,7 @@ class Navbar extends React.Component {
           {menu_on ? (
             // this pointless a is for styling as the navlink creates an a-tage which pushes the button over
             <a>
-            <Button icon onClick={() => {
-              this.selectMenu()
-              this.props.history.goBack()}}>
+              <Button icon onClick={this.handleClick}>
               <Icon name="chevron up" />
             </Button>
             </a>
