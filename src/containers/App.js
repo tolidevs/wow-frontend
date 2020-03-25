@@ -68,12 +68,6 @@ class App extends Component {
           className="main-container"
           textAlign="center"
         >
-          {/* {this.props.menu_on ?
-            this.props.user ?
-              <UserMenu logOut={this.logOut} history={history} />
-              :
-              <LoginForm logIn={this.logIn} history={history} />
-            : */}
             <Switch>
               <Route exact path="/" component={Home} history={history} />
               <Route
