@@ -24,7 +24,7 @@ class SavedShows extends Component {
     if (!saved_shows || saved_shows.length === 0) {
       return (
         <Grid.Row>
-          <Header as="h2">You have not saved any shows yet</Header>
+          <Header as="h2" className="no-saved">You have not saved any shows yet</Header>
         </Grid.Row>
       )
     } else if (!this.state.servicesLoaded || !this.state.filter ) {
@@ -137,15 +137,11 @@ class SavedShows extends Component {
     return (
       <Segment
         basic
+        vertical
         textAlign="center"
-        style={{
-          height: "90vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
       >
         <Grid
+          centered
           textAlign="center"
           style={{ height: "100vh" }}
           verticalAlign="middle"
@@ -154,7 +150,12 @@ class SavedShows extends Component {
             <Grid.Row> </Grid.Row>
             <Grid.Row> </Grid.Row>
             <Grid.Row>
-              <Header as="h1">Your Watch List</Header>
+              <Segment
+                basic
+                textAlign="center"
+              >
+                  <Header as="h1">Your Watch List</Header>
+                </Segment>
             </Grid.Row>
             <Grid.Row><FilterDropDown setFilter={this.setFilter} /></Grid.Row>
             <Fragment>

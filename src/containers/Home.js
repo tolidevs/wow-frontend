@@ -37,24 +37,24 @@ class Home extends Component {
     return (
       <Segment
         basic
+        vertical
         textAlign="center"
         style={{
-          height: "90vh",
+          height: "100vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center"
         }}
       >
         <Grid
+          centered
           textAlign="center"
           style={{ height: "100vh" }}
-          
         >
           
           <Grid.Row verticalAlign="bottom" style={{ height: "50vh" }}>
             <Grid.Column>
               <Segment basic className="welcome">
-                {/* <Image src={logo} size='small' centered spaced></Image> */}
                 <Header as="h1">What's On Where</Header>
                 <br></br>
                 <p>All streaming services.<br></br>One search.</p>
@@ -63,13 +63,13 @@ class Home extends Component {
           </Grid.Row>
           <Grid.Row verticalAlign="top" style={{ height: "50vh" }}>
             <Grid.Column>
-            <Form
-              style={{ width: "80vw"}}
+              <Form className="form-input-custom"
+              // style={{ width: "80vw"}}
               onSubmit={this.handleSubmit}
             >
-              <Form.Input
+                <Form.Input
                 size='big'
-                className="form-input-custom"
+                
                 required
                 action={{ icon: "search" }}
                 placeholder="Type to search"

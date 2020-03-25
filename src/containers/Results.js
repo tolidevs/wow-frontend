@@ -49,12 +49,13 @@ class Results extends Component {
           textAlign="center"
           style={{
             height: "90vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
+            // display: "flex",
+            // justifyContent: "center",
+            // alignItems: "center"
           }}
       >
-        <Grid
+          <Grid
+            centered
             textAlign="center"
             style={{ height: "100vh" }}
             verticalAlign="middle"

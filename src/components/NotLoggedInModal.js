@@ -30,11 +30,11 @@ class NotLoggedInModal extends Component {
                 </Modal.Content>
                 <Modal.Actions>
                     <NavLink to="/login">
-                        <Button basic color='green' onClick={this.handleClose} inverted>
+                        <Button color='blue' onClick={this.handleClose} inverted>
                             <Icon name='sign in' /> Log In
                         </Button>
                     </NavLink>
-                    <Button color='red' onClick={this.handleClose} inverted>
+                    <Button color='yellow' onClick={this.handleClose} inverted>
                         <Icon name='arrow circle left' /> Go back
               </Button>
                 </Modal.Actions>

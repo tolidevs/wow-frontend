@@ -31,53 +31,61 @@ img {
   text-align: center;
 }
 
+p {
+  background: rgba(250, 250, 250, 0.9);
+  text-align: center;
+  margin: 0px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+/* NAVBAR */
 .ui.top.fixed.navbar.menu {
   background-color: #9CD4D6;
   outline-style: none;
   border-style: none;
-  padding-top: 5px;
-  padding-bottom: 5px;
 }
 
-/* div.right.item.dropdown{
-  background-color: #9CD4D6;
-  outline-style: none;
-  border-style: none;
-  padding-top: 16px;
-  padding-bottom: 16px;
-} */
 
+/* MODALS */
+div.ui.modals.dimmer.transition.visible.active{
+  background-color: rgba(156, 212, 214, 0.85);
+}
+
+.modals p{
+  background-color: rgba(156, 212, 214, 0.0);
+  color: #002326;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* SEGMENTS */
+div.ui.center.aligned {
+  text-align: center;
+  width: 90vw;
+}
+
+div.ui.basic.segment{
+  border-radius: 5px;
+  background: rgba(250, 250, 250, 0.9);
+  border-radius: 5px;
+}
+
+div.ui.basic.center.aligned.segment.result-card{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 0px;
+}
 
 div.ui.center.aligned.container.main-container{
   padding-top: 64px;
   padding-bottom: 16px;
-  height: 100vh;
+  height: auto;
 }
 
-div.ui.segment{
-  background-color: #DCDEE5;
-}
-
-div.ui.basic.segment.welcome{
-  background-color: #fafafa;
-  opacity: 90%;
-  border-radius: 5px;
-}
-
-
-div.ui.center.aligned {
-  width: 90vw;
-}
-
-div.ui.basic.center.aligned.segment.result-card{
-  background: rgba(250, 250, 250, 0.9);
-  /* opacity: 90%; */
-  border-radius: 5px;
-}
-
+/* FORMS */
 .ui.form input[type=text]{
   font-family: 'Comfortaa', cursive;
-
   color: #231F20;
 }
 
@@ -87,6 +95,8 @@ input::selection, textarea::selection{
   color: #231F20;
 }
 
+
+/* BUTTONS */
 .ui.icon.button{
   background-color: #E0E1E2;
 }
@@ -99,27 +109,37 @@ button.ui.fluid.button{
   margin: 5px
 }
 
+
+/* HEADERS */
 h1.ui.header {
-  background-color: #fafafa;
-  opacity: 80%;
+  background: rgba(250, 250, 250, 0.8);
+  /* background-color: #fafafa;
+  opacity: 80%; */
   text-align: center;
-  /* color: #231F20; */
   color: #002326;
   font-size: 40px;
   font-family: 'Comfortaa', cursive;
   margin: 10px;
   border-radius: 5px;
+  width: auto;
 }
 
 h2.header {
-  background-color: #fafafa;
-  opacity: 80%;
   text-align: center;
   color: #231F20;
   font-size: 30px;
   font-family: 'Comfortaa', cursive;
   margin: 0px;
   border-radius: 5px;
+}
+
+h2.header.no-saved{
+  background: rgba(250, 250, 250, 0.9)
+}
+
+/* messages */
+div.ui.message{
+  background-color: rgba(156, 212, 214, 0.4)
 }
 
 a.secondary {
@@ -132,14 +152,6 @@ a.secondary {
   color: #fafafa;
 }
 
-p {
-  background-color: #fafafa;
-  opacity: 80%;
-  text-align: center;
-  margin: 0px;
-  border-radius: 5px;
-  font-size: 20px;
-}
 
 * {
   font-family: 'Comfortaa', cursive;

@@ -31,7 +31,7 @@ class Navbar extends React.Component {
     const { loggedIn, menu_on } = this.props
     return (
       <Menu className="navbar" fixed="top" borderless>
-        <Menu.Item><Image src={logo} size="mini"></Image></Menu.Item>
+        <Menu.Item><NavLink to='/' exact ><Image src={logo} size="mini"></Image></NavLink></Menu.Item>
         <Menu.Item className="dropdown" position="right">
           {menu_on ? (
             // this pointless a is for styling as the navlink creates an a-tage which pushes the button over

@@ -37,7 +37,10 @@ class FilterDropDown extends Component {
     render() {
 
         return (
-            <Segment>
+            <Segment
+                basic
+                textAlign="center"
+            >
                 <Dropdown
                     clearable
                     options={this.state.options}

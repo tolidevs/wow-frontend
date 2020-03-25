@@ -29,16 +29,16 @@ class RemoveFromWatchListModal extends Component{
                     <p>Are you sure you would like to remove {title} from your watchlist?</p>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button basic color='red' onClick={this.handleClose} inverted>
-                        <Icon name='remove' /> No
+                    <Button  standard onClick={this.handleClose} inverted>
+                        <Icon  name='remove' /> No
                     </Button>
-                    <Button color='green' onClick={() => {
+                    <Button color='yellow' onClick={() => {
                         unsave(id)
                         this.handleClose()
                     }
                     } inverted>
                     <Icon name='checkmark' /> Yes
-              </Button>
+                    </Button>
                 </Modal.Actions>
             </Modal>
         )

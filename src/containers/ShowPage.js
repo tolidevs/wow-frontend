@@ -15,7 +15,7 @@ import amazon from "../images/amazon-icon.png";
 import disney from "../images/disneyplus-logo.jpg";
 import itunes from "../images/itunes-logo.jpg";
 import google from "../images/google-play.png";
-import stream from "../images/stream.png";
+import stream from "../images/video-player.png";
 
 
 class ShowPage extends Component {

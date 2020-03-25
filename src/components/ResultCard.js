@@ -17,7 +17,7 @@ import amazon from "../images/amazon-icon.png";
 import disney from "../images/disneyplus-logo.jpg";
 import itunes from "../images/itunes-logo.jpg";
 import google from "../images/google-play.png";
-import stream from "../images/stream.png";
+import stream from "../images/video-player.png";
 
 
 class ResultCard extends Component {
@@ -90,11 +90,12 @@ class ResultCard extends Component {
   // if already saved then render a filled heart icon that renders a modal to check if you are sure you want to remove from watchlist
   // if not render an empty heart icon
   renderSaveIcon = (show) => {
-    const savedShow = ([...this.props.saved_shows].filter(saved => saved.imdbID === show.imdbID))[0]
+    
 
     if (!this.props.user) {
       return <NotLoggedInModal />
-    } else if (savedShow) {
+    } else if (this.props.saved_shows) {
+      const savedShow = this.props.saved_shows.filter(saved => saved.imdbID === show.imdbID)
       return <RemoveFromWatchListModal id={savedShow.id} title={savedShow.title} unsave={this.unsave} />
     } else {
       return (<Icon
