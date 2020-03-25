@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import API from "../API";
 import TickBox from "../components/TickBox";
-import { Segment, Header } from "semantic-ui-react";
+import { Segment, Header, Grid, Icon } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
 
 class Subscriptions extends Component {
   state = {
@@ -70,9 +71,49 @@ class Subscriptions extends Component {
 
   render() {
     return (
-      <Segment>
-        <Header>Your Subscriptions</Header>
-        <Segment>{this.mapServicesCheckboxes(this.state.services)}</Segment>
+      <Segment
+        // className='page'
+        basic
+        vertical
+        textAlign="center"
+        style={{
+          height: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Grid
+          centered
+          textAlign="center"
+          style={{ height: "90vh" }}
+          verticalAlign="middle"
+        >
+          <Grid.Column>
+            <Segment
+              basic
+              textAlign="center"
+            >
+              <Header as="h1">Your Subscriptions</Header>
+            </Segment>
+            <Segment
+              className="subscriptions"
+              basic
+            >{this.mapServicesCheckboxes(this.state.services)}</Segment>
+            <Grid.Row
+              style={{
+                display: "flex",
+                justifyContent: "center"
+            }}>
+              <NavLink to='/' exact>
+                <Icon
+                  name="arrow circle left"
+                />
+              Back to Search
+            </NavLink>
+            </Grid.Row>
+          </Grid.Column>
+        </Grid>
       </Segment>
     );
   }
@@ -91,7 +132,7 @@ const mapStateToProps = ({ user, user_subscriptions }) => {
 const mapDispatchToProps = dispatch => {
   return {
     setUserSubscriptions: user_subscriptions =>
-      dispatch({ type: "SET_USER_SUBSCRIPTIONS", payload: { user_subscriptions } })
+      dispatch({ type: "SET_USER_SUBSCRIPTIONS", payload: { user_subscriptions } }),
   };
 };
 

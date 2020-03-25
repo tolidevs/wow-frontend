@@ -42,7 +42,7 @@ class Home extends Component {
         vertical
         textAlign="center"
         style={{
-          height: "100vh",
+          height: "90vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center"
@@ -58,7 +58,7 @@ class Home extends Component {
             <Grid.Column>
               <Segment basic className="welcome">
                 <Header as="h1">What's On Where</Header>
-                <br></br>
+                
                 <p>All streaming services.<br></br>One search.</p>
               </Segment>
             </Grid.Column>

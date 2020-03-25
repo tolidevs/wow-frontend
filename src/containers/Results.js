@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import {
     Segment,
     Header,
-    Dimmer,
     Loader,
     Image,
     Grid,
@@ -11,17 +10,30 @@ import {
 import { connect } from "react-redux";
 import ResultCard from '../components/ResultCard'
 import logo from '../images/logo.png'
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 
 
 class Results extends Component {
   
   renderResults = () => {
-    const { search_results } = this.props;
+    const { search_results, search_string } = this.props;
     if (Array.isArray(search_results) && search_results.length > 0) {
       return search_results.map(result => (
         <ResultCard showObj={result} />
-      ));
+      ))
+    } else {
+      return (
+        <Segment
+          basic
+          textAlign="center"
+          
+        >
+          <Header as="h2">
+            Sorry, no results found for {search_string}.<br></br>
+            Return to <NavLink to="/" exact>search</NavLink> to try again.
+          </Header>
+        </Segment>
+      )
     }
   };
 
@@ -79,7 +91,7 @@ class Results extends Component {
           >
             <Grid.Row> </Grid.Row>
             <Grid.Row> </Grid.Row>
-          <Grid.Row>
+            <Grid.Row style={{ height: "auto" }}>
             <Header as="h1">Results for {search_string}</Header>
           </Grid.Row>
             {this.renderCards()}

@@ -123,18 +123,16 @@ class App extends Component {
 
               <Route component={NotFound} />
             </Switch>
-          {/* } */}
         </Container>
       </Router>
     );
   }
 }
 
-const mapStateToProps = ({ user, user_type, menu_on}) => {
+const mapStateToProps = ({ user, user_type}) => {
   return {
     user,
-    user_type,
-    menu_on
+    user_type
   }
 }
 

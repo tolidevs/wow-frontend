@@ -75,6 +75,10 @@ div.ui.basic.segment.page{
   background: rgba(250, 250, 250, 0);
 }
 
+div.ui.basic.segment.subscriptions{
+  padding: 5%;
+}
+
 div.ui.basic.center.aligned.segment.result-card{
   margin-top: 5px;
   margin-bottom: 5px;
@@ -155,6 +159,18 @@ h2.header.no-saved{
 /* messages */
 div.ui.message{
   background-color: rgba(156, 212, 214, 0.4)
+}
+
+/* checkboxes */
+.ui.toggle.checkbox input:checked~label:before {
+    background-color: #0D474E!important;
+}
+
+
+/* a-tags */
+a {
+  text-decoration: none;
+  color: black
 }
 
 a.secondary {

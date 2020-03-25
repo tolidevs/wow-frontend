@@ -53,24 +53,26 @@ class ShowPage extends Component {
   };
 
   renderServices = services => {
-    return services.map(service => {
-      switch (service.name) {
-        default:
-          return null;
-        case "Netflix":
-          return <Image src={netflix} as="a" href={service.url} target="_blank"></Image>;
-        case "iTunes":
-          return <Image src={itunes} as="a" href={service.url} target="_blank"></Image>;
-        case "Amazon Instant Video":
-          return <Image src={amazon} as="a" href={service.url} target="_blank"></Image>;
-        case "Google Play":
-          return <Image src={google} as="a" href={service.url} target="_blank"></Image>;
-        case "DisneyPlus":
-          return <Image src={disney} as="a" href={service.url} target="_blank"></Image>;
-        case "other":
-          return <Image src={stream} as="a" href={service.url}></Image>;
-      }
-    });
+    if (services) {
+      return services.map(service => {
+        switch (service.name) {
+          default:
+            return null;
+          case "Netflix":
+            return <Image src={netflix} as="a" href={service.url} target="_blank"></Image>;
+          case "iTunes":
+            return <Image src={itunes} as="a" href={service.url} target="_blank"></Image>;
+          case "Amazon Instant Video":
+            return <Image src={amazon} as="a" href={service.url} target="_blank"></Image>;
+          case "Google Play":
+            return <Image src={google} as="a" href={service.url} target="_blank"></Image>;
+          case "DisneyPlus":
+            return <Image src={disney} as="a" href={service.url} target="_blank"></Image>;
+          case "other":
+            return <Image src={stream} as="a" href={service.url}></Image>;
+        }
+      });
+    }
   };
 
 
