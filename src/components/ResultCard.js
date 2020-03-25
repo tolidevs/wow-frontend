@@ -79,7 +79,7 @@ class ResultCard extends Component {
 
   // delete saved show from backend and remove from saved_shows in state
   unsave = (id) => {
-    this.props.setSavedShows([...this.props.saved_shows].filter(saved => saved.id !== id))
+    this.props.setSavedShows(this.props.saved_shows.filter(saved => saved.id !== id))
     this.deleteSavedShow(id)
   }
 
