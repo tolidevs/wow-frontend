@@ -33,7 +33,33 @@ class Navbar extends React.Component {
       <Menu className="navbar" fixed="top" borderless>
         <Menu.Item><Image src={logo} size="mini"></Image></Menu.Item>
         <Menu.Item className="dropdown" position="right">
-          <Button icon onClick={this.selectMenu}>
+          {menu_on ? (
+            // this pointless a is for styling as the navlink creates an a-tage which pushes the button over
+            <a>
+            <Button icon onClick={() => {
+              this.selectMenu()
+              this.props.history.goBack()}}>
+              <Icon name="chevron up" />
+            </Button>
+            </a>
+          ) : (
+              loggedIn ? (
+                <NavLink  to="/menu" exact>
+                  <Button icon onClick={this.selectMenu}>
+                    <Icon name="chevron down" />
+                  </Button>
+                </NavLink>
+              ) : (
+                  <NavLink  to="/login" exact>
+                    <Button icon onClick={this.selectMenu}>
+                      <Icon name="chevron down" />
+                    </Button>
+                  </NavLink>
+            )
+          )
+          } 
+
+          {/* <Button icon onClick={this.selectMenu}>
             {menu_on ? (
               // need to change this to history so when close menu takes you back to last page not home page
               // <NavLink to="/" exact>
@@ -48,7 +74,7 @@ class Navbar extends React.Component {
                 <Icon name="chevron down" />
               </NavLink>
             )}
-          </Button>
+          </Button> */}
         </Menu.Item>
       </Menu>
     );

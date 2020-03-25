@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Navbar from '../components/Navbar'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory'
+// import createHistory from 'history/createBrowserHistory'
+import { createBrowserHistory } from 'history'
 import '../App.css';
 import { connect } from "react-redux";
 import LoginForm from './LoginForm'
@@ -16,7 +17,7 @@ import NotFound from '../components/NotFound'
 import Subscriptions from './Subscriptions'
 import { Container } from 'semantic-ui-react'
 import FilterDropDown from './FilterDropDown'
-const history = createHistory();
+const history = createBrowserHistory();
 
 class App extends Component {
 
@@ -67,71 +68,79 @@ class App extends Component {
           className="main-container"
           textAlign="center"
         >
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route
-              exact
-              path="/login"
-              component={() => <LoginForm logIn={this.logIn} />}
-            />
-            <Route
-              exact
-              path="/sign-up"
-              component={() => <SignUpForm logIn={this.logIn} />}
-            />
-            <Route
-              exact
-              path="/menu"
-              component={() => (
-                <UserMenu logOut={this.logOut} history={history} />
-              )}
-            />
-            <Route
-              exact
-              path="/results"
-              component={() => (
-                <Results history={history} />
-              )}
-            />
-            <Route
-              exact
-              path="/results/show"
-              component={() => (
-                <ShowPage history={history} />
-              )}
-            />
-            <Route
-              exact
-              path="/user/watch-list"
-              component={() =>
-                <SavedShows history={history}
-                />}
-            />
-            <Route
-              exact
-              path="/user/subscriptions"
-              component={() =>
-                <Subscriptions history={history}
-                />}
-            />
-            <Route
-              exact
-              path="/dropdown"
-              component={FilterDropDown}
-            />
+          {/* {this.props.menu_on ?
+            this.props.user ?
+              <UserMenu logOut={this.logOut} history={history} />
+              :
+              <LoginForm logIn={this.logIn} history={history} />
+            : */}
+            <Switch>
+              <Route exact path="/" component={Home} history={history} />
+              <Route
+                exact
+                path="/login"
+                component={() => <LoginForm logIn={this.logIn} history={history} />}
+              />
+              <Route
+                exact
+                path="/sign-up"
+                component={() => <SignUpForm logIn={this.logIn} history={history} />}
+              />
+              <Route
+                exact
+                path="/menu"
+                component={() => (
+                  <UserMenu logOut={this.logOut} history={history} />
+                )}
+              />
+              <Route
+                exact
+                path="/results"
+                component={() => (
+                  <Results history={history} />
+                )}
+              />
+              <Route
+                exact
+                path="/results/show"
+                component={() => (
+                  <ShowPage history={history} />
+                )}
+              />
+              <Route
+                exact
+                path="/user/watch-list"
+                component={() =>
+                  <SavedShows history={history}
+                  />}
+              />
+              <Route
+                exact
+                path="/user/subscriptions"
+                component={() =>
+                  <Subscriptions history={history}
+                  />}
+              />
+              <Route
+                exact
+                path="/dropdown"
+                component={FilterDropDown}
+              />
 
-            <Route component={NotFound} />
+              <Route component={NotFound} />
             </Switch>
+          {/* } */}
         </Container>
       </Router>
     );
   }
 }
 
-const mapStateToProps = ({ user, user_type}) => {
+const mapStateToProps = ({ user, user_type, menu_on}) => {
   return {
     user,
-    user_type
+    user_type,
+    menu_on
   }
 }
 
