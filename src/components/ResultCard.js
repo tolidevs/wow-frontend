@@ -90,12 +90,10 @@ class ResultCard extends Component {
   // if already saved then render a filled heart icon that renders a modal to check if you are sure you want to remove from watchlist
   // if not render an empty heart icon
   renderSaveIcon = (show) => {
-    
-
     if (!this.props.user) {
       return <NotLoggedInModal />
-    } else if (this.props.saved_shows) {
-      const savedShow = this.props.saved_shows.filter(saved => saved.imdbID === show.imdbID)
+    } else if (this.props.saved_shows.find(saved => saved.imdbID === show.imdbID)) {
+      const savedShow = this.props.saved_shows.find(saved => saved.imdbID === show.imdbID)
       return <RemoveFromWatchListModal id={savedShow.id} title={savedShow.title} unsave={this.unsave} />
     } else {
       return (<Icon
@@ -115,17 +113,17 @@ class ResultCard extends Component {
               default:
                 return null;
               case "Netflix":
-                return <Image src={netflix} as="a" href={service.url}></Image>;
+                return <Image src={netflix} as="a" href={service.url} target="_blank" ></Image>;
               case "iTunes":
-                return <Image src={itunes} as="a" href={service.url}></Image>;
+                return <Image src={itunes} as="a" href={service.url} target="_blank" ></Image>;
               case "Amazon":
-                return <Image src={amazon} as="a" href={service.url}></Image>;
+                return <Image src={amazon} as="a" href={service.url} target="_blank" ></Image>;
               case "Google Play":
-                return <Image src={google} as="a" href={service.url}></Image>;
+                return <Image src={google} as="a" href={service.url} target="_blank" ></Image>;
               case "DisneyPlus":
-                return <Image src={disney} as="a" href={service.url}></Image>;
+                return <Image src={disney} as="a" href={service.url} target="_blank" ></Image>;
               case "other":
-                return <Image src={stream} as="a" href={service.url}></Image>;
+                return <Image src={stream} as="a" href={service.url} target="_blank" ></Image>;
             }
           });
         } 

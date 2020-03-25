@@ -5,11 +5,12 @@ import {
     Dimmer,
     Loader,
     Image,
-    Grid
+    Grid,
+    Icon
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import ResultCard from '../components/ResultCard'
-import clapper from '../images/clapper-img.png'
+import logo from '../images/logo.png'
 import { Redirect } from "react-router-dom";
 
 
@@ -28,15 +29,30 @@ class Results extends Component {
     return this.props.search_results ? (
       <Fragment>{this.renderResults()}</Fragment>
     ) : (
-      <Grid.Row>
-        <Segment>
-          <Dimmer active inverted>
-            <Loader inverted></Loader>
-          </Dimmer>
-          <Image src={clapper} size="medium" centered />
-          <Header>Searching...</Header>
+        <Segment
+        className="loading waiting"
+            basic
+            vertical
+            centered
+            textAlign="center"
+            style={{
+              width: '90vw',
+              height: "40vh",
+              display: "flex",
+              justifyContent: 'center',
+              alignItems: "center",
+            }}>
+            <Grid.Column centered textAlign="center">
+              <Grid.Row>
+                <Loader active ></Loader>
+                <Image src={logo} size='small' centered></Image>
+              </Grid.Row>
+
+              <Grid.Row style={{ margin: '10px' }}>
+              <Header as="h2">Finding {this.props.search_string}...</Header>
+              </Grid.Row>
+            </Grid.Column>
         </Segment>
-      </Grid.Row>
     );
   };
 
@@ -45,6 +61,7 @@ class Results extends Component {
     return (
       search_string ? (
         <Segment
+          className='page'
           basic
           textAlign="center"
           style={{
@@ -65,7 +82,15 @@ class Results extends Component {
           <Grid.Row>
             <Header as="h1">Results for {search_string}</Header>
           </Grid.Row>
-          {this.renderCards()}
+            {this.renderCards()}
+            <Grid.Row>
+              <div onClick={() => this.props.history.goBack()}>
+                <Icon
+                  name="arrow circle left"
+                />
+              Back
+            </div>
+            </Grid.Row>
         </Grid>
         </Segment>
       ) : (

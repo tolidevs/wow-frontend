@@ -20,6 +20,7 @@ class Home extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    this.props.setSearchResults(null)
     // redirect to results page
     API.findShows(this.props.search_string).then(search_results =>
       this.props.setSearchResults(search_results)
@@ -36,6 +37,7 @@ class Home extends Component {
   render() {
     return (
       <Segment
+        className="page"
         basic
         vertical
         textAlign="center"

@@ -3,13 +3,14 @@ import {
   Segment,
   Header,
   Grid,
-  Dimmer,
+  Image,
   Loader
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import ResultCard from "../components/ResultCard";
 import API from "../API";
 import FilterDropDown from './FilterDropDown'
+import logo from '../images/logo.png'
 
 class SavedShows extends Component {
 
@@ -88,18 +89,39 @@ class SavedShows extends Component {
 
   // render loading page or results
   renderCards = () => {
-    return this.props.saved_shows ? (
-      <Fragment>{this.renderResults()}</Fragment>
+    return (
+    this.props.saved_shows ? (
+        <Fragment>
+      <Grid.Row><FilterDropDown setFilter={this.setFilter} /></Grid.Row>
+      { this.renderResults() }
+      </Fragment >
     ) : (
+      <Segment
+        className="loading waiting"
+        basic
+        vertical
+        centered
+        textAlign="center"
+        style={{
+          width: '90vw',
+          height: "40vh",
+          display: "flex",
+          justifyContent: 'center',
+          alignItems: "center",
+        }}>
+        <Grid.Column centered textAlign="center">
         <Grid.Row>
-          <Segment>
-            {/* <Dimmer active inverted> */}
-              <Loader active inverted></Loader>
-            {/* </Dimmer> */}
-            <Header>Loading saved shows...</Header>
-          </Segment>
-        </Grid.Row>
-      );
+            <Loader active ></Loader>
+            <Image src={logo} size='small' centered></Image>
+          </Grid.Row>
+          
+        <Grid.Row style={{margin: '10px'}}>
+          <Header as="h2">Loading saved shows...</Header>
+          </Grid.Row>
+        </Grid.Column>
+      </Segment >
+        )
+    )
   };
 
   // when page  loads do fetch for services if saved_shows has a value
@@ -136,6 +158,7 @@ class SavedShows extends Component {
   render() {
     return (
       <Segment
+        className='page'
         basic
         vertical
         textAlign="center"
@@ -157,7 +180,7 @@ class SavedShows extends Component {
                   <Header as="h1">Your Watch List</Header>
                 </Segment>
             </Grid.Row>
-            <Grid.Row><FilterDropDown setFilter={this.setFilter} /></Grid.Row>
+            
             <Fragment>
               {this.renderCards()}
             </Fragment>

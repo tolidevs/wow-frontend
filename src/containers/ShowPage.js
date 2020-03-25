@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { Redirect } from 'react-router-dom'
 import RemoveFromWatchListModal from '../components/RemoveFromWatchListModal'
 import NotLoggedInModal from '../components/NotLoggedInModal'
 import {
@@ -57,15 +58,15 @@ class ShowPage extends Component {
         default:
           return null;
         case "Netflix":
-          return <Image src={netflix} as="a" href={service.url}></Image>;
+          return <Image src={netflix} as="a" href={service.url} target="_blank"></Image>;
         case "iTunes":
-          return <Image src={itunes} as="a" href={service.url}></Image>;
+          return <Image src={itunes} as="a" href={service.url} target="_blank"></Image>;
         case "Amazon Instant Video":
-          return <Image src={amazon} as="a" href={service.url}></Image>;
+          return <Image src={amazon} as="a" href={service.url} target="_blank"></Image>;
         case "Google Play":
-          return <Image src={google} as="a" href={service.url}></Image>;
+          return <Image src={google} as="a" href={service.url} target="_blank"></Image>;
         case "DisneyPlus":
-          return <Image src={disney} as="a" href={service.url}></Image>;
+          return <Image src={disney} as="a" href={service.url} target="_blank"></Image>;
         case "other":
           return <Image src={stream} as="a" href={service.url}></Image>;
       }
@@ -93,6 +94,7 @@ class ShowPage extends Component {
   updateSavedShows = () => {
     const { user, setSavedShows } = this.props
     API.getSavedShows(user.id)
+      // .then(console.log)
       .then(saved_shows => setSavedShows(saved_shows))
   }
 
@@ -108,18 +110,17 @@ class ShowPage extends Component {
 
   // if already saved then render a filled heart icon that renders a modal to check if you are sure you want to remove from watchlist
   // if not render an empty heart icon
-  renderSaveIcon = (show_id) => {
-    const savedShow = (this.props.saved_shows.filter(saved => saved.imdbID === show_id))[0]
-
+  renderSaveIcon = (show) => {
     if (!this.props.user) {
       return <NotLoggedInModal />
-    } else if (savedShow) {
+    } else if (this.props.saved_shows.find(saved => saved.imdbID === show.imdbID)) {
+      const savedShow = this.props.saved_shows.find(saved => saved.imdbID === show.imdbID)
       return <RemoveFromWatchListModal id={savedShow.id} title={savedShow.title} unsave={this.unsave} />
     } else {
       return (<Icon
         name="heart outline"
         size="big"
-        onClick={() => this.save(show_id)}
+        onClick={() => this.save(show)}
       />)
     }
   }
@@ -128,14 +129,9 @@ class ShowPage extends Component {
 
   render() {
     const { show_details } = this.props;
-    const {
-      title,
-      show_type,
-      year,
-      poster,
-      services
-    } = this.props.show_details
+    
     return (
+      show_details ? (
       <Segment
         basic
         className="result-card"
@@ -153,13 +149,13 @@ class ShowPage extends Component {
             <Grid.Row> </Grid.Row>
             <Grid.Row> </Grid.Row>
             <Item.Group>
-            <Item.Header as="h1">{title}</Item.Header>
-            <Item.Image src={poster} centered />
-            {this.renderSaveIcon(this.props.selected_show)}
+            <Item.Header as="h1">{show_details.title}</Item.Header>
+            <Item.Image src={show_details.poster} centered />
+            {this.renderSaveIcon(show_details)}
             <br></br>Watch on:
-        <Image.Group size="tiny">{this.renderServices(services)}</Image.Group>
+        <Image.Group size="tiny">{this.renderServices(show_details.services)}</Image.Group>
             <br></br>
-              <Grid.Row>{this.renderType(show_type)} {year}</Grid.Row>
+              <Grid.Row>{this.renderType(show_details.show_type)} {show_details.year}</Grid.Row>
             {show_details.genre && (
               <div>
                   <Grid.Row>
@@ -180,7 +176,9 @@ class ShowPage extends Component {
           </Grid.Column>
         </Grid>
       </Segment>
-
+      ) : (
+          <Redirect push to="/" />
+      )
     )
   }
 }
