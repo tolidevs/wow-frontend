@@ -18,6 +18,7 @@ import disney from "../images/disneyplus-logo.jpg";
 import itunes from "../images/itunes-logo.jpg";
 import google from "../images/google-play.png";
 import stream from "../images/video-player.png";
+import clapper from "../images/clapperboard.png"
 
 
 class ResultCard extends Component {
@@ -104,6 +105,8 @@ class ResultCard extends Component {
     }
   }
 
+
+
 // ------------- to do with rendering the services -------------
 
     renderServices = (services) => {
@@ -136,7 +139,8 @@ class ResultCard extends Component {
   // ---------------render ---------------
 
     render() {
-        const { imdbID, title, show_type, year, poster, services } = this.props.showObj
+      const { imdbID, title, show_type, year, services } = this.props.showObj
+      const img_url = (this.props.showObj.poster === "N/A") ?  clapper  : this.props.showObj.poster
         const { showObj } = this.props
         return (
           <Grid.Row key={imdbID}>
@@ -153,8 +157,9 @@ class ResultCard extends Component {
               <Item.Header as="h2" onClick={() => this.handleClick()}>
                 {title}
               </Item.Header>
-              <Item.Image
-                src={poster}
+                <Item.Image
+                  size="medium"
+                src={img_url}
                 centered
                 onClick={() => this.handleClick()}
               />

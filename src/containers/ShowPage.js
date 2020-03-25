@@ -7,7 +7,8 @@ import {
   Image,
   Icon,
   Item,
-  Grid
+  Grid,
+  Message
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import API from "../API";
@@ -17,6 +18,7 @@ import disney from "../images/disneyplus-logo.jpg";
 import itunes from "../images/itunes-logo.jpg";
 import google from "../images/google-play.png";
 import stream from "../images/video-player.png";
+import clapper from "../images/clapperboard.png"
 
 
 class ShowPage extends Component {
@@ -72,7 +74,7 @@ class ShowPage extends Component {
             return <Image src={stream} as="a" href={service.url}></Image>;
         }
       });
-    }
+    } 
   };
 
 
@@ -127,11 +129,14 @@ class ShowPage extends Component {
     }
   }
 
+  imgUrl = (show_details) => {
+    return (show_details.poster === "N/A") ? clapper : show_details.poster
+  }
+
 // ----------- render -------------
 
   render() {
     const { show_details } = this.props;
-    
     return (
       show_details ? (
       <Segment
@@ -152,11 +157,16 @@ class ShowPage extends Component {
             <Grid.Row> </Grid.Row>
             <Item.Group>
             <Item.Header as="h1">{show_details.title}</Item.Header>
-            <Item.Image src={show_details.poster} centered />
+                <Item.Image src={this.imgUrl(show_details)} centered size="medium" />
+                <br></br>
             {this.renderSaveIcon(show_details)}
             <br></br>Watch on:
-        <Image.Group size="tiny">{this.renderServices(show_details.services)}</Image.Group>
-            <br></br>
+                {Array.isArray(show_details.services) ? (
+                  <Image.Group size="tiny">
+                    {this.renderServices(show_details.services)}
+                  </Image.Group>
+                   ) : <Message>Not currently available on any streaming services</Message>
+                }
               <Grid.Row>{this.renderType(show_details.show_type)} {show_details.year}</Grid.Row>
             {show_details.genre && (
               <div>

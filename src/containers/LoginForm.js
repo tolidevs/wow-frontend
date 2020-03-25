@@ -5,6 +5,7 @@ import {
   Segment,
   Grid,
   Header,
+  Icon
 } from "semantic-ui-react";
 import API from '../API';
 import { NavLink, Redirect } from "react-router-dom";
@@ -87,6 +88,19 @@ class LoginForm extends Component {
             <NavLink className="secondary" to="/sign-up" exact>
               Sign Up
             </NavLink>
+            <Grid.Row onClick={this.props.setMenu(false)}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                padding: "1vh"
+              }}>
+              <NavLink to='/' exact >
+                <Icon
+                  name="arrow circle left"
+                />
+              Back to Search
+            </NavLink>
+            </Grid.Row>
           </Grid.Column>
         </Grid>
         {this.redirectToHome()}
@@ -95,11 +109,18 @@ class LoginForm extends Component {
   }
 };
 
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = ({ user, menu_on }) => {
   return {
-    user
+    user,
+    menu_on
   }
 }
 
-export default connect(mapStateToProps)(LoginForm)
+const mapDispatchToProps = dispatch => {
+  return {
+    setMenu: menu_on => dispatch({ type: "SET_MENU", payload: { menu_on } })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
 

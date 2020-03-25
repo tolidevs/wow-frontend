@@ -5,9 +5,11 @@ import {
     Segment,
     Grid,
     Header,
+    Icon
 } from 'semantic-ui-react';
 import API from '../API'
 import { NavLink, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux'
 
 class SignUpForm extends Component {
   state = {
@@ -100,6 +102,19 @@ class SignUpForm extends Component {
             <NavLink className="secondary" to="/login" exact>
               Log In
             </NavLink>
+            <Grid.Row
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                padding: "1vh"
+              }}>
+              <NavLink to='/' exact>
+                <Icon
+                  name="arrow circle left"
+                />
+              Back to Search
+            </NavLink>
+            </Grid.Row>
           </Grid.Column>
         </Grid>
         {this.redirectToHome()}
@@ -108,5 +123,17 @@ class SignUpForm extends Component {
   }
 };
 
-export default SignUpForm;
+const mapStateToProps = ({menu_on }) => {
+  return {
+    menu_on
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setMenu: menu_on => dispatch({ type: "SET_MENU", payload: { menu_on } })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
 
