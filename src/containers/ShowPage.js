@@ -109,7 +109,7 @@ class ShowPage extends Component {
   }
 
   deleteSavedShow = (id) => {
-    API.deleteSavedShow(id).then(() => this.updateSavedShows())
+    API.deleteSavedShow(id)
   }
 
   // if already saved then render a filled heart icon that renders a modal to check if you are sure you want to remove from watchlist
