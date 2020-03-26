@@ -105,11 +105,11 @@ class Subscriptions extends Component {
                 display: "flex",
                 justifyContent: "center"
             }}>
-              <NavLink to='/' exact>
+              <NavLink exact to='/user/watch-list' >
                 <Icon
                   name="arrow circle left"
                 />
-              Back to Search
+              Go to Watch List
             </NavLink>
             </Grid.Row>
           </Grid.Column>

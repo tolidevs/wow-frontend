@@ -50,7 +50,7 @@ class LoginForm extends Component {
         <Grid
           textAlign="center"
         >
-          <Grid.Column>
+          <Grid.Column style={{ maxWidth: "50vh" }}>
             <Header as="h1">
               Log In
             </Header>
@@ -94,12 +94,21 @@ class LoginForm extends Component {
                 justifyContent: "center",
                 padding: "1vh"
               }}>
-              <NavLink to='/' exact >
+              {/* this doesn't work!! check this! */}
+              {this.props.search_results ? (
+                <NavLink to='/results' exact >
+                  <Icon
+                    name="arrow circle left"
+                  />
+                  Back to Search
+                </NavLink>
+              ) : (<NavLink to = '/' exact >
                 <Icon
                   name="arrow circle left"
                 />
               Back to Search
             </NavLink>
+            )}
             </Grid.Row>
           </Grid.Column>
         </Grid>
@@ -109,10 +118,11 @@ class LoginForm extends Component {
   }
 };
 
-const mapStateToProps = ({ user, menu_on }) => {
+const mapStateToProps = ({ user, menu_on, search_results }) => {
   return {
     user,
-    menu_on
+    menu_on,
+    search_results
   }
 }
 
