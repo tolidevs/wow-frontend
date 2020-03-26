@@ -102,7 +102,7 @@ class SignUpForm extends Component {
             <NavLink className="secondary" to="/login" exact>
               Log In
             </NavLink>
-            <Grid.Row
+            <Grid.Row onClick={this.props.setMenu(false)}
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -123,9 +123,10 @@ class SignUpForm extends Component {
   }
 };
 
-const mapStateToProps = ({menu_on }) => {
+const mapStateToProps = ({menu_on, user }) => {
   return {
-    menu_on
+    menu_on,
+    user
   }
 }
 

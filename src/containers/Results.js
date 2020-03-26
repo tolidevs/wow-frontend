@@ -26,7 +26,6 @@ class Results extends Component {
         <Segment
           basic
           textAlign="center"
-          
         >
           <Header as="h2">
             Sorry, no results found for {search_string}.<br></br>
@@ -39,7 +38,17 @@ class Results extends Component {
 
   renderCards = () => {
     return this.props.search_results ? (
-      <Fragment>{this.renderResults()}</Fragment>
+      <Fragment>
+        <Grid.Row>
+          <div onClick={() => this.props.history.goBack()}>
+            <Icon
+              name="arrow circle left"
+            />
+              Search Again
+            </div>
+        </Grid.Row>
+        {this.renderResults()}
+      </Fragment>
     ) : (
         <Segment
         className="loading waiting"
@@ -78,9 +87,6 @@ class Results extends Component {
           textAlign="center"
           style={{
             height: "90vh",
-            // display: "flex",
-            // justifyContent: "center",
-            // alignItems: "center"
           }}
       >
           <Grid
@@ -100,7 +106,7 @@ class Results extends Component {
                 <Icon
                   name="arrow circle left"
                 />
-              Back
+              Search Again
             </div>
             </Grid.Row>
         </Grid>

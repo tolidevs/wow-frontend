@@ -57,9 +57,9 @@ class Home extends Component {
           <Grid.Row verticalAlign="bottom" style={{ height: "50vh" }}>
             <Grid.Column>
               <Segment basic className="welcome">
-                <Header as="h1">What's On Where</Header>
+                <Header as="h1" className="home-logo">.WoW.</Header>
                 
-                <p>All streaming services.<br></br>One search.</p>
+                <p>What's on Where?<br></br>All streaming services.<br></br>One search.</p>
               </Segment>
             </Grid.Column>
           </Grid.Row>
