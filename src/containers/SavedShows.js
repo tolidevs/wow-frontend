@@ -76,7 +76,7 @@ class SavedShows extends Component {
       case 1:
         return "Netflix"
       case 2:
-        return "Amazon Instant Video"
+        return "Amazon"
       case 3:
         return "iTunes"
       case 4:
