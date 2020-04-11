@@ -10,13 +10,21 @@
 
 
 body {
-  background-color: #231F20;
+  /* background-color: #231F20; */
   font-family: 'Comfortaa', cursive;
-  background-image: url('./film-background.jpg');
+  /* background-image: url('./film-background.jpg');
   background-position: center;
   background-size: auto 100%;
-  background-attachment: fixed;
+  background-attachment: fixed; */
   font-size: 20px;
+}
+
+.landing-image {
+    background-image: url('./film-background.jpg') !important;
+    /* background-position: center !important; */
+  background-size: auto 100% !important;
+  /* background-attachment: fixed !important;  */
+    /* background-size: cover !important; */
 }
 
 img {
