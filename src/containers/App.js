@@ -62,23 +62,25 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <Navbar history={history} />
+        <div className="landing-image">
+          <Navbar history={history} />
 
-        <Container
-          className="main-container"
-          textAlign="center"
-        >
+          <Container className="main-container" textAlign="center">
             <Switch>
               <Route exact path="/" component={Home} history={history} />
               <Route
                 exact
                 path="/login"
-                component={() => <LoginForm logIn={this.logIn} history={history} />}
+                component={() => (
+                  <LoginForm logIn={this.logIn} history={history} />
+                )}
               />
               <Route
                 exact
                 path="/sign-up"
-                component={() => <SignUpForm logIn={this.logIn} history={history} />}
+                component={() => (
+                  <SignUpForm logIn={this.logIn} history={history} />
+                )}
               />
               <Route
                 exact
@@ -90,40 +92,29 @@ class App extends Component {
               <Route
                 exact
                 path="/results"
-                component={() => (
-                  <Results history={history} />
-                )}
+                component={() => <Results history={history} />}
               />
               <Route
                 exact
                 path="/results/show"
-                component={() => (
-                  <ShowPage history={history} />
-                )}
+                component={() => <ShowPage history={history} />}
               />
               <Route
                 exact
                 path="/user/watch-list"
-                component={() =>
-                  <SavedShows history={history}
-                  />}
+                component={() => <SavedShows history={history} />}
               />
               <Route
                 exact
                 path="/user/subscriptions"
-                component={() =>
-                  <Subscriptions history={history}
-                  />}
+                component={() => <Subscriptions history={history} />}
               />
-              <Route
-                exact
-                path="/dropdown"
-                component={FilterDropDown}
-              />
+              <Route exact path="/dropdown" component={FilterDropDown} />
 
               <Route component={NotFound} />
             </Switch>
-        </Container>
+          </Container>
+        </div>
       </Router>
     );
   }
