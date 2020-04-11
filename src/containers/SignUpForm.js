@@ -69,7 +69,6 @@ class SignUpForm extends Component {
             >
               <Form.Input
                 required
-                // fluid
                 icon="user"
                 iconPosition="left"
                 placeholder="Name"
@@ -78,7 +77,6 @@ class SignUpForm extends Component {
               />
               <Form.Input
                 required
-                // fluid
                 icon="at"
                 iconPosition="left"
                 placeholder="Email"
@@ -87,7 +85,6 @@ class SignUpForm extends Component {
               />
               <Form.Input
                 required
-                // fluid
                 icon="lock"
                 iconPosition="left"
                 placeholder="Password"

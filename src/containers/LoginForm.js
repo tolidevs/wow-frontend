@@ -63,7 +63,6 @@ class LoginForm extends Component {
               <Form.Input
                 required
                 size="big"
-                // fluid
                 icon="at"
                 iconPosition="left"
                 placeholder="Email"
@@ -72,7 +71,6 @@ class LoginForm extends Component {
               />
               <Form.Input
                required
-                // fluid
                 size="big"
                 icon="lock"
                 iconPosition="left"
