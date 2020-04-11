@@ -58,7 +58,7 @@ class SignUpForm extends Component {
           textAlign="center"
 
         >
-          <Grid.Column style={{ maxWidth: "50vh" }}>
+          <Grid.Column >
             <Header as="h1">
               Sign Up
             </Header>
@@ -69,7 +69,7 @@ class SignUpForm extends Component {
             >
               <Form.Input
                 required
-                fluid
+                // fluid
                 icon="user"
                 iconPosition="left"
                 placeholder="Name"
@@ -78,7 +78,7 @@ class SignUpForm extends Component {
               />
               <Form.Input
                 required
-                fluid
+                // fluid
                 icon="at"
                 iconPosition="left"
                 placeholder="Email"
@@ -87,7 +87,7 @@ class SignUpForm extends Component {
               />
               <Form.Input
                 required
-                fluid
+                // fluid
                 icon="lock"
                 iconPosition="left"
                 placeholder="Password"

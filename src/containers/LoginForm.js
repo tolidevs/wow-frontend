@@ -50,7 +50,7 @@ class LoginForm extends Component {
         <Grid
           textAlign="center"
         >
-          <Grid.Column style={{ maxWidth: "50vh" }}>
+          <Grid.Column>
             <Header as="h1">
               Log In
             </Header>
@@ -63,7 +63,7 @@ class LoginForm extends Component {
               <Form.Input
                 required
                 size="big"
-                fluid
+                // fluid
                 icon="at"
                 iconPosition="left"
                 placeholder="Email"
@@ -72,7 +72,7 @@ class LoginForm extends Component {
               />
               <Form.Input
                required
-                fluid
+                // fluid
                 size="big"
                 icon="lock"
                 iconPosition="left"
@@ -81,7 +81,9 @@ class LoginForm extends Component {
                 name="password"
                 onChange={this.handleChange}
               />
-              <Button fluid size="huge" name="login" type="submit">
+              <Button
+                fluid
+                size="huge" name="login" type="submit">
                 Log In
               </Button>
             </Form>
