@@ -20,6 +20,7 @@ class FilterDropDown extends Component {
         services.map(service => {
             let servObj = { key: service.id, text: service.name, value: service.id}
             options_array.push(servObj)
+            return ''
         })
         this.setState({
             options: options_array

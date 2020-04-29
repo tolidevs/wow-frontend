@@ -20,7 +20,7 @@ class UserMenu extends Component {
             </Grid.Row>
             <Grid.Row>
               <p>
-                Get started by choosing one of the options below to search for what's on where, or go to your account to manage your subscriptions
+                Get started by choosing one of the following options:
               </p>
             </Grid.Row>
             </Fragment>

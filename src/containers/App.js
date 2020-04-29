@@ -29,6 +29,8 @@ class App extends Component {
       this.props.setUserType(user_type)
       this.getAndSetSavedShows(user.id)
       this.getAndSetSubscriptions(user.id)
+    } else {
+      console.log("not logged in")
     }
   }
 
