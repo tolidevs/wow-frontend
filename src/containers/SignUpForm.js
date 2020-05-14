@@ -5,7 +5,8 @@ import {
     Segment,
     Grid,
     Header,
-    Icon
+    Icon,
+    Message
 } from 'semantic-ui-react';
 import API from '../API'
 import { NavLink, Redirect } from 'react-router-dom';
@@ -15,8 +16,15 @@ class SignUpForm extends Component {
   state = {
     user_name: "",
     email: "",
-    password: ""
+    password: "",
+    errorMsg: this.props.errorMsg
   };
+
+  setErrorMsg = (errorMsg) => {
+    this.setState({
+      errorMsg
+    })
+  }
 
   handleChange = e => {
     this.setState({
@@ -45,6 +53,9 @@ class SignUpForm extends Component {
   };
 
   render() {
+      
+    const { errorMsg } = this.state
+
     return (
       <Segment
         basic
@@ -92,6 +103,7 @@ class SignUpForm extends Component {
                 name="password"
                 onChange={this.handleChange}
               />
+              {errorMsg && <Message>{errorMsg}</Message>}
               <Button fluid size="huge" name="signup" type="submit">
                 Sign Up
               </Button>

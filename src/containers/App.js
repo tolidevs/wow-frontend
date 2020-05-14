@@ -21,8 +21,17 @@ const history = createBrowserHistory();
 
 class App extends Component {
 
+  state = {
+    errorMsg: ""
+  }
 
-  logIn = (user, token, user_type) => {
+  setErrorMsg = (errorMsg) => {
+    this.setState({
+      errorMsg
+    })
+  }
+
+  logIn = (message, user, token, user_type) => {
     if (user) {
       this.props.setUser(user)
       localStorage.token = token
@@ -30,7 +39,7 @@ class App extends Component {
       this.getAndSetSavedShows(user.id)
       this.getAndSetSubscriptions(user.id)
     } else {
-      console.log("not logged in")
+      this.setErrorMsg(message)
     }
   }
 
@@ -74,14 +83,22 @@ class App extends Component {
                 exact
                 path="/login"
                 component={() => (
-                  <LoginForm logIn={this.logIn} history={history} />
+                  <LoginForm
+                    logIn={this.logIn}
+                    history={history}
+                    errorMsg={this.state.errorMsg}
+                  />
                 )}
               />
               <Route
                 exact
                 path="/sign-up"
                 component={() => (
-                  <SignUpForm logIn={this.logIn} history={history} />
+                  <SignUpForm
+                    logIn={this.logIn}
+                    history={history}
+                    errorMsg={this.state.errorMsg}
+                  />
                 )}
               />
               <Route

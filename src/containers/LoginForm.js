@@ -5,7 +5,8 @@ import {
   Segment,
   Grid,
   Header,
-  Icon
+  Icon,
+  Message
 } from "semantic-ui-react";
 import API from '../API';
 import { NavLink, Redirect } from "react-router-dom";
@@ -14,7 +15,8 @@ import { connect } from 'react-redux'
 class LoginForm extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    errorMsg: this.props.errorMsg
   }
 
   handleChange = e => {
@@ -31,12 +33,14 @@ class LoginForm extends Component {
     e.preventDefault()
 
     API.logIn(this.state)
-      .then(userObj => this.props.logIn(userObj.user, userObj.token, "existing_user"))
+      .then(userObj => this.props.logIn(userObj.message, userObj.user, userObj.token, "existing_user"))
       .then(e.target.reset())
-      .catch({ message: "Request failed" });
+      .catch(console.log("Failed to fetch"))
   };
 
   render() {
+    const {errorMsg} = this.state
+
     return (
       <Segment
         basic
@@ -79,6 +83,7 @@ class LoginForm extends Component {
                 name="password"
                 onChange={this.handleChange}
               />
+              {errorMsg && <Message>{errorMsg}</Message>}
               <Button
                 fluid
                 size="huge" name="login" type="submit">
