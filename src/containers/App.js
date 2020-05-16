@@ -22,7 +22,7 @@ const history = createBrowserHistory();
 class App extends Component {
 
   state = {
-    errorMsg: ""
+    errorMsg: false
   }
 
   setErrorMsg = (errorMsg) => {
@@ -33,7 +33,7 @@ class App extends Component {
 
   logIn = (user, token, user_type, message) => {
     if (user) {
-      this.setErrorMsg("")
+      this.setErrorMsg(false)
       this.props.setUser(user)
       localStorage.token = token
       this.props.setUserType(user_type)
@@ -88,6 +88,7 @@ class App extends Component {
                     logIn={this.logIn}
                     history={history}
                     errorMsg={this.state.errorMsg}
+                    clearError={this.setErrorMsg}
                   />
                 )}
               />
@@ -99,6 +100,7 @@ class App extends Component {
                     logIn={this.logIn}
                     history={history}
                     errorMsg={this.state.errorMsg}
+                    clearError={this.setErrorMsg}
                   />
                 )}
               />

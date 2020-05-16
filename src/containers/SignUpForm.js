@@ -36,6 +36,11 @@ class SignUpForm extends Component {
     this.setErrorMsg("Please enter a valid email address")
   }
 
+  clearErrors = () => {
+    this.props.clearError(false)
+    this.setErrorMsg(false)
+  }
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -122,12 +127,14 @@ class SignUpForm extends Component {
                 fluid
                 size="huge"
                 name="signup"
-                type="submit">
+                type="submit"
+                disabled={!!errorMsg}
+              >
                 Sign Up
               </Button>
             </Form>
             <NavLink
-              onClick={() => this.setErrorMsg(false)}
+              onClick={this.clearErrors}
               className="secondary"
               to="/login"
               exact>

@@ -35,6 +35,11 @@ class LoginForm extends Component {
     this.setErrorMsg("Please enter a valid email address")
   }
 
+  clearErrors = () => {
+    this.props.clearError(false)
+    this.setErrorMsg(false)
+  }
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -51,7 +56,7 @@ class LoginForm extends Component {
     const { email, password } = this.state
 
     API.logIn(email, password)
-      .then(userObj => this.props.logIn(userObj.user, userObj.token, "existing_user", userObj.message, ))
+      .then(userObj => this.props.logIn(userObj.user, userObj.token, "existing_user", userObj.message))
       .then(e.target.reset())
       .catch(console.log("Failed to fetch"))
   };
@@ -108,12 +113,16 @@ class LoginForm extends Component {
               {errorMsg && <Message>{errorMsg}</Message>}
               <Button
                 fluid
-                size="huge" name="login" type="submit">
+                size="huge"
+                name="login"
+                type="submit"
+                disabled={!!errorMsg}
+              >
                 Log In
               </Button>
             </Form>
             <NavLink
-              onClick={() =>this.setErrorMsg(false)}
+              onClick={this.clearErrors}
               className="secondary"
               to="/sign-up"
               exact
