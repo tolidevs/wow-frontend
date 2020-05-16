@@ -26,6 +26,16 @@ class SignUpForm extends Component {
     })
   }
 
+  validateEmail = (e) => {
+    const input = e.target.value
+
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input)) {
+      this.setErrorMsg(false)
+      return false
+    }
+    this.setErrorMsg("Please enter a valid email address")
+  }
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -92,7 +102,11 @@ class SignUpForm extends Component {
                 iconPosition="left"
                 placeholder="Email"
                 name="email"
-                onChange={this.handleChange}
+                onChange={(e) => {
+                  // run front end validations on email format
+                  this.validateEmail(e)
+                  this.handleChange(e)
+                }}
               />
               <Form.Input
                 required
@@ -104,11 +118,19 @@ class SignUpForm extends Component {
                 onChange={this.handleChange}
               />
               {errorMsg && <Message>{errorMsg}</Message>}
-              <Button fluid size="huge" name="signup" type="submit">
+              <Button
+                fluid
+                size="huge"
+                name="signup"
+                type="submit">
                 Sign Up
               </Button>
             </Form>
-            <NavLink className="secondary" to="/login" exact>
+            <NavLink
+              onClick={() => this.setErrorMsg(false)}
+              className="secondary"
+              to="/login"
+              exact>
               Log In
             </NavLink>
             <Grid.Row onClick={this.props.setMenu(false)}

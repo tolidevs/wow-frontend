@@ -19,6 +19,22 @@ class LoginForm extends Component {
     errorMsg: this.props.errorMsg
   }
 
+  setErrorMsg = (errorMsg) => {
+    this.setState({
+      errorMsg
+    })
+  }
+
+  validateEmail = (e) => {
+    const input = e.target.value
+
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input)) {
+      this.setErrorMsg(false)
+      return false
+    }
+    this.setErrorMsg("Please enter a valid email address")
+  }
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -32,8 +48,10 @@ class LoginForm extends Component {
   handleSubmit = e => {
     e.preventDefault()
 
-    API.logIn(this.state)
-      .then(userObj => this.props.logIn(userObj.message, userObj.user, userObj.token, "existing_user"))
+    const { email, password } = this.state
+
+    API.logIn(email, password)
+      .then(userObj => this.props.logIn(userObj.user, userObj.token, "existing_user", userObj.message, ))
       .then(e.target.reset())
       .catch(console.log("Failed to fetch"))
   };
@@ -71,7 +89,11 @@ class LoginForm extends Component {
                 iconPosition="left"
                 placeholder="Email"
                 name="email"
-                onChange={this.handleChange}
+                onChange={(e) => {
+                  // run front end validations on email format
+                  this.validateEmail(e)
+                  this.handleChange(e)
+                }}
               />
               <Form.Input
                required
@@ -90,7 +112,12 @@ class LoginForm extends Component {
                 Log In
               </Button>
             </Form>
-            <NavLink className="secondary" to="/sign-up" exact>
+            <NavLink
+              onClick={() =>this.setErrorMsg(false)}
+              className="secondary"
+              to="/sign-up"
+              exact
+            >
               Sign Up
             </NavLink>
             <Grid.Row onClick={this.props.setMenu(false)}
@@ -101,13 +128,13 @@ class LoginForm extends Component {
               }}>
               {/* this doesn't work!! check this! */}
               {this.props.search_results ? (
-                <NavLink to='/results' exact >
+                <NavLink to='/results' exact>
                   <Icon
                     name="arrow circle left"
                   />
                   Back to Search
                 </NavLink>
-              ) : (<NavLink to = '/' exact >
+              ) : (<NavLink to='/' exact>
                 <Icon
                   name="arrow circle left"
                 />

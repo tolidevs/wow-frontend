@@ -31,8 +31,9 @@ class App extends Component {
     })
   }
 
-  logIn = (message, user, token, user_type) => {
+  logIn = (user, token, user_type, message) => {
     if (user) {
+      this.setErrorMsg("")
       this.props.setUser(user)
       localStorage.token = token
       this.props.setUserType(user_type)
