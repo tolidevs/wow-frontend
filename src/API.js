@@ -1,5 +1,5 @@
 // Define the URLs for our different routes
-const baseURL = "https://whats-on-where.herokuapp.app"
+const baseURL = "https://whats-on-where.herokuapp.com"
 // const baseURL = "http://localhost:3000"
 const logInURL = `${baseURL}/login`
 const validateURL = `${baseURL}/profile`
