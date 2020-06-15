@@ -22,7 +22,7 @@ class Home extends Component {
     e.preventDefault()
     this.props.setSearchResults(null)
     // redirect to results page
-    API.findShows(this.props.search_string).then(search_results =>
+    API.findShows(this.props.search_string.trim()).then(search_results =>
       this.props.setSearchResults(search_results)
     )
 
